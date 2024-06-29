@@ -1,0 +1,42 @@
+.web-px {
+  @apply p-4 md:p-[64px];
+}
+
+.fx {
+  @apply flex;
+}
+.fx-center {
+  @apply flex items-center justify-center;
+}
+.fx-j-center {
+  @apply flex justify-center;
+}
+.fx-a-center {
+  @apply flex items-center;
+}
+.fx-col {
+  @apply flex flex-col;
+}
+/* styles.css */
+.h1 {
+  @apply text-4xl font-bold md:text-6xl  leading-tight;
+}
+.h2 {
+  @apply text-3xl font-bold md:text-5xl  leading-tight;
+}
+.h3 {
+  @apply text-2xl font-bold md:text-4xl  leading-tight;
+}
+.h4 {
+  @apply text-xl font-bold md:text-3xl  leading-tight;
+}
+.h5 {
+  @apply text-lg font-bold md:text-2xl  leading-tight;
+}
+.h6 {
+  @apply text-base font-bold md:text-xl  leading-tight;
+}
+
+.fx-col-mb {
+  @apply flex flex-col md:flex-row;
+}
