@@ -1,5 +1,5 @@
 .web-px {
-  @apply p-4 md:p-[64px];
+  @apply px-4 md:px-[64px];
 }
 
 .fx {

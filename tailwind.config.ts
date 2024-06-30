@@ -29,8 +29,8 @@ const config = {
         border: "hsla(var(--border))",
         input: "hsla(var(--input))",
         ring: "hsla(var(--ring))",
-        background: "hsla(var(--background))",
-        foreground: "hsla(var(--foreground))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
         primary: {
           DEFAULT: "hsla(var(--primary))",
           foreground: "hsla(var(--primary-foreground))",

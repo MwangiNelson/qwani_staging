@@ -12,15 +12,13 @@ const Layout = ({ children }: { children: ReactNode }) => {
   const [open, setOpen] = React.useState(false);
 
   return (
-    <>
-      <>
-        <div className="h-[80px]">
-          <Navbar open={open} setOpen={setOpen} />
-        </div>
-        <CustomSpeedDial />
-        {children}
-      </>
-    </>
+    <div className="overflow-x-hidden">
+      <div className="h-[80px]">
+        <Navbar open={open} setOpen={setOpen} />
+      </div>
+      <CustomSpeedDial />
+      {children}
+    </div>
   );
 };
 
