@@ -28,11 +28,11 @@ import { EventCard } from "./Cards";
 export const EventsCardsWrapper = () => {
   return (
     <Carousel className="w-full">
-      <CarouselContent className="gap-5 h-auto">
+      <CarouselContent className="gap-1 md:gap-5 h-auto">
         {[1, 2, 3, 4, 6].map((item, index) => {
           return (
-            <CarouselItem key={index} className=" basis-3/4 md:basis-1/4">
-              <EventCard />
+            <CarouselItem key={index} className=" basis-[80%] md:basis-1/4">
+              <EventCard index={index} />
             </CarouselItem>
           );
         })}

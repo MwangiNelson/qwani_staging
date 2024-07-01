@@ -17,6 +17,10 @@ const config = {
         "2xl": "1400px",
       },
     },
+    fontFamily: {
+      display: "var(--font-montserrat)",
+      body: "var(--font-montserrat)",
+    },
     extend: {
       fontFamily: {
         mont: ["var(--font-montserrat)"],

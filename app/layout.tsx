@@ -8,6 +8,7 @@ const mont = Montserrat({
   variable: "--font-montserrat",
   weight: ["300", "400", "500", "600", "700", "800"],
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -22,7 +23,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn("font-mont", mont.className)}>{children}</body>
+      <body
+        className={`
+      ${mont.className} `}
+      >
+        {children}
+      </body>
     </html>
   );
 }

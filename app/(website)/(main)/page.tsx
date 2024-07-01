@@ -1,4 +1,6 @@
 import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import { BlogCard } from "@/components/website/shared/Cards";
 import {
   CustomVideoPlayer,
   HeroUI,
@@ -6,9 +8,10 @@ import {
 import { EventsCardsWrapper } from "@/components/website/shared/Wrappers";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import Link from "next/link";
 export default function Home() {
   return (
-    <main className=" fx-col gap-5">
+    <main className="">
       <HeroUI imageLink="/home.png">
         <div className=" mb:-mt-14  text-background fx-col gap-5 justify-start ">
           <h1 className=" h1 text-center ">
@@ -29,15 +32,17 @@ export default function Home() {
       <AboutSection />
       <AboutCards />
       <EventCards />
+      <Psection />
+      <BlogsSections />
     </main>
   );
 }
 const AboutSection = () => {
   return (
-    <div className="fx-col  gap-8 web-px mt-10">
+    <div className="fx-col  gap-8 web-px mt-14">
       <div className="fx-col-mb gap-1 md:gap-10">
         <h3 className="h5 text-primary ">About Qwani</h3>
-        <p className="text-lg w-full flex-1   ">
+        <p className="text-lg w-full flex-1  font-medium  ">
           Qwani is a vibrant youth-led initiative, serving as a dynamic platform
           for emerging writers. It celebrates diversity in literature,
           showcasing fresh perspectives across various forms of writing, from
@@ -75,7 +80,7 @@ const AboutCard = (item: {
   return (
     <div
       className={cn(
-        "flex flex-col gap-10  md:flex-row",
+        "flex flex-col gap-10  md:flex-row ",
         item.index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
       )}
     >
@@ -97,7 +102,7 @@ const AboutCard = (item: {
 };
 const AboutCards = () => {
   return (
-    <div className="web-px fx-col gap-5 ">
+    <div className="web-px fx-col gap-5 mt-14 ">
       {[
         {
           image: "/literature.png",
@@ -131,7 +136,7 @@ const AboutCards = () => {
 };
 const EventCards = () => {
   return (
-    <div className="web-px bg-[rgba(0,0,0,.98)] py-14 fx-col gap-5  md:gap-10 relative">
+    <div className="web-px bg-[rgba(0,0,0,.98)] py-20 fx-col gap-5 mt-14 md:gap-10 relative">
       <Image
         src="/home.png"
         alt="Home"
@@ -139,21 +144,66 @@ const EventCards = () => {
         height={1000}
         className="w-full absolute o top-0 left-0 z-[-1] object-cover h-full rounded-lg"
       />
-      <div className="flex flex-col md:flex-row  items-start gap-1 md:gap-10">
+      <div className="flex flex-col md:flex-row  items-start gap-1 md:gap-10 md:items-end">
         <h1 className="mb:font-bold md:text-2xl text-primary">
           Upcoming Events
         </h1>
-        <div className="flex-1">
-          <p className="text-background text-lg md:text-xl font-medium md:font-semibold">
-            Celebrate Creativity and Community
-          </p>
-        </div>
+
+        <p className="text-background  flex-1 text-lg md:text-xl font-medium md:font-semibold">
+          Celebrate Creativity and Community
+        </p>
       </div>
       <EventsCardsWrapper />
-      <div className="fx-center ">
+      <div className="fx-center mt-10 ">
         <Button size={"sm"} className=" rounded-full">
           View All Events
         </Button>
+      </div>
+    </div>
+  );
+};
+const Psection = () => {
+  return (
+    <div className="h-[70vh] fx-center bg-accent web-px">
+      <h3 className="text-2xl md:text-4xl text-center font-mont font-medium ">
+        The Perfect Place to Ponder, Play, and Pen Your
+        <span className="font-bold"> Passionate</span>, Peculiar, and Profound
+        Prose
+      </h3>
+    </div>
+  );
+};
+const BlogsSections = () => {
+  return (
+    <div className="fx-col gap-5 web-px py-20">
+      <Separator className="bg-foreground/70" />
+      <div className="fx-col-mb mb:gap-3 md:justify-between md:items-center my-1">
+        <div className="fx items-center gap-1">
+          <Separator className="w-14 bg-foreground" />
+          <h4 className="font-medium text-xl">New & Stuff</h4>
+        </div>
+        <Link href={"#"}>See More</Link>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-5">
+        {[
+          {
+            title: "The Art of Writing",
+            imageUrl: "/imgs/4.jpg",
+            date: "May 25th 2024",
+          },
+          {
+            title: "The Art of Writing",
+            imageUrl: "/imgs/5.jpg",
+            date: "May 25th 2024",
+          },
+          {
+            title: "The Art of Writing",
+            imageUrl: "/imgs/6.jpg",
+            date: "May 25th 2024",
+          },
+        ].map((item, index) => (
+          <BlogCard key={index} {...item} />
+        ))}
       </div>
     </div>
   );
