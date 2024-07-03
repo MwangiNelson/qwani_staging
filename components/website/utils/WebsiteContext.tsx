@@ -1,8 +1,11 @@
 "use client";
-import { useContext, createContext, useState } from "react";
+import { SetState } from "@/utils/uitypes";
+import { usePathname } from "next/navigation";
+import { useContext, createContext, useState, useEffect } from "react";
 interface IWebsiteContext {
   drawerOpen: boolean;
-  setDrawerOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setDrawerOpen: SetState<boolean>;
+  minimalFooter: boolean;
 }
 const WebsiteContext = createContext<IWebsiteContext | null>(null);
 export const WebsiteContextProvider = ({
@@ -10,9 +13,17 @@ export const WebsiteContextProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
+  const pathName = usePathname();
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [minimalFooter, setMinimalFooter] = useState(false);
+  useEffect(() => {
+    setMinimalFooter(false);
+  }, [pathName]);
+
   return (
-    <WebsiteContext.Provider value={{ drawerOpen, setDrawerOpen }}>
+    <WebsiteContext.Provider
+      value={{ drawerOpen, setDrawerOpen, minimalFooter }}
+    >
       {children}
     </WebsiteContext.Provider>
   );

@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 import SideMenus from "@/components/website/SideMenus";
 import { cn } from "@/lib/utils";
 import { CustomSpeedDial } from "@/components/website/CustomSpeedDial";
+import Footer from "@/components/website/Footer";
 const Layout = ({ children }: { children: ReactNode }) => {
   const [open, setOpen] = React.useState(false);
 
@@ -18,6 +19,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
       </div>
       <CustomSpeedDial />
       {children}
+      <Footer />
     </div>
   );
 };
