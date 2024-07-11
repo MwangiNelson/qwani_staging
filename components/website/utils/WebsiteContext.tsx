@@ -18,6 +18,7 @@ export const WebsiteContextProvider = ({
   const [minimalFooter, setMinimalFooter] = useState(false);
   useEffect(() => {
     setMinimalFooter(false);
+    setDrawerOpen(false);
   }, [pathName]);
 
   return (

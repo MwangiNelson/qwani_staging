@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <main className="">
       <HeroUI imageLink="/home.png">
-        <div className=" mb:-mt-14  text-background fx-col gap-5 justify-start ">
+        <div className=" mb:-mt-16  text-background fx-col gap-5 justify-start ">
           <h1 className=" h1 text-center ">
             Discover
             <span className="text-primary"> Qwani</span>: A Hub for Young
@@ -136,7 +136,7 @@ const AboutCards = () => {
 };
 const EventCards = () => {
   return (
-    <div className="web-px bg-[rgba(0,0,0,.98)] py-20 fx-col gap-5 mt-14 md:gap-10 relative">
+    <div className="web-px bg-[rgba(0,0,0,.98)] py-10 md:py-20 fx-col gap-5 mt-14 md:gap-10 relative">
       <Image
         src="/home.png"
         alt="Home"
@@ -145,9 +145,7 @@ const EventCards = () => {
         className="w-full absolute o top-0 left-0 z-[-1] object-cover h-full rounded-lg"
       />
       <div className="flex flex-col md:flex-row  items-start gap-1 md:gap-10 md:items-end">
-        <h1 className="mb:font-bold md:text-2xl text-primary">
-          Upcoming Events
-        </h1>
+        <h1 className="mb:font-bold text-2xl text-primary">Upcoming Events</h1>
 
         <p className="text-background  flex-1 text-lg md:text-xl font-medium md:font-semibold">
           Celebrate Creativity and Community

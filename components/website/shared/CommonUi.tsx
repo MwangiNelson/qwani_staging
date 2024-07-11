@@ -13,6 +13,7 @@ import { Play } from "lucide-react";
 import YouTube from "react-youtube";
 
 import { FaPlay } from "react-icons/fa6";
+import { ReactNode } from "react";
 export const HeroUI = ({
   imageLink,
   children,
@@ -23,9 +24,9 @@ export const HeroUI = ({
   return (
     <div
       style={{
-        background: `linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0.90) 100%)`,
+        background: `linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0.80) 100%)`,
       }}
-      className=" web-px h-[calc(100vh-80px)]  md:h-[calc(100vh-80px)] bg-primary fx items-center relative"
+      className=" web-px h-[calc(100vh-100px)]  md:h-[calc(100vh-80px)] bg-primary fx items-center relative"
     >
       <Image
         src={imageLink}
@@ -73,3 +74,7 @@ export function CustomVideoPlayer({
     </Dialog>
   );
 }
+
+export const PrimaryTextSpan: React.FC<{ children: ReactNode }> = ({
+  children,
+}) => <span className="text-primary mx-[4px]">{children}</span>;

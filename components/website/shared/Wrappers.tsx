@@ -23,7 +23,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { EventCard } from "./Cards";
+import { EventCard, TeamMemberCard } from "./Cards";
 
 export const EventsCardsWrapper = () => {
   return (
@@ -31,7 +31,10 @@ export const EventsCardsWrapper = () => {
       <CarouselContent className="gap-1 md:gap-5 h-auto">
         {[1, 2, 3, 4, 6].map((item, index) => {
           return (
-            <CarouselItem key={index} className=" basis-[80%] md:basis-1/4">
+            <CarouselItem
+              key={index}
+              className=" basis-[80%] md:basis-1/3 lg:basis-1/4"
+            >
               <EventCard index={index} />
             </CarouselItem>
           );
@@ -40,5 +43,15 @@ export const EventsCardsWrapper = () => {
       <CarouselPrevious />
       <CarouselNext />
     </Carousel>
+  );
+};
+
+export const TeamMemberWrapper = () => {
+  return (
+    <div className="grid  mb:gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 ">
+      {Array.from({ length: 4 }).map((_, index) => {
+        return <TeamMemberCard key={index} />;
+      })}
+    </div>
   );
 };

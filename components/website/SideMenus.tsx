@@ -68,7 +68,7 @@ const CustomLink = ({ name, url }: { name: string; url: string }) => {
         className={cn(
           `text-base 
                font-medium t-200  text-background hover:text-darkRed`,
-          pathname === url && "text-primary"
+          pathname === url && "underline underline-offset-4"
         )}
       >
         {name}

@@ -10,10 +10,12 @@ export default function Footer() {
   const { minimalFooter } = useWebsiteContext();
   return (
     <div className="pt-10">
-      <div className="fx-col-mb gap-5 web-px">
-        <h3 className="text-primary ">Join Community</h3>
+      <div className="fx-col-mb mb:gap-2 gap-5 web-px">
+        <h3 className="text-primary mb:font-bold mb:text-xl ">
+          Join Community
+        </h3>
         <div className="flex-1 fx-col gap-2">
-          <p className="font-semibold text-lg">
+          <p className="font-semibold  text-lg">
             Step into Qwanis vibrant circle of creatives. Here, every voice
             matters, every story thrives, and camaraderie blooms. Become a part
             of our literary mosaic today!
@@ -31,7 +33,8 @@ export default function Footer() {
       <div
         className={cn(
           "bg-foreground py-5 web-px ",
-          !minimalFooter && "-mt-[250px] pt-[270px] min-h-[50vh] "
+          !minimalFooter &&
+            "-mt-[200px] pt-[200px] md:-mt-[250px] md:pt-[270px] min-h-[50vh] "
         )}
       >
         <div className="grid grid-cols-2 md:grid-cols-4 w-full text-background gap-5">
@@ -42,7 +45,7 @@ export default function Footer() {
             height={500}
             className=" w-32 col-span-2 md:col-span-1 "
           />
-          <div className="w-full md:col-span-3 fx justify-between flex-wrap gap-10">
+          <div className="w-full md:col-span-3 flex flex-wrap md:justify-between  ">
             <Links links={footer_quickLinks} title={"Quick Links"} />
             <Links links={footer_links} title={"Links"} />
             <Links links={socials} title={"Socials"} />
@@ -72,10 +75,10 @@ type LinkProps = {
 };
 
 const Links: React.FC<LinkProps> = ({ links, title }) => (
-  <div className="fx-col">
+  <div className="fx-col mb:mb-5 ">
     <h4 className="text-xl font-semibold">{title}</h4>
     {links.map((link) => (
-      <Link key={link.link} href={link.link} className="text-lg">
+      <Link key={link.link} href={link.link} className="  md:text-lg">
         {link.name}
       </Link>
     ))}

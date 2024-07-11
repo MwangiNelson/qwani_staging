@@ -14,7 +14,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
 
   return (
     <div className="overflow-x-hidden">
-      <div className="h-[80px]">
+      <div className="h-[100px]">
         <Navbar open={open} setOpen={setOpen} />
       </div>
       <CustomSpeedDial />

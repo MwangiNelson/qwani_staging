@@ -1,5 +1,5 @@
 .web-px {
-  @apply px-4 md:px-[64px];
+  @apply px-4 md:px-[64px] xl:px-[128px];
 }
 
 .fx {
@@ -17,6 +17,9 @@
 .fx-col {
   @apply flex flex-col;
 }
+.fx-jb {
+  @apply flex justify-between;
+}
 /* styles.css */
 .h1 {
   @apply text-4xl font-bold md:text-6xl  leading-tight;
@@ -25,18 +28,30 @@
   @apply text-3xl font-bold md:text-5xl  leading-tight;
 }
 .h3 {
-  @apply text-2xl font-bold md:text-4xl  leading-tight;
+  @apply text-2xl font-semibold md:text-4xl  leading-tight;
 }
 .h4 {
-  @apply text-xl font-bold md:text-3xl  leading-tight;
+  @apply text-xl font-semibold md:text-3xl  leading-tight;
 }
 .h5 {
-  @apply text-lg font-bold md:text-2xl  leading-tight;
+  @apply text-lg font-semibold md:text-2xl  leading-tight;
 }
 .h6 {
-  @apply text-base font-bold md:text-xl  leading-tight;
+  @apply text-base font-semibold md:text-xl  leading-tight;
 }
 
 .fx-col-mb {
   @apply flex flex-col md:flex-row;
 }
+.absolute-cover {
+  @apply absolute top-0 left-0 w-full h-full object-cover blur-[10];
+}
+.blur-bg {
+  @apply bg-background/20 border-[1px] border-background/60  backdrop-filter backdrop-blur-md;
+}
+/* 
+.blur_bg {
+  border: 1px solid rgba(255, 255, 255, 0.64);
+  background: rgba(255, 255, 255, 0.21);
+  backdrop-filter: blur(10.5px);
+} */

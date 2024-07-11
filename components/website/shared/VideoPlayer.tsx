@@ -2,13 +2,13 @@
 import { useEffect, useRef, useState } from "react";
 import VideoPlayerControls from "../utils/VideoPlayerControls";
 import Image from "next/image";
-
+import { useMediaQuery } from "react-responsive";
 export default function VideoPlayer() {
   const [videoProgress, setVideoProgress] = useState<number>(0);
   const [videoDuration, setVideoDuration] = useState<number>();
   const [isPaused, setIsPaused] = useState(true);
   const [isPlaying, setIsPlaying] = useState(false);
-
+  const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -46,7 +46,12 @@ export default function VideoPlayer() {
   return (
     <div className="relative overflow-hidden ">
       {isPlaying ? (
-        <div className="relative  overflow-hidden" style={{ height: "500px" }}>
+        <div
+          className="relative  overflow-hidden"
+          style={{
+            height: isMobile ? "350px" : "500px",
+          }}
+        >
           <div className="absolute top-4 right-5 z-10">
             <VideoPlayerControls
               progress={videoProgress}
@@ -67,7 +72,7 @@ export default function VideoPlayer() {
         <div>
           <Image
             src={"/footer_image.png"}
-            className="w-full h-[500px]  object-cover object-center  "
+            className="w-full h-[350px] md:h-[500px]  object-cover object-center  "
             width={1000}
             height={1000}
             alt="Pens"
