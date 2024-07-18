@@ -40,6 +40,28 @@
   @apply text-base font-semibold md:text-xl  leading-tight;
 }
 
+.ts1 {
+  @apply text-4xl  md:text-6xl  leading-tight;
+}
+.ts2 {
+  @apply text-3xl  md:text-5xl  leading-tight;
+}
+.ts3 {
+  @apply text-2xl  md:text-4xl  leading-tight;
+}
+.ts4 {
+  @apply text-xl  md:text-3xl  leading-tight;
+}
+.ts5 {
+  @apply text-lg  md:text-2xl  leading-tight;
+}
+.ts6 {
+  @apply text-base  md:text-xl  leading-tight;
+}
+.ts7 {
+  @apply text-sm  md:text-lg  leading-tight;
+}
+
 .fx-col-mb {
   @apply flex flex-col md:flex-row;
 }

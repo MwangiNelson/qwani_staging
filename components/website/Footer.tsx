@@ -9,22 +9,24 @@ import Link from "next/link";
 export default function Footer() {
   const { minimalFooter } = useWebsiteContext();
   return (
-    <div className="pt-10">
-      <div className="fx-col-mb mb:gap-2 gap-5 web-px">
-        <h3 className="text-primary mb:font-bold mb:text-xl ">
-          Join Community
-        </h3>
-        <div className="flex-1 fx-col gap-2">
-          <p className="font-semibold  text-lg">
-            Step into Qwanis vibrant circle of creatives. Here, every voice
-            matters, every story thrives, and camaraderie blooms. Become a part
-            of our literary mosaic today!
-          </p>
-          <div>
-            <Button size={"sm"}>Join Community</Button>
+    <div className="">
+      {!minimalFooter && (
+        <div className="fx-col-mb mb:gap-2 gap-5 web-px">
+          <h3 className="text-primary mb:font-bold mb:text-xl ">
+            Join Community
+          </h3>
+          <div className="flex-1 fx-col gap-2">
+            <p className="font-semibold  text-lg">
+              Step into Qwanis vibrant circle of creatives. Here, every voice
+              matters, every story thrives, and camaraderie blooms. Become a
+              part of our literary mosaic today!
+            </p>
+            <div>
+              <Button size={"sm"}>Join Community</Button>
+            </div>
           </div>
         </div>
-      </div>
+      )}
       {!minimalFooter && (
         <div className="web-px py-10  ">
           <VideoPlayer />

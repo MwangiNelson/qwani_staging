@@ -23,7 +23,7 @@ export default function AboutPage() {
 const HeroSection = () => {
   return (
     <HeroUI imageLink="/home.png">
-      <div className=" mb:-mt-14  text-background fx-col gap-5 justify-start ">
+      <div className="  md:mt-28  text-background fx-col gap-5 justify-start ">
         <h1 className="mb:text-center text-5xl md:text-6xl lg:text-[90px] font-bold  leading-tight ">
           Crafting a Legacy of
           <span className="text-primary"> Literary </span>
@@ -139,9 +139,9 @@ const DetailsCards: React.FC<{}> = () => {
 };
 const OurTeamSection = () => {
   return (
-    <div className="web-px mt-10">
+    <div className="web-px mt-20">
       <CustomTitle title="Our Team" titleNumber={3} />
-      <div className="mt-5">
+      <div className="mt-5 mb-10">
         <TeamMemberWrapper />
       </div>
     </div>

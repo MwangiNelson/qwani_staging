@@ -17,16 +17,23 @@ import { ReactNode } from "react";
 export const HeroUI = ({
   imageLink,
   children,
+  bgtype = "default",
 }: {
   imageLink: string;
   children: React.ReactNode;
+  bgtype?: "default" | "radial";
 }) => {
   return (
     <div
       style={{
-        background: `linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0.80) 100%)`,
+        background:
+          bgtype == "default"
+            ? `linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0.80) 100%)`
+            : ` linear-gradient(180deg, rgba(0, 0, 0, 0.50) 0%, 
+        rgba(0, 0, 0, 0.01) 21%, rgba(0, 0, 0, 0.00) 100%),
+         linear-gradient(90deg, #000 0.07%, rgba(0, 0, 0, 0.00) 99.93%)`,
       }}
-      className=" web-px h-[calc(100vh-100px)]  md:h-[calc(100vh-80px)] bg-primary fx items-center relative"
+      className=" web-px h-screen bg-primary fx items-center relative "
     >
       <Image
         src={imageLink}

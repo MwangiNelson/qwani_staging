@@ -56,3 +56,12 @@ export const AboutPageValueCard: React.FC<{
     </div>
   );
 };
+
+export const SeparatorTitle: React.FC<{ title: string }> = ({ title }) => {
+  return (
+    <div className="fx-a-center gap-5 ">
+      <Separator className="w-20 bg-foreground" />
+      <h2 className="ts5 font-semibold">{title}</h2>
+    </div>
+  );
+};

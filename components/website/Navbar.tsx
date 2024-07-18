@@ -40,7 +40,7 @@ const Navbar = ({ open, setOpen }: ISwitch) => {
 
   return (
     <div
-      className="h-full bg-black    
+      className="h-full  sticky top-0 z-50 
     flex justify-between items-center web-px"
     >
       <Link className="flex items-center" href={"/"}>

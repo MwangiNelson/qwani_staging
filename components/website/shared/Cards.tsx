@@ -30,6 +30,28 @@ export const EventCard = (props: { index: number }) => {
     </Card>
   );
 };
+export const EventCardMain = (props: { index: number }) => {
+  return (
+    <Card className="w-full  z-[1]   ">
+      <CardContent className="w-full p-0 fx-col gap-3">
+        <Image
+          src={`/imgs/${props.index + 1}.jpg`}
+          className="w-full h-[250px] rounded-sm object-cover "
+          alt={"Card Image"}
+          width={1000}
+          height={1000}
+        />
+        <div className="flex flex-col p-4">
+          <h4 className="text-lg">Lets hike at Kariminu!</h4>
+          <h5 className="ts6 font-semibold text-primary">
+            Kenya Railways Museum
+          </h5>
+          <p className="">May 25th 2024, 8:00am</p>
+        </div>
+      </CardContent>
+    </Card>
+  );
+};
 export const BlogCard = (props: {
   imageUrl: string;
   title: string;
@@ -88,6 +110,60 @@ export const TeamMemberCard = () => {
           </div>
           <Button className="blur-bg rounded-full " variant="ghost" size={"sm"}>
             <span>Excetive Director</span>
+            <FaAngleRight />
+          </Button>
+        </div>
+      </CardContent>
+    </Card>
+  );
+};
+
+export const WriterCard = () => {
+  return (
+    <Card className="p-0 relative h-[350px] z-[3]">
+      <Image
+        src={randomImage()}
+        alt="Team Member"
+        width={500}
+        height={500}
+        className="absolute-cover rounded-sm z-[-1]"
+      />
+      <div className="absolute top-1/2 -translate-y-1/2 fx-col right-0 ">
+        {["Art", "Poerty", "Fiction"].map((item, index) => {
+          return (
+            <span
+              key={index}
+              className="font-semibold text-bgsecondary text-end"
+            >
+              {item}
+            </span>
+          );
+        })}
+      </div>
+      <div className="absolute-cover bg-foreground/50 z-[-1]" />
+      <CardContent className=" fx flex-col text-background py-4 h-full">
+        <h1 className="ts5  font-semibold ">
+          Tole <br /> Rightson
+        </h1>
+        <div className="fx-jb flex-1  items-end ">
+          <div className="fx-center gap-1">
+            <Button
+              variant={"ghost"}
+              className="blur-bg rounded-full"
+              size={"icon"}
+            >
+              <FaXTwitter />
+            </Button>
+            <Button
+              variant={"ghost"}
+              className="blur-bg rounded-full"
+              size={"icon"}
+            >
+              <FaInstagram />
+            </Button>
+          </div>
+          <Button className="blur-bg rounded-full " variant="ghost" size={"sm"}>
+            <span>Read More</span>
             <FaAngleRight />
           </Button>
         </div>

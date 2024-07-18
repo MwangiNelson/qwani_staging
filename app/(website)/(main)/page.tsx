@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <main className="">
       <HeroUI imageLink="/home.png">
-        <div className=" mb:-mt-16  text-background fx-col gap-5 justify-start ">
+        <div className="text-background  fx-col gap-5 justify-start md:mt-28 ">
           <h1 className=" h1 text-center ">
             Discover
             <span className="text-primary"> Qwani</span>: A Hub for Young

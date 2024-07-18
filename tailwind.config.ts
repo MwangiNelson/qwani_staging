@@ -63,6 +63,10 @@ const config = {
           DEFAULT: "hsla(var(--card))",
           foreground: "hsla(var(--card-foreground))",
         },
+        bgsecondary: {
+          DEFAULT: "hsla(var(--bgsecondary))",
+          foreground: "hsla(var(--bgsecondary-foreground))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

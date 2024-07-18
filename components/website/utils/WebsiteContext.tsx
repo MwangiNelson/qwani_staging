@@ -6,6 +6,10 @@ interface IWebsiteContext {
   drawerOpen: boolean;
   setDrawerOpen: SetState<boolean>;
   minimalFooter: boolean;
+  speedDial: boolean;
+  setSpeedDial: SetState<boolean>;
+  addSpeedDialInvisiblePages: (page: string) => void;
+  addMinimalFooterVisiblePages: (page: string) => void;
 }
 const WebsiteContext = createContext<IWebsiteContext | null>(null);
 export const WebsiteContextProvider = ({
@@ -15,15 +19,55 @@ export const WebsiteContextProvider = ({
 }) => {
   const pathName = usePathname();
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [speedDialInvisiblePages, setSpeedDialInvisiblePages] = useState<
+    string[]
+  >([]);
+  const [minimalFooterVisiblePages, setMinimalFooterVisiblePages] = useState<
+    string[]
+  >(["/writers"]);
   const [minimalFooter, setMinimalFooter] = useState(false);
+  const [speedDial, setSpeedDial] = useState(true);
+
   useEffect(() => {
     setMinimalFooter(false);
     setDrawerOpen(false);
-  }, [pathName]);
 
+    if (speedDialInvisiblePages.includes(pathName)) {
+      setSpeedDial(false);
+    } else {
+      setSpeedDial(true);
+    }
+    if (minimalFooterVisiblePages.includes(pathName)) {
+      setMinimalFooter(true);
+    } else {
+      setMinimalFooter(false);
+    }
+  }, [pathName]);
+  const addSpeedDialInvisiblePages = (page: string) => {
+    if (!speedDialInvisiblePages.includes(page)) {
+      const pages = speedDialInvisiblePages;
+      pages.push(page);
+      setSpeedDialInvisiblePages(pages);
+    }
+  };
+  const addMinimalFooterVisiblePages = (page: string) => {
+    if (!minimalFooterVisiblePages.includes(page)) {
+      const pages = minimalFooterVisiblePages;
+      pages.push(page);
+      setMinimalFooterVisiblePages(pages);
+    }
+  };
   return (
     <WebsiteContext.Provider
-      value={{ drawerOpen, setDrawerOpen, minimalFooter }}
+      value={{
+        drawerOpen,
+        setDrawerOpen,
+        minimalFooter,
+        setSpeedDial,
+        addSpeedDialInvisiblePages,
+        speedDial,
+        addMinimalFooterVisiblePages,
+      }}
     >
       {children}
     </WebsiteContext.Provider>
