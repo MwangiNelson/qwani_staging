@@ -171,3 +171,5 @@ export const WriterCard = () => {
     </Card>
   );
 };
+
+export const PublicationCards = () => {};

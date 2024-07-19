@@ -60,3 +60,5 @@ export const WritersWrapper = () => {
     </div>
   );
 };
+
+export const QwaniPublicationCards = () => {};
