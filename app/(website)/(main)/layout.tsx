@@ -1,12 +1,6 @@
 "use client";
 import React, { ReactNode } from "react";
-
-import { useMediaQuery } from "react-responsive";
-import { usePathname } from "next/navigation";
 import Navbar from "@/components/website/Navbar";
-import { motion } from "framer-motion";
-import SideMenus from "@/components/website/SideMenus";
-import { cn } from "@/lib/utils";
 import { CustomSpeedDial } from "@/components/website/CustomSpeedDial";
 import Footer from "@/components/website/Footer";
 import { useWebsiteContext } from "@/components/website/utils/WebsiteContext";

@@ -23,7 +23,8 @@ const SideMenus = () => {
       >
         <Button
           size={"icon"}
-          className="  bg-background text-primary
+          variant={"noEffect"}
+          className="  bg-background text-primary 
             rounded-full p-2 text-xl "
           onClick={() => setOpen(false)}
         >

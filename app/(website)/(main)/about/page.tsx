@@ -9,7 +9,7 @@ import { TeamMemberWrapper } from "@/components/website/shared/Wrappers";
 import Image from "next/image";
 import React from "react";
 import { FaArrowDown } from "react-icons/fa";
-export default function AboutPage() {
+function AboutPage() {
   return (
     <div>
       <HeroSection />
@@ -147,3 +147,5 @@ const OurTeamSection = () => {
     </div>
   );
 };
+
+export default AboutPage;

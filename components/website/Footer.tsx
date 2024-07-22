@@ -11,7 +11,7 @@ export default function Footer() {
   return (
     <div className="">
       {!minimalFooter && (
-        <div className="fx-col-mb mb:gap-2 gap-5 web-px">
+        <div className="fx-col-mb mb:gap-2 gap-5 web-px mt-20">
           <h3 className="text-primary mb:font-bold mb:text-xl ">
             Join Community
           </h3>

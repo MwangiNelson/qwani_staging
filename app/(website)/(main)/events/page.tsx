@@ -5,7 +5,7 @@ import { HeroSectionContent } from "@/components/website/pageUIs/events";
 import { Separator } from "@/components/ui/separator";
 import { EventsCardsWrapper } from "@/components/website/shared/Wrappers";
 
-export default function Page() {
+const Events = () => {
   return (
     <div className="pb-20">
       <HeroSection>
@@ -14,7 +14,7 @@ export default function Page() {
       <UpcommingEvents />
     </div>
   );
-}
+};
 const HeroSection = ({ children }: { children: React.ReactNode }) => {
   return (
     <div
@@ -57,3 +57,4 @@ const UpcommingEvents = () => {
     </div>
   );
 };
+export default Events;

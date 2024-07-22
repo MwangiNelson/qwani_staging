@@ -1,11 +1,11 @@
 "use client";
 
-import { ImagesSlider } from "@/components/ui/aceternity/images-slider";
+// import { ImagesSlider } from "@/components/ui/aceternity/images-slider";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Plus } from "lucide-react";
 import { useMediaQuery } from "react-responsive";
-import { motion } from "framer-motion";
+// import { motion } from "framer-motion";
 
 export const AboutPageDetailsCard: React.FC<{
   title: number | string;
@@ -70,8 +70,9 @@ export const SeparatorTitle: React.FC<{ title: string }> = ({ title }) => {
 
 export const QwaniPublicationImages = ({ images }: { images: string[] }) => {
   return (
-    <ImagesSlider className="h-[50vh] md:h-[80vh]" images={images}>
-      <motion.div
+    <div className="h-[50vh] md:h-[80vh]">
+      <div />
+      {/* <motion.div
         initial={{
           opacity: 0,
           y: -80,
@@ -92,7 +93,7 @@ export const QwaniPublicationImages = ({ images }: { images: string[] }) => {
           <span>Buy Now →</span>
           <div className="absolute inset-x-0  h-px -bottom-px bg-gradient-to-r w-3/4 mx-auto from-transparent via-emerald-500 to-transparent" />
         </button>
-      </motion.div>
-    </ImagesSlider>
+      </motion.div> */}
+    </div>
   );
 };

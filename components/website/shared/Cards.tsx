@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -172,4 +173,28 @@ export const WriterCard = () => {
   );
 };
 
-export const PublicationCards = () => {};
+export const PublicationCards = (props: {
+  imageUrl: string;
+  title: string;
+  paragraph: string;
+  date: string;
+}) => {
+  return (
+    <Card className="w-full  z-[1]  p-0 bg-transparent border-none  shadow-none  ">
+      <CardContent className="w-full p-0 fx-col gap-3">
+        <Image
+          src={props.imageUrl}
+          className="w-full h-[250px] rounded-sm object-cover "
+          alt={"Card Image"}
+          width={1000}
+          height={1000}
+        />
+        <div className=" flex flex-col p">
+          <h4 className="font-thin text-sm">{props.date}</h4>
+          <h5 className="h5 text-primary">{props.title}</h5>
+          <p className="text-xs font-light ">{props.paragraph}</p>
+        </div>
+      </CardContent>
+    </Card>
+  );
+};

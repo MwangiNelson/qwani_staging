@@ -6,7 +6,13 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 
-import { EventCard, EventCardMain, TeamMemberCard, WriterCard } from "./Cards";
+import {
+  EventCard,
+  EventCardMain,
+  PublicationCards,
+  TeamMemberCard,
+  WriterCard,
+} from "./Cards";
 
 export const EventsCardsWrapper = ({
   page = "home",
@@ -21,7 +27,7 @@ export const EventsCardsWrapper = ({
             return (
               <CarouselItem
                 key={index}
-                className=" basis-[80%] md:basis-1/3 lg:basis-1/4"
+                className=" basis-[85%] md:basis-1/3 lg:basis-1/4"
               >
                 <EventCard index={index} />
               </CarouselItem>
@@ -60,5 +66,3 @@ export const WritersWrapper = () => {
     </div>
   );
 };
-
-export const QwaniPublicationCards = () => {};

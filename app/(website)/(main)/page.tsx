@@ -1,15 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { BlogCard } from "@/components/website/shared/Cards";
-import {
-  CustomVideoPlayer,
-  HeroUI,
-} from "@/components/website/shared/CommonUi";
+import { HeroUI } from "@/components/website/shared/CommonUi";
 import { EventsCardsWrapper } from "@/components/website/shared/Wrappers";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
-export default function Home() {
+const Home = () => {
   return (
     <main className="">
       <HeroUI imageLink="/home.png">
@@ -36,7 +33,8 @@ export default function Home() {
       <BlogsSections />
     </main>
   );
-}
+};
+
 const AboutSection = () => {
   return (
     <div className="fx-col  gap-8 web-px mt-14">
@@ -206,3 +204,5 @@ const BlogsSections = () => {
     </div>
   );
 };
+
+export default Home;

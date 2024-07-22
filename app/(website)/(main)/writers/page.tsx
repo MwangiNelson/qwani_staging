@@ -4,14 +4,14 @@ import { HeroUI } from "@/components/website/shared/CommonUi";
 import { WritersWrapper } from "@/components/website/shared/Wrappers";
 import React from "react";
 
-export default function page() {
+const Writers = () => {
   return (
     <div className="">
       <HeroSection />
       <WritersSection />
     </div>
   );
-}
+};
 
 const HeroSection = () => {
   return (
@@ -42,3 +42,5 @@ const WritersSection = () => {
     </div>
   );
 };
+
+export default Writers;

@@ -2,17 +2,18 @@ import {
   QwaniPublicationImages,
   SeparatorTitle,
 } from "@/components/website/pageUIs";
-import React from "react";
+import { PublicationCards } from "@/components/website/shared/Cards";
+import Image from "next/image";
 
-export default function page() {
+const Publications = () => {
   return (
     <div>
       <HeroSection />
       <PublicationsImagesSection />
-      <Publications />
+      <PublicationsSection />
     </div>
   );
-}
+};
 const HeroSection = () => {
   return (
     <div className="bg-foreground web-px h-screen text-background   pt-48">
@@ -30,18 +31,56 @@ const HeroSection = () => {
   );
 };
 const PublicationsImagesSection = () => {
-  const images = ["/book2.png"];
   return (
-    <div className="-mt-[30vh] md:-mt-[40vh] web-px">
-      <QwaniPublicationImages images={images} />
+    <div className="-mt-[30vh] md:-mt-[40vh]  web-px">
+      <Image
+        alt="CONTACT IMAGE"
+        src="/book2.png"
+        width={1920}
+        height={1080}
+        className="h-[50vh] md:h-[70vh] object-cover"
+      />
     </div>
   );
 };
 
-const Publications = () => {
+const PublicationsSection = () => {
+  const publications = [
+    {
+      imageUrl: "/book1.png",
+      title: "QWANI BOOK 1",
+      paragraph:
+        "The book starts with Museo explaining the issue of non-consensual sex from a female perspective...",
+      date: "Published April 1, 2023",
+    },
+    {
+      imageUrl: "/book2.png",
+      title: "Qwani Book 2",
+      paragraph:
+        "The book starts with Museo explaining the issue of non-consensual sex from a female perspective...",
+      date: "Published April 1, 2023",
+    },
+  ];
+
   return (
-    <div className="web-px mt-14">
+    <div className="web-px mt-14 mb-20">
       <SeparatorTitle title="Our Publications" />
+      <div className="mt-10 ">
+        <div className="grid   gap-5  md:gap-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 ">
+          {publications.map((item, index) => {
+            return (
+              <PublicationCards
+                key={index}
+                imageUrl={item.imageUrl}
+                title={item.title}
+                paragraph={item.paragraph}
+                date={item.date}
+              />
+            );
+          })}
+        </div>
+      </div>
     </div>
   );
 };
+export default Publications;

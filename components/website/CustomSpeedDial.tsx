@@ -33,7 +33,7 @@ export function CustomSpeedDial() {
           <Mail />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-36 bg-foreground/90 border-border border text-background">
+      <PopoverContent className="w-36 bg-foreground/70  shadow-2xl border-none text-background">
         <div className="fx fx-col gap-3">
           <CustomLink link="mailto:" icon={IoMailOutline} text="Email" />
           <CustomLink link="https://wa.me/" icon={FaWhatsapp} text="Whatsapp" />
