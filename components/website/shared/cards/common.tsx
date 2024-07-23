@@ -9,8 +9,10 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { randomImage } from "@/lib/data";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Image from "next/image";
 import { FaAngleRight, FaInstagram, FaXTwitter } from "react-icons/fa6";
+import { Bookmark } from "lucide-react";
 export const EventCard = (props: { index: number }) => {
   return (
     <Card className="w-full  z-[1]  p-0 bg-transparent border-none  ">
@@ -196,5 +198,27 @@ export const PublicationCards = (props: {
         </div>
       </CardContent>
     </Card>
+  );
+};
+export const ProfileCard = () => {
+  return (
+    <div className="fx-a-center gap-2">
+      <Avatar>
+        <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+        <AvatarFallback>CN</AvatarFallback>
+      </Avatar>
+      <div className="fx-col">
+        <div className=" font-semibold text-sm">Tole Rightson</div>
+        <div className="fx font-light text-sm">20/20/2020 || 3 min read</div>
+      </div>
+    </div>
+  );
+};
+export const ProfileCardWithBookMark = () => {
+  return (
+    <div className="fx-jb items-center pt-2">
+      <ProfileCard />
+      <Bookmark size={15} />
+    </div>
   );
 };

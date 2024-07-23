@@ -1,6 +1,9 @@
 .web-px {
   @apply px-4 md:px-[64px] xl:px-[128px];
 }
+.blog-px {
+  @apply px-0 md:px-[86px] xl:px-[172px];
+}
 
 .fx {
   @apply flex;

@@ -12,7 +12,7 @@ import {
   PublicationCards,
   TeamMemberCard,
   WriterCard,
-} from "./Cards";
+} from "./cards/common";
 
 export const EventsCardsWrapper = ({
   page = "home",

@@ -3,7 +3,7 @@ import {
   AboutPageDetailsCard,
   AboutPageValueCard,
 } from "@/components/website/pageUIs";
-import { TeamMemberCard } from "@/components/website/shared/Cards";
+import { TeamMemberCard } from "@/components/website/shared/cards/common";
 import { HeroUI } from "@/components/website/shared/CommonUi";
 import { TeamMemberWrapper } from "@/components/website/shared/Wrappers";
 import Image from "next/image";

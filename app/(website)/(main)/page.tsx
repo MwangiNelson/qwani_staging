@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { BlogCard } from "@/components/website/shared/Cards";
+import { BlogCard } from "@/components/website/shared/cards/common";
 import { HeroUI } from "@/components/website/shared/CommonUi";
 import { EventsCardsWrapper } from "@/components/website/shared/Wrappers";
 import { cn } from "@/lib/utils";
@@ -143,9 +143,11 @@ const EventCards = () => {
         className="w-full absolute o top-0 left-0 z-[-1] object-cover h-full rounded-lg"
       />
       <div className="flex flex-col md:flex-row  items-start gap-1 md:gap-10 md:items-end">
-        <h1 className="mb:font-bold text-2xl text-primary">Upcoming Events</h1>
+        <h1 className="mb:font-bold text-2xl text-primary text-center w-full  md:text-start">
+          Upcoming Events
+        </h1>
 
-        <p className="text-background  flex-1 text-lg md:text-xl font-medium md:font-semibold">
+        <p className="text-background text-center md:text-start flex-1 text-lg md:text-xl font-medium md:font-semibold">
           Celebrate Creativity and Community
         </p>
       </div>

@@ -50,7 +50,7 @@ const UpcommingEvents = () => {
       <div className="space-y-5 mt-10">
         <div className="fx-a-center gap-5 ">
           <Separator className="w-20 bg-foreground" />
-          Prevoius Events
+          Previus Events
         </div>
         <EventsCardsWrapper page="events" />
       </div>

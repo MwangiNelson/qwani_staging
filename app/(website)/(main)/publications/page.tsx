@@ -2,7 +2,7 @@ import {
   QwaniPublicationImages,
   SeparatorTitle,
 } from "@/components/website/pageUIs";
-import { PublicationCards } from "@/components/website/shared/Cards";
+import { PublicationCards } from "@/components/website/shared/cards/common";
 import Image from "next/image";
 
 const Publications = () => {
