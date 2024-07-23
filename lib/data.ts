@@ -3,7 +3,7 @@ export const randomImage = () => {
 };
 
 export const blog_categories = [
-  "All",
+  // "All",
   "Technology",
   "Business",
   "Health",

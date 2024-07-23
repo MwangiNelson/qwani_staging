@@ -1,14 +1,15 @@
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import {
+  AllBlogsCards,
   BlogCategoriesFilter,
   TrendingBlogsWrapper,
 } from "@/components/website/pageUIs/blogs";
 import {
+  BlogCardMain,
   BlogListHero,
-  MainBlogCardHero,
 } from "@/components/website/shared/cards/blogs";
-import { Bookmark, PenIcon, Search } from "lucide-react";
+import { PenIcon, Search } from "lucide-react";
 import React from "react";
 
 const Blogs = () => {
@@ -17,6 +18,7 @@ const Blogs = () => {
       <HeroSection />
       <TrendingBlogs />
       <BlogCategories />
+      <AllBlogs />
     </div>
   );
 };
@@ -32,7 +34,7 @@ const HeroSection = () => {
           For You
         </h1>
       </div>
-      <div className="absolute -right-2 web-px top-32 fx-col">
+      <div className="fixed z-[6] -right-2 web-px top-32 fx-col">
         <Button variant={"noEffect"} size={"icon"}>
           <Search size={15} />
         </Button>
@@ -41,7 +43,7 @@ const HeroSection = () => {
         </Button>
       </div>
       <div className="blog-px fx flex-col md:flex-row mt-10  gap-14 md:gap-10">
-        <MainBlogCardHero />
+        <BlogCardMain bg="foreground" />
         <BlogListHero />
       </div>
     </div>
@@ -74,6 +76,16 @@ const BlogCategories = () => {
         <PageTitle title={"Featured Blogs"} />
       </div>
       <BlogCategoriesFilter />
+    </div>
+  );
+};
+const AllBlogs = () => {
+  return (
+    <div className="bg-[#F2F2F2] mt-10 py-10 web-px">
+      <div className="fx-center">
+        <PageTitle title={"All Blogs"} />
+      </div>
+      <AllBlogsCards />
     </div>
   );
 };

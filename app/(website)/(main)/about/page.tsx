@@ -24,7 +24,7 @@ const HeroSection = () => {
   return (
     <HeroUI imageLink="/home.png">
       <div className="  md:mt-28  text-background fx-col gap-5 justify-start ">
-        <h1 className="mb:text-center text-5xl md:text-6xl lg:text-[90px] font-bold  leading-tight ">
+        <h1 className="mb:text-centesr text-5xl md:text-6xl lg:text-[90px] font-bold  leading-tight ">
           Crafting a Legacy of
           <span className="text-primary"> Literary </span>
           Excellence and Inclusive{" "}

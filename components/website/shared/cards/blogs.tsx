@@ -3,11 +3,20 @@ import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { ProfileCardWithBookMark } from "./common";
-export const MainBlogCardHero = () => {
+import { Separator } from "@/components/ui/separator";
+import { cn } from "@/lib/utils";
+export const BlogCardMain: React.FC<{
+  bg?: "background" | "foreground";
+}> = ({ bg = "background" }) => {
   return (
-    <Card className="w-full  z-[1]  p-0 bg-transparent border-none  shadow-none text-background relative  ">
+    <Card
+      className={cn(
+        `w-full  z-[1]  p-0 bg-transparent border-none  shadow-none relative  `,
+        bg === "background" ? "text-foreground " : "text-background"
+      )}
+    >
       <Badge className="top-0 absolute" variant={"outline"}>
-        <span className="text-background">Trending</span>
+        <span className={cn("text-background")}>Trending</span>
       </Badge>
       <CardContent className="w-full p-0 fx-col gap-3">
         <Image
@@ -18,9 +27,7 @@ export const MainBlogCardHero = () => {
           height={1000}
         />
         <div className=" flex flex-col space-y-1">
-          <h4 className="ts6 font-semibold text-background">
-            The origin of the name shylock
-          </h4>
+          <h4 className="ts6 font-semibold ">The origin of the name shylock</h4>
           <p className="  ">
             In modern society or today, the name shylock is used to refer to an
             informal money lender. You may have come across such a person
@@ -64,7 +71,9 @@ const BlogHorizontalCard = () => {
   );
 };
 
-export const BlogCardPrimary = () => {
+export const BlogCardPrimary: React.FC<{
+  size?: "small" | "large";
+}> = ({ size = "large" }) => {
   return (
     <Card className="w-full bg-background  z-[1]   border-none  shadow-none text-foreground relative  ">
       <CardContent className="w-full fx-col gap-3 py-5">
@@ -76,8 +85,11 @@ export const BlogCardPrimary = () => {
           </div>
           <h4 className="ts6 font-semibold ">The origin of the name shylock</h4>
           <p className=" text-md ">
-            In modern society or today, the name shylock is used to refer to an
-            informal money lender. You may have come across such a person
+            {size == "large"
+              ? `In modern society or today, the name shylock is used to refer to an
+            informal money lender. You may have come across such a person`
+              : ` In modern society or today, the name shylock is used to refer to an
+            informal money lender...`}
           </p>
           <ProfileCardWithBookMark />
         </div>

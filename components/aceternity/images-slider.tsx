@@ -149,22 +149,3 @@
 //     </div>
 //   );
 // };
-export const ImagesSlider = ({
-  images,
-  children,
-  overlay = true,
-  overlayClassName,
-  className,
-  autoplay = true,
-  direction = "up",
-}: {
-  images: string[];
-  children: React.ReactNode;
-  overlay?: React.ReactNode;
-  overlayClassName?: string;
-  className?: string;
-  autoplay?: boolean;
-  direction?: "up" | "down";
-}) => {
-  return <></>;
-};

@@ -21,7 +21,7 @@ export const HeroUI = ({
 }: {
   imageLink: string;
   children: React.ReactNode;
-  bgtype?: "default" | "radial";
+  bgtype?: "default" | "radial" | "center";
 }) => {
   return (
     <div
@@ -29,11 +29,13 @@ export const HeroUI = ({
         background:
           bgtype == "default"
             ? `linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0.80) 100%)`
-            : ` linear-gradient(180deg, rgba(0, 0, 0, 0.50) 0%, 
+            : bgtype == "radial"
+            ? ` linear-gradient(180deg, rgba(0, 0, 0, 0.50) 0%, 
         rgba(0, 0, 0, 0.01) 21%, rgba(0, 0, 0, 0.00) 100%),
-         linear-gradient(90deg, #000 0.07%, rgba(0, 0, 0, 0.00) 99.93%)`,
+         linear-gradient(90deg, #000 0.07%, rgba(0, 0, 0, 0.00) 99.93%)`
+            : `radial-gradient(50% 50% at 50% 50%, rgba(0, 0, 0, 0.50) 0%, rgba(0, 0, 0, 0.90) 50.82%)`,
       }}
-      className=" web-px h-screen bg-primary fx items-center relative "
+      className=" web-px h-screen bg-primary fx items-center relative  "
     >
       <Image
         src={imageLink}

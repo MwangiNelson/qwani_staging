@@ -24,7 +24,7 @@ export const WebsiteContextProvider = ({
   >([]);
   const [minimalFooterVisiblePages, setMinimalFooterVisiblePages] = useState<
     string[]
-  >(["/writers"]);
+  >(["/writers", "/blogs"]);
   const [minimalFooter, setMinimalFooter] = useState(false);
   const [speedDial, setSpeedDial] = useState(true);
 

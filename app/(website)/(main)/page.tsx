@@ -11,17 +11,17 @@ const Home = () => {
     <main className="">
       <HeroUI imageLink="/home.png">
         <div className="text-background  fx-col gap-5 justify-start md:mt-28 ">
-          <h1 className=" h1 text-center ">
+          <h1 className=" h1 text-start ">
             Discover
             <span className="text-primary"> Qwani</span>: A Hub for Young
             Writers and Exciting <span className="text-primary">Events</span>
           </h1>
-          <p className="text-xl text-center">
+          <p className="text-xl text-start">
             Qwani champions the artistry of young writers, curating a rich
             tapestry of narratives that resonate with the soul and spark
             imagination.
           </p>
-          <div className="w-full place-content-center fx">
+          <div className="w-full items-start">
             <Button>Join Community</Button>
           </div>
         </div>
@@ -142,12 +142,12 @@ const EventCards = () => {
         height={1000}
         className="w-full absolute o top-0 left-0 z-[-1] object-cover h-full rounded-lg"
       />
-      <div className="flex flex-col md:flex-row  items-start gap-1 md:gap-10 md:items-end">
+      <div className="w-full">
         <h1 className="mb:font-bold text-2xl text-primary text-center w-full  md:text-start">
           Upcoming Events
         </h1>
 
-        <p className="text-background text-center md:text-start flex-1 text-lg md:text-xl font-medium md:font-semibold">
+        <p className="text-background w-full text-center md:text-start flex-1 text-lg md:text-xl font-medium md:font-semibold">
           Celebrate Creativity and Community
         </p>
       </div>

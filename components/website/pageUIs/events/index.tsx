@@ -15,6 +15,7 @@ import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { useIntersectionInCarousel } from "@/lib/hook/useIntersection";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 export const HeroSectionContent = () => {
   const { activeIndex, itemRefs } = useIntersectionInCarousel();
@@ -45,7 +46,9 @@ export const HeroSectionContent = () => {
               </p>
             </div>
             <div className="mt-4 ">
-              <Button>Learn More</Button>
+              <Button asChild>
+                <Link href={`/events/1234`}>Learn More</Link>
+              </Button>
             </div>
             <div className="mt-5 fx gap-[1px]">
               {Array.from({ length: 5 }).map((_, index) => (

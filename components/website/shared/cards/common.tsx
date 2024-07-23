@@ -13,45 +13,50 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Image from "next/image";
 import { FaAngleRight, FaInstagram, FaXTwitter } from "react-icons/fa6";
 import { Bookmark } from "lucide-react";
+import Link from "next/link";
 export const EventCard = (props: { index: number }) => {
   return (
     <Card className="w-full  z-[1]  p-0 bg-transparent border-none  ">
-      <CardContent className="w-full p-0 fx-col gap-3">
-        <Image
-          src={`/imgs/${props.index + 1}.jpg`}
-          className="w-full h-[250px] rounded-sm object-cover "
-          alt={"Card Image"}
-          width={1000}
-          height={1000}
-        />
-        <div className="text-background flex flex-col p">
-          <h4 className="text-lg">Lets hike at Kariminu!</h4>
-          <h5 className="h5 text-primary">Kenya Railways Museum</h5>
-          <p className="text-background/60">May 25th 2024, 8:00am</p>
-        </div>
-      </CardContent>
+      <Link href={`/events/1234`}>
+        <CardContent className="w-full p-0 fx-col gap-3">
+          <Image
+            src={`/imgs/${props.index + 1}.jpg`}
+            className="w-full h-[250px] rounded-sm object-cover "
+            alt={"Card Image"}
+            width={1000}
+            height={1000}
+          />
+          <div className="text-background flex flex-col p">
+            <h4 className="text-lg">Lets hike at Kariminu!</h4>
+            <h5 className="h5 text-primary">Kenya Railways Museum</h5>
+            <p className="text-background/60">May 25th 2024, 8:00am</p>
+          </div>
+        </CardContent>
+      </Link>
     </Card>
   );
 };
 export const EventCardMain = (props: { index: number }) => {
   return (
     <Card className="w-full  z-[1]   ">
-      <CardContent className="w-full p-0 fx-col gap-3">
-        <Image
-          src={`/imgs/${props.index + 1}.jpg`}
-          className="w-full h-[250px] rounded-sm object-cover "
-          alt={"Card Image"}
-          width={1000}
-          height={1000}
-        />
-        <div className="flex flex-col p-4">
-          <h4 className="text-lg">Lets hike at Kariminu!</h4>
-          <h5 className="ts6 font-semibold text-primary">
-            Kenya Railways Museum
-          </h5>
-          <p className="">May 25th 2024, 8:00am</p>
-        </div>
-      </CardContent>
+      <Link href={`/events/1234`}>
+        <CardContent className="w-full p-0 fx-col gap-3">
+          <Image
+            src={`/imgs/${props.index + 1}.jpg`}
+            className="w-full h-[250px] rounded-sm object-cover "
+            alt={"Card Image"}
+            width={1000}
+            height={1000}
+          />
+          <div className="flex flex-col p-4">
+            <h4 className="text-lg">Lets hike at Kariminu!</h4>
+            <h5 className="ts6 font-semibold text-primary">
+              Kenya Railways Museum
+            </h5>
+            <p className="">May 25th 2024, 8:00am</p>
+          </div>
+        </CardContent>
+      </Link>
     </Card>
   );
 };
@@ -165,9 +170,16 @@ export const WriterCard = () => {
               <FaInstagram />
             </Button>
           </div>
-          <Button className="blur-bg rounded-full " variant="ghost" size={"sm"}>
-            <span>Read More</span>
-            <FaAngleRight />
+          <Button
+            className="blur-bg rounded-full "
+            variant="ghost"
+            size={"sm"}
+            asChild
+          >
+            <Link href={`/writers/1234`}>
+              <span>Read More</span>
+              <FaAngleRight />
+            </Link>
           </Button>
         </div>
       </CardContent>
@@ -183,20 +195,22 @@ export const PublicationCards = (props: {
 }) => {
   return (
     <Card className="w-full  z-[1]  p-0 bg-transparent border-none  shadow-none  ">
-      <CardContent className="w-full p-0 fx-col gap-3">
-        <Image
-          src={props.imageUrl}
-          className="w-full h-[250px] rounded-sm object-cover "
-          alt={"Card Image"}
-          width={1000}
-          height={1000}
-        />
-        <div className=" flex flex-col p">
-          <h4 className="font-thin text-sm">{props.date}</h4>
-          <h5 className="h5 text-primary">{props.title}</h5>
-          <p className="text-xs font-light ">{props.paragraph}</p>
-        </div>
-      </CardContent>
+      <Link href={`/publications/1234`}>
+        <CardContent className="w-full p-0 fx-col gap-3">
+          <Image
+            src={props.imageUrl}
+            className="w-full h-[250px] rounded-sm object-cover "
+            alt={"Card Image"}
+            width={1000}
+            height={1000}
+          />
+          <div className=" flex flex-col p">
+            <h4 className="font-thin text-sm">{props.date}</h4>
+            <h5 className="h5 text-primary">{props.title}</h5>
+            <p className="text-xs font-light ">{props.paragraph}</p>
+          </div>
+        </CardContent>
+      </Link>
     </Card>
   );
 };
@@ -216,7 +230,7 @@ export const ProfileCard = () => {
 };
 export const ProfileCardWithBookMark = () => {
   return (
-    <div className="fx-jb items-center pt-2">
+    <div className="fx-jb items-center pt-2 w-full">
       <ProfileCard />
       <Bookmark size={15} />
     </div>
