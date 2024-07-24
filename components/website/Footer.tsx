@@ -47,7 +47,7 @@ export default function Footer() {
             height={500}
             className=" w-32 col-span-2 md:col-span-1 "
           />
-          <div className="w-full md:col-span-3 flex flex-wrap md:justify-between  ">
+          <div className="w-full col-span-3 mb:grid mb:grid-cols-2 flex md:justify-between  ">
             <Links links={footer_quickLinks} title={"Quick Links"} />
             <Links links={footer_links} title={"Links"} />
             <Links links={socials} title={"Socials"} />
