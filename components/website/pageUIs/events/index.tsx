@@ -31,7 +31,7 @@ export const HeroSectionContent = () => {
             }}
             data-index={index}
           >
-            <div className="space-y-2">
+            <div className="space-y-2 pt-10">
               <h1 className="h7 opacity-50 font-semibold">
                 Kenya Railways Museum
               </h1>
