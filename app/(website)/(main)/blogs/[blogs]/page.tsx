@@ -5,6 +5,7 @@ import { ProfileCardWithBookMark } from "@/components/website/shared/cards/commo
 import { MinimalFooter } from "@/components/website/shared/client";
 import { ChevronLeft } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import { CiShare2 } from "react-icons/ci";
 import { FaInstagram, FaXTwitter } from "react-icons/fa6";
@@ -25,9 +26,11 @@ const Details = () => {
   return (
     <div className="web-px  pt-10">
       <div className="fx flex-col items-start gap-2">
-        <Button variant={"noEffect"} className="p-0 -ml-2">
-          <ChevronLeft />
-          <span>Back To Writers</span>
+        <Button variant={"noEffect"} className="p-0 -ml-2" asChild>
+          <Link href="/blogs">
+            <ChevronLeft />
+            <span>Back To Blogs</span>
+          </Link>
         </Button>
         <span className="font-semibold">Jan 13, 2024</span>
         <ProfileCardWithBookMark />

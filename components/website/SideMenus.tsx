@@ -61,6 +61,8 @@ const MobileMenu = () => {
 };
 const CustomLink = ({ name, url }: { name: string; url: string }) => {
   const pathname = usePathname();
+  const isActive = pathname.split("/")[1] === url.split("/")[1];
+
   return (
     <button className="group relative flex flex-col text-white" key={name}>
       <Link
@@ -69,7 +71,7 @@ const CustomLink = ({ name, url }: { name: string; url: string }) => {
         className={cn(
           `text-base 
                font-medium t-200  text-background hover:text-darkRed`,
-          pathname === url && "underline underline-offset-4"
+          isActive && "underline underline-offset-4"
         )}
       >
         {name}
@@ -78,7 +80,7 @@ const CustomLink = ({ name, url }: { name: string; url: string }) => {
         className={`w-0 
             h-[2px] bg-primary t-200  absolute 
             -bottom-[5px] left-0 group-hover:w-full
-            ${pathname === url && "w-full"}
+            ${isActive && "w-full"}
             `}
       ></span>
     </button>

@@ -143,16 +143,16 @@ const EventCards = () => {
         className="w-full absolute o top-0 left-0 z-[-1] object-cover h-full rounded-lg"
       />
       <div className="w-full">
-        <h1 className="mb:font-bold text-2xl text-primary text-center w-full  md:text-start">
+        <h1 className="mb:font-bold text-2xl text-primary w-full text-start">
           Upcoming Events
         </h1>
 
-        <p className="text-background w-full text-center md:text-start flex-1 text-lg md:text-xl font-medium md:font-semibold">
+        <p className="text-background w-full text-start flex-1 text-lg md:text-xl font-medium md:font-semibold">
           Celebrate Creativity and Community
         </p>
       </div>
       <EventsCardsWrapper />
-      <div className="fx-center mt-10 ">
+      <div className="fx-center mt-5 ">
         <Button size={"sm"} className=" rounded-full">
           View All Events
         </Button>

@@ -67,20 +67,22 @@ export const BlogCard = (props: {
 }) => {
   return (
     <Card className="w-full  z-[1]  p-0 bg-transparent border-none  shadow-none  ">
-      <CardContent className="w-full p-0 fx-col gap-3">
-        <Image
-          src={props.imageUrl}
-          className="w-full h-[250px] rounded-sm object-cover "
-          alt={"Card Image"}
-          width={1000}
-          height={1000}
-        />
-        <div className=" flex flex-col p">
-          <h4 className="font-thin text-sm">{props.date}</h4>
-          <h5 className="h5 text-primary">{props.title}</h5>
-          <p className="text-xs font-light ">...Read More</p>
-        </div>
-      </CardContent>
+      <Link href={`/blogs/1234`}>
+        <CardContent className="w-full p-0 fx-col gap-3">
+          <Image
+            src={props.imageUrl}
+            className="w-full h-[250px] rounded-sm object-cover "
+            alt={"Card Image"}
+            width={1000}
+            height={1000}
+          />
+          <div className=" flex flex-col p">
+            <h4 className="font-thin text-sm">{props.date}</h4>
+            <h5 className="h5 text-primary">{props.title}</h5>
+            <p className="text-xs font-light ">...Read More</p>
+          </div>
+        </CardContent>
+      </Link>
     </Card>
   );
 };
@@ -116,9 +118,16 @@ export const TeamMemberCard = () => {
               <FaInstagram />
             </Button>
           </div>
-          <Button className="blur-bg rounded-full " variant="ghost" size={"sm"}>
-            <span>Excetive Director</span>
-            <FaAngleRight />
+          <Button
+            className="blur-bg rounded-full "
+            variant="ghost"
+            size={"sm"}
+            asChild
+          >
+            <Link href={`/about/1234`}>
+              <span>Excetive Director</span>
+              <FaAngleRight />
+            </Link>
           </Button>
         </div>
       </CardContent>

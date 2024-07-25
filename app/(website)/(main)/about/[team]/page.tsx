@@ -4,7 +4,6 @@ import { ProfileCardWithBookMark } from "@/components/website/shared/cards/commo
 import { MinimalFooter } from "@/components/website/shared/client";
 import { ChevronLeft } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import React from "react";
 import { CiShare2 } from "react-icons/ci";
 import { FaInstagram, FaXTwitter } from "react-icons/fa6";
@@ -21,13 +20,12 @@ const HeroSection = () => {
   return (
     <div className="web-px py-32 space-y-2 ">
       <div className="fx flex-col items-start gap-2">
-        <Button variant={"noEffect"} className="p-0 -ml-2" asChild>
-          <Link href={`/writers`}>
-            <ChevronLeft />
-            <span>Back To Writers</span>
-          </Link>
+        <Button variant={"noEffect"} className="p-0 -ml-2">
+          <ChevronLeft />
+          <span>Back To Writers</span>
         </Button>
         <span className="font-semibold">Jan 13, 2024</span>
+        <Badge className="blur-bg ">Executive Director</Badge>
         <h3 className="ts4 font-semibold">Keith Angana</h3>
       </div>
 
