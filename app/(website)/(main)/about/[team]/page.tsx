@@ -22,7 +22,7 @@ const HeroSection = () => {
       <div className="fx flex-col items-start gap-2">
         <Button variant={"noEffect"} className="p-0 -ml-2">
           <ChevronLeft />
-          <span>Back To Writers</span>
+          <span>Back </span>
         </Button>
         <span className="font-semibold">Jan 13, 2024</span>
         <Badge className="blur-bg ">Executive Director</Badge>
