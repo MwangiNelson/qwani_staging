@@ -6,6 +6,7 @@ import Image from "next/image";
 import { FaAngleRight, FaInstagram, FaXTwitter } from "react-icons/fa6";
 import { CiShare2 } from "react-icons/ci";
 import { MinimalFooter } from "@/components/website/shared/client";
+import { BackButton } from "@/components/website/utils";
 const Publication = () => {
   return (
     <div className="pb-20">
@@ -21,10 +22,7 @@ const HeroSection = () => {
     <div className="bg-foreground web-px h-screen text-background pt-36 md:pt-44">
       <div className="fx-col gap-1">
         <div>
-          <Button variant={"noEffect"} className="p-0">
-            <ChevronLeft />
-            <span>Back To Events</span>
-          </Button>
+          <BackButton />
         </div>
         <h4 className="ts7  font-bold text-primary">Published April 1, 2024</h4>
         <h3 className="ts3 font-semibold">

@@ -7,6 +7,7 @@ import { FaAngleRight, FaInstagram, FaXTwitter } from "react-icons/fa6";
 import { CiShare2 } from "react-icons/ci";
 import { MinimalFooter } from "@/components/website/shared/client";
 import { EventsCardsWrapper } from "@/components/website/shared/Wrappers";
+import { BackButton } from "@/components/website/utils";
 
 const Event = () => {
   return (
@@ -82,10 +83,7 @@ const EventDetails = () => {
           <h3 className="ts5 font-semibold">Location</h3>
           <p>Nairobi Nairobi, Nairobi County</p>
           <div>
-            <Button variant={"noEffect"} className="text-primary p-0">
-              <span>Show Map</span>
-              <FaAngleRight />
-            </Button>
+            <BackButton />
           </div>
         </div>
         <div className="fx-a-center gap-2 py-2">

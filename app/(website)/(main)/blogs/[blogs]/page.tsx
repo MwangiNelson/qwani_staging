@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { ProfileCardWithBookMark } from "@/components/website/shared/cards/common";
 import { MinimalFooter } from "@/components/website/shared/client";
+import { BackButton } from "@/components/website/utils";
 import { ChevronLeft } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -27,10 +28,7 @@ const Details = () => {
     <div className="web-px  pt-10">
       <div className="fx flex-col items-start gap-2">
         <Button variant={"noEffect"} className="p-0 -ml-2" asChild>
-          <Link href="/blogs">
-            <ChevronLeft />
-            <span>Back To Blogs</span>
-          </Link>
+          <BackButton />
         </Button>
         <span className="font-semibold">Jan 13, 2024</span>
         <ProfileCardWithBookMark />

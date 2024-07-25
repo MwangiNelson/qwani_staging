@@ -2,6 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ProfileCardWithBookMark } from "@/components/website/shared/cards/common";
 import { MinimalFooter } from "@/components/website/shared/client";
+import { BackButton } from "@/components/website/utils";
 import { ChevronLeft } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -22,10 +23,7 @@ const HeroSection = () => {
     <div className="web-px py-32 space-y-2 ">
       <div className="fx flex-col items-start gap-2">
         <Button variant={"noEffect"} className="p-0 -ml-2" asChild>
-          <Link href={`/writers`}>
-            <ChevronLeft />
-            <span>Back To Writers</span>
-          </Link>
+          <BackButton />
         </Button>
         <span className="font-semibold">Jan 13, 2024</span>
         <h3 className="ts4 font-semibold">Keith Angana</h3>
