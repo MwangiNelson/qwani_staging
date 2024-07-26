@@ -8,10 +8,10 @@ export const fetchSeo = async (page: string): Promise<ISeo> => {
     query,
     {},
     {
-      cache: "no-cache",
+      // cache: "no-cache",
       next: {
         tags: ["seo"],
-        // revalidate: 3600 * 24 * 30,
+        revalidate: 3600 * 24 * 30,
       },
     }
   );
@@ -28,10 +28,10 @@ export const fetchBlogs = async () => {
     query,
     {},
     {
-      cache: "no-cache",
+      // cache: "no-cache",
       next: {
         tags: ["blogs"],
-        // revalidate: 3600 * 24 * 30,
+        revalidate: 3600 * 24 * 30,
       },
     }
   );
@@ -49,10 +49,10 @@ export const getHomePageContent = async (): Promise<IHomePage> => {
     query,
     {},
     {
-      cache: "no-cache",
+      // cache: "no-cache",
       next: {
         tags: ["homepage"],
-        // revalidate: 3600 * 24 * 30,
+        revalidate: 3600 * 24 * 30,
       },
     }
   );
@@ -88,10 +88,10 @@ export const fetchEvents = async (): Promise<IEvent[]> => {
     query,
     {},
     {
-      cache: "no-cache",
+      // cache: "no-cache",
       next: {
         tags: ["events"],
-        // revalidate: 3600 * 24 * 30,
+        revalidate: 3600 * 24 * 30,
       },
     }
   );
@@ -107,10 +107,10 @@ export const fetchUpcomingEvents = async (): Promise<IEvent[]> => {
     query,
     {},
     {
-      cache: "no-cache",
+      // cache: "no-cache",
       next: {
         tags: ["upcomingevents"],
-        // revalidate: 3600 * 24 * 30,
+        revalidate: 3600 * 24 * 30,
       },
     }
   );
@@ -125,10 +125,10 @@ export const fetchEventById = async (id: string): Promise<IEvent> => {
     query,
     {},
     {
-      cache: "no-cache",
+      // cache: "no-cache",
       next: {
         tags: ["event"],
-        // revalidate: 3600 * 24 * 30,
+        revalidate: 3600 * 24 * 30,
       },
     }
   );
