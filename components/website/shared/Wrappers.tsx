@@ -9,27 +9,29 @@ import {
 import {
   EventCard,
   EventCardMain,
-  PublicationCards,
   TeamMemberCard,
   WriterCard,
 } from "./cards/common";
+import { IEvent, ITeamMember } from "@/utils/data_types";
 
 export const EventsCardsWrapper = ({
+  events = [],
   page = "home",
 }: {
   page?: "home" | "events";
+  events: IEvent[];
 }) => {
   if (page === "home") {
     return (
       <Carousel className="w-full">
         <CarouselContent className="gap-1 md:gap-5 h-auto">
-          {[1, 2, 3, 4, 6].map((item, index) => {
+          {events.map((item, index) => {
             return (
               <CarouselItem
                 key={index}
                 className=" basis-[85%] md:basis-1/3 lg:basis-1/4"
               >
-                <EventCard index={index} />
+                <EventCard event={item} />
               </CarouselItem>
             );
           })}
@@ -41,18 +43,22 @@ export const EventsCardsWrapper = ({
   }
   return (
     <div className="grid  gap-5  md:gap-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
-      {Array.from({ length: 4 }).map((_, index) => {
-        return <EventCardMain key={index} index={index} />;
+      {events.map((event, index) => {
+        return <EventCardMain key={index} event={event} />;
       })}
     </div>
   );
 };
 
-export const TeamMemberWrapper = () => {
+export const TeamMemberWrapper = ({
+  teamMembers,
+}: {
+  teamMembers: ITeamMember[];
+}) => {
   return (
     <div className="grid  gap-5  md:gap-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 ">
-      {Array.from({ length: 4 }).map((_, index) => {
-        return <TeamMemberCard key={index} />;
+      {teamMembers.map((item, index) => {
+        return <TeamMemberCard key={index} member={item} />;
       })}
     </div>
   );

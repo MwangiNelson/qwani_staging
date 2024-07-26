@@ -3,53 +3,58 @@ import { Separator } from "@/components/ui/separator";
 import { BlogCard } from "@/components/website/shared/cards/common";
 import { HeroUI } from "@/components/website/shared/CommonUi";
 import { EventsCardsWrapper } from "@/components/website/shared/Wrappers";
+import {
+  formatSanityText,
+  pageMetadata,
+} from "@/components/website/utils/functions";
+import { fetchBlogs, fetchSeo, getHomePageContent } from "@/lib/api";
 import { cn } from "@/lib/utils";
+import { imageUrl } from "@/sanity/lib/client";
+import { IHomePage } from "@/utils/data_types";
+import { Metadata, ResolvingMetadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-const Home = () => {
+const Home = async () => {
+  const homepage = await getHomePageContent();
+  if (!homepage) return null;
   return (
     <main className="">
-      <HeroUI imageLink="/home.png">
+      <HeroUI imageLink={imageUrl(homepage.heroImage)}>
         <div className="text-background  fx-col gap-5 justify-start md:mt-28 ">
           <h1 className=" h1 text-start ">
-            Discover
-            <span className="text-primary"> Qwani</span>: A Hub for Young
-            Writers and Exciting <span className="text-primary">Events</span>
+            {formatSanityText(homepage.heroTitle, "text-primary")}
           </h1>
-          <p className="text-xl text-start">
-            Qwani champions the artistry of young writers, curating a rich
-            tapestry of narratives that resonate with the soul and spark
-            imagination.
-          </p>
+          <p className="text-xl text-start">{homepage.heroSubtitle}</p>
           <div className="w-full items-start">
-            <Button>Join Community</Button>
+            <Button>
+              <Link href={homepage.heroButtonLink ?? "#"}>
+                {homepage.heroButtonText}
+              </Link>
+            </Button>
           </div>
         </div>
       </HeroUI>
-      <AboutSection />
-      <AboutCards />
-      <EventCards />
-      <Psection />
-      <BlogsSections />
+      <AboutSection homepage={homepage} />
+      <AboutCards homepage={homepage} />
+      <EventCards homepage={homepage} />
+      <Psection homepage={homepage} />
+      <BlogsSections homepage={homepage} />
     </main>
   );
 };
 
-const AboutSection = () => {
+const AboutSection = ({ homepage }: { homepage: IHomePage }) => {
   return (
     <div className="fx-col  gap-8 web-px mt-14">
       <div className="fx-col-mb gap-1 md:gap-10">
-        <h3 className="h5 text-primary ">About Qwani</h3>
+        <h3 className="h5 text-primary ">{homepage.aboutTitle}</h3>
         <p className="text-lg w-full flex-1  font-medium  ">
-          Qwani is a vibrant youth-led initiative, serving as a dynamic platform
-          for emerging writers. It celebrates diversity in literature,
-          showcasing fresh perspectives across various forms of writing, from
-          gripping short stories to evocative poetry.
+          {homepage.aboutDescription}
         </p>
       </div>
       <div className="w-full">
         <Image
-          src={"/youth.jpg"}
+          src={imageUrl(homepage.aboutImage) || "/youth.jpg"}
           alt="Youth"
           width={1000}
           height={1000}
@@ -58,21 +63,14 @@ const AboutSection = () => {
       </div>
       <div className="fx-col-mb gap-1 md:gap-10">
         <h3 className="h5 text-primary ">Qwani</h3>
-        <p className="text-lg font-semibold">Literary Voices Unleashed</p>
-        <p className="text-lg w-full flex-1">
-          Qwani is a vibrant youth-led initiative, serving as a dynamic platform
-          for emerging writers. It celebrates diversity in literature,
-          showcasing fresh perspectives across various forms of writing, from
-          gripping short stories to evocative poetry.
-        </p>
+        <p className="text-lg font-semibold">{homepage.about2Title}</p>
+        <p className="text-lg w-full flex-1">{homepage.about2description}</p>
       </div>
     </div>
   );
 };
 const AboutCard = (item: {
-  image: string;
-  title: string;
-  paragraph?: string;
+  highlight: IHomePage["highlights"][0];
   index: number;
 }) => {
   return (
@@ -84,7 +82,7 @@ const AboutCard = (item: {
     >
       {/* <div className="w-full h-full h-"> */}
       <Image
-        src={item.image}
+        src={imageUrl(item.highlight.image)}
         width={500}
         alt="Image"
         height={500}
@@ -92,47 +90,22 @@ const AboutCard = (item: {
       />
       {/* </div> */}
       <div className="fx-col justify-center md:items-center gap-1 w-full">
-        <h3 className="h5 text-primary ">{item.title}</h3>
-        <p className="w-full ">{item.paragraph}</p>
+        <h3 className="h5 text-primary ">{item.highlight.title}</h3>
+        <p className="w-full ">{item.highlight.description}</p>
       </div>
     </div>
   );
 };
-const AboutCards = () => {
+const AboutCards = ({ homepage }: { homepage: IHomePage }) => {
   return (
     <div className="web-px fx-col gap-5 mt-14 ">
-      {[
-        {
-          image: "/literature.png",
-          title: "Diverse Literary Works",
-          paragraph:
-            "Qwani publishes an array of literary pieces, from thought-provoking essays to vibrant poetry, reflecting a spectrum of voices.",
-        },
-        {
-          image: "/events.png",
-          title: "VIBRANT LITERATURE AND FUN EVENTS",
-          paragraph:
-            "Qwani hosts engaging events, including book launches and writers’ forums, to celebrate and inspire the literary community",
-        },
-        {
-          title: "Supporting Aspiring Writers",
-          image: "/fun.png",
-          paragraph:
-            "Qwani is dedicated to discovering and nurturing new writing talent, providing a platform for their work to shine.",
-        },
-      ].map((item, index) => (
-        <AboutCard
-          key={index}
-          {...{
-            ...item,
-            index,
-          }}
-        />
+      {homepage.highlights.map((item, index) => (
+        <AboutCard key={index} highlight={item} index={index} />
       ))}
     </div>
   );
 };
-const EventCards = () => {
+const EventCards = ({ homepage }: { homepage: IHomePage }) => {
   return (
     <div className="web-px bg-[rgba(0,0,0,.98)] py-10 md:py-20 fx-col gap-5 mt-14 md:gap-10 relative">
       <Image
@@ -144,34 +117,32 @@ const EventCards = () => {
       />
       <div className="w-full">
         <h1 className="mb:font-bold text-2xl text-primary w-full text-start">
-          Upcoming Events
+          {homepage.eventsTitle}
         </h1>
 
         <p className="text-background w-full text-start flex-1 text-lg md:text-xl font-medium md:font-semibold">
-          Celebrate Creativity and Community
+          {homepage.eventsDescription}
         </p>
       </div>
-      <EventsCardsWrapper />
+      <EventsCardsWrapper events={homepage.events} />
       <div className="fx-center mt-5 ">
-        <Button size={"sm"} className=" rounded-full">
-          View All Events
+        <Button size={"sm"} className=" rounded-full" asChild>
+          <Link href={"/events"}>View All Events</Link>
         </Button>
       </div>
     </div>
   );
 };
-const Psection = () => {
+const Psection = ({ homepage }: { homepage: IHomePage }) => {
   return (
     <div className="h-[70vh] fx-center bg-accent web-px">
       <h3 className="text-2xl md:text-4xl text-center font-mont font-medium ">
-        The Perfect Place to Ponder, Play, and Pen Your
-        <span className="font-bold"> Passionate</span>, Peculiar, and Profound
-        Prose
+        {formatSanityText(homepage.graySectionTitle, "font-bold")}
       </h3>
     </div>
   );
 };
-const BlogsSections = () => {
+const BlogsSections = ({ homepage }: { homepage: IHomePage }) => {
   return (
     <div className="fx-col gap-5 web-px py-20">
       <Separator className="bg-foreground/70" />
@@ -183,28 +154,15 @@ const BlogsSections = () => {
         <Link href={"#"}>See More</Link>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-5">
-        {[
-          {
-            title: "The Art of Writing",
-            imageUrl: "/imgs/4.jpg",
-            date: "May 25th 2024",
-          },
-          {
-            title: "The Art of Writing",
-            imageUrl: "/imgs/5.jpg",
-            date: "May 25th 2024",
-          },
-          {
-            title: "The Art of Writing",
-            imageUrl: "/imgs/6.jpg",
-            date: "May 25th 2024",
-          },
-        ].map((item, index) => (
+        {homepage.blogs.map((item, index) => (
           <BlogCard key={index} {...item} />
         ))}
       </div>
     </div>
   );
 };
-
+export async function generateMetadata(): Promise<Metadata> {
+  const results = pageMetadata("home");
+  return results;
+}
 export default Home;

@@ -8,19 +8,37 @@ import { CiShare2 } from "react-icons/ci";
 import { MinimalFooter } from "@/components/website/shared/client";
 import { EventsCardsWrapper } from "@/components/website/shared/Wrappers";
 import { BackButton } from "@/components/website/utils";
+import { fetchEventById, fetchUpcomingEvents } from "@/lib/api";
+import { IEvent } from "@/utils/data_types";
+import { formatSanityDate } from "@/components/website/utils/functions";
+import Link from "next/link";
+import { imageUrl } from "@/sanity/lib/client";
+import { PortableText, type PortableTextReactComponents } from 'next-sanity'
+import { myPortableTextComponents } from "@/components/website/utils/sanity_components";
 
-const Event = () => {
+const Event = async ({
+  params,
+}: {
+  params: {
+    event: string;
+  };
+}) => {
+  const event = await fetchEventById(params.event);
+  const upcommingEvents = await fetchUpcomingEvents();
+
   return (
     <div>
-      <HeroSection />
-      <PublicationsImagesSection />
-      <EventDetails />
+      <HeroSection event={event} />
+      <PublicationsImagesSection event={event} />
+      <EventDetails event={event} />
       <MinimalFooter />
-      <OtherEvents />
+      <OtherEvents
+      events={upcommingEvents}
+      />
     </div>
   );
 };
-const HeroSection = () => {
+const HeroSection = ({ event }: { event: IEvent }) => {
   return (
     <div className="bg-foreground web-px h-screen text-background pt-36 md:pt-44">
       <div className="fx-a-center gap-5 ">
@@ -32,42 +50,39 @@ const HeroSection = () => {
         />
         <div className="fx-col gap-1">
           <div>
-            <Button variant={"noEffect"} className="p-0">
-              <ChevronLeft />
-              <span>Back To Events</span>
-            </Button>
+            <BackButton text="Back Button" />
           </div>
-          <h4 className="ts7  font-bold text-primary">May 25th 2024, 8:00am</h4>
-          <h3 className="ts3 font-semibold">Qwani X Uzima Sketch Tour</h3>
+          <h4 className="ts7  font-bold text-primary">
+            {formatSanityDate(event.date)} ,{event.time}
+          </h4>
+          <h3 className="ts3 font-semibold">{event.title}</h3>
 
-          <p className="">
-            This time, our tour will be at the Kenya Railways Museum as a
-            continuation of our previous tour around the area. We will learn the
-            History of the Uganda Railway/Lunat
-          </p>
+          <p className="">{event.excerpt}</p>
           <div className="flex gap-2 mt-2">
             <Badge className="bg-background text-foreground h-[35px]">
-              KSH 1,000
+              {event.price}
             </Badge>
-            <Button
-              variant={"noEffect"}
-              size="sm"
-              className="border border-primary text-primary rounded-full"
-            >
-              Buy Ticket
-            </Button>
+            {event.paymentLink && (
+              <Button
+                variant={"noEffect"}
+                size="sm"
+                className="border border-primary text-primary rounded-full"
+              >
+                <Link href={event.paymentLink}>Buy Ticket</Link>
+              </Button>
+            )}
           </div>
         </div>
       </div>
     </div>
   );
 };
-const PublicationsImagesSection = () => {
+const PublicationsImagesSection = ({ event }: { event: IEvent }) => {
   return (
     <div className="-mt-[30vh]  web-px">
       <Image
         alt="CONTACT IMAGE"
-        src="/event.jpg"
+        src={imageUrl(event.featuredImage)}
         width={1920}
         height={1080}
         className="h-[50vh] md:h-[60vh] object-cover"
@@ -75,13 +90,13 @@ const PublicationsImagesSection = () => {
     </div>
   );
 };
-const EventDetails = () => {
+const EventDetails = ({ event }: { event: IEvent }) => {
   return (
     <div className="web-px mt-5">
       <div className="fx-jb fx-col-mb">
         <div className="fx-col">
           <h3 className="ts5 font-semibold">Location</h3>
-          <p>Nairobi Nairobi, Nairobi County</p>
+          <p>{event.location}</p>
           <div>
             <BackButton />
           </div>
@@ -100,28 +115,25 @@ const EventDetails = () => {
         </div>
       </div>
       <div className="ts5 font-semibold">Description</div>
-      <p>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Deleniti et
-        ad, eligendi atque possimus at odit, sit assumenda vitae quasi molestias
-        aliquid impedit vero, doloremque autem velit rem. Exercitationem quae
-        eaque cum voluptate non natus ipsam soluta illo sequi, perspiciatis, in
-        ut ipsum consequuntur quisquam. Asperiores libero ipsam aliquam rem
-        dolores magnam veniam architecto facere quisquam nemo esse suscipit
-        commodi reiciendis repudiandae nulla nobis accusantium expedita
-        consequuntur in voluptate molestiae iste, neque minus aperiam!
-        Architecto optio dolore quos? Sed ea praesentium libero, consequuntur
-        minima eos ratione corrupti accusamus voluptates molestiae doloribus
-        assumenda perferendis ipsum beatae eaque nam animi quidem maxime.
-      </p>
+        <div className={`prose  lg:prose-xl  `}>
+      <PortableText value={
+      event.description
+      } components={myPortableTextComponents} />
+    </div>
     </div>
   );
 };
 
-const OtherEvents = () => {
+const OtherEvents = ({events}:{
+  events:IEvent []
+}) => {
+
   return (
     <div className="bg-[#F2F2F2] mt-10 py-10 web-px space-y-5">
       <h1 className="ts5 font-semibold ">Other Events</h1>
-      <EventsCardsWrapper page="events" />
+      <EventsCardsWrapper page="events"
+      events={events}
+      />
     </div>
   );
 };

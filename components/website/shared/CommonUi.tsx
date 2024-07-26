@@ -1,17 +1,12 @@
-"use client";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Play } from "lucide-react";
-import YouTube from "react-youtube";
-
 import { FaPlay } from "react-icons/fa6";
 import { ReactNode } from "react";
 export const HeroUI = ({

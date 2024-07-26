@@ -4,7 +4,7 @@ import { ChevronLeft } from "lucide-react";
 import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
 
-export const BackButton = () => {
+export const BackButton = ({ text }: { text?: string }) => {
   const router = useRouter();
   return (
     <Button
@@ -13,7 +13,7 @@ export const BackButton = () => {
       onClick={() => router.back()}
     >
       <ChevronLeft />
-      <span>Back </span>
+      <span>{text || "Back"} </span>
     </Button>
   );
 };

@@ -1,4 +1,3 @@
-"use client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -16,13 +15,19 @@ import { usePathname } from "next/navigation";
 import { useIntersectionInCarousel } from "@/lib/hook/useIntersection";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { IEvent } from "@/utils/data_types";
+import { formatSanityDate } from "../../utils/functions";
 
-export const HeroSectionContent = () => {
+export const HeroSectionContent = ({
+  upcommingevents,
+}: {
+  upcommingevents: IEvent[];
+}) => {
   const { activeIndex, itemRefs } = useIntersectionInCarousel();
   return (
     <Carousel className="w-full md:px-12 h-full items-center justify-center fx ">
       <CarouselContent className="">
-        {Array.from({ length: 5 }).map((_, index) => (
+        {upcommingevents.map((event, index) => (
           <CarouselItem
             key={index}
             className="text-background "
@@ -32,26 +37,20 @@ export const HeroSectionContent = () => {
             data-index={index}
           >
             <div className="space-y-2 pt-10">
-              <h1 className="h7 opacity-50 font-semibold">
-                Kenya Railways Museum
-              </h1>
+              <h1 className="h7 opacity-50 font-semibold">{event.location}</h1>
               <h1 className="ts6 text-primary font-bold">
-                May 25th 2024, 8:00am
+                {formatSanityDate(event.date)} ,{event.time}
               </h1>
-              <h1 className="ts3 font-bold">Qwani X Uzima Sketch Tour</h1>
-              <p>
-                This time, our tour will be at the Kenya Railways Museum as a
-                continuation of our previous tour around the area. We will learn
-                the History of the Uganda Railway/Lunat
-              </p>
+              <h1 className="ts3 font-bold">{event.title}</h1>
+              <p>{event.excerpt}</p>
             </div>
             <div className="mt-4 ">
               <Button asChild>
-                <Link href={`/events/1234`}>Learn More</Link>
+                <Link href={`/events/${event._id}`}>Learn More</Link>
               </Button>
             </div>
             <div className="mt-5 fx gap-[1px]">
-              {Array.from({ length: 5 }).map((_, index) => (
+              {upcommingevents.map((_, index) => (
                 <div
                   key={index}
                   className={cn(

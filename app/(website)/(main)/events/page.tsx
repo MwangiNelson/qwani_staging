@@ -4,14 +4,26 @@ import React from "react";
 import { HeroSectionContent } from "@/components/website/pageUIs/events";
 import { Separator } from "@/components/ui/separator";
 import { EventsCardsWrapper } from "@/components/website/shared/Wrappers";
+import { fetchEvents } from "@/lib/api";
+import { IEvent } from "@/utils/data_types";
 
-const Events = () => {
+const Events = async () => {
+  const events = await fetchEvents();
+  if (!events) return null;
+  const upcommingevents = events.filter(
+    (event) => new Date(event.date) > new Date()
+  );
+  const previousevents = events.filter(
+    (event) => new Date(event.date) < new Date()
+  );
+
   return (
     <div className="pb-20">
       <HeroSection>
-        <HeroSectionContent />
+        <HeroSectionContent upcommingevents={upcommingevents} />
       </HeroSection>
-      <UpcommingEvents />
+      <UpcommingEvents upcommingevents={upcommingevents} />
+      <PreviousEvents events={previousevents} />
     </div>
   );
 };
@@ -37,7 +49,11 @@ const HeroSection = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-const UpcommingEvents = () => {
+const UpcommingEvents = ({
+  upcommingevents,
+}: {
+  upcommingevents: IEvent[];
+}) => {
   return (
     <div className="mt-10 web-px ">
       <div className="space-y-5">
@@ -45,16 +61,24 @@ const UpcommingEvents = () => {
           <Separator className="w-20 bg-foreground" />
           Upcomming Events
         </div>
-        <EventsCardsWrapper page="events" />
-      </div>
-      <div className="space-y-5 mt-10">
-        <div className="fx-a-center gap-5 ">
-          <Separator className="w-20 bg-foreground" />
-          Previus Events
-        </div>
-        <EventsCardsWrapper page="events" />
+        <EventsCardsWrapper page="events" events={upcommingevents} />
       </div>
     </div>
   );
 };
+
+const PreviousEvents = ({ events }: { events: IEvent[] }) => {
+  return (
+    <div className="mt-10 web-px ">
+      <div className="space-y-5">
+        <div className="fx-a-center gap-5 ">
+          <Separator className="w-20 bg-foreground" />
+          Previous Events
+        </div>
+        <EventsCardsWrapper page="events" events={events} />
+      </div>
+    </div>
+  );
+};
+
 export default Events;
