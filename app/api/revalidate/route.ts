@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
       _type: string;
       slug?: string | undefined;
     }>(req, hookSecret);
-  console.log(body)
+  
     if (!isValidSignature) {
       return new Response("Invalid Signature", { status: 401 });
     }

@@ -1,9 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
-import { ChevronLeft } from "lucide-react";
 import Image from "next/image";
-import { FaAngleRight, FaInstagram, FaXTwitter } from "react-icons/fa6";
+import {  FaInstagram, FaXTwitter } from "react-icons/fa6";
 import { CiShare2 } from "react-icons/ci";
 import { MinimalFooter } from "@/components/website/shared/client";
 import { EventsCardsWrapper } from "@/components/website/shared/Wrappers";
@@ -15,6 +13,9 @@ import Link from "next/link";
 import { imageUrl } from "@/sanity/lib/client";
 import { PortableText, type PortableTextReactComponents } from 'next-sanity'
 import { myPortableTextComponents } from "@/components/website/utils/sanity_components";
+import { Sharing } from "@/components/website/shared/sharing";
+import { Metadata, ResolvingMetadata } from "next";
+import { Props } from "@/utils/uitypes";
 
 const Event = async ({
   params,
@@ -60,7 +61,7 @@ const HeroSection = ({ event }: { event: IEvent }) => {
           <p className="">{event.excerpt}</p>
           <div className="flex gap-2 mt-2">
             <Badge className="bg-background text-foreground h-[35px]">
-              {event.price}
+             KSH {event.price}
             </Badge>
             {event.paymentLink && (
               <Button
@@ -97,24 +98,12 @@ const EventDetails = ({ event }: { event: IEvent }) => {
         <div className="fx-col">
           <h3 className="ts5 font-semibold">Location</h3>
           <p>{event.location}</p>
-          <div>
-            <BackButton />
-          </div>
         </div>
         <div className="fx-a-center gap-2 py-2">
-          <span>Share</span>
-          <Button variant={"outline"} size={"icon"}>
-            <FaXTwitter />
-          </Button>
-          <Button variant={"outline"} size={"icon"}>
-            <FaInstagram />
-          </Button>
-          <Button variant={"outline"} size={"icon"}>
-            <CiShare2 />
-          </Button>
+         <Sharing/>
         </div>
       </div>
-      <div className="ts5 font-semibold">Description</div>
+      <div className="ts5 mt-5 font-semibold">Description</div>
         <div className={`prose  lg:prose-xl  `}>
       <PortableText value={
       event.description
@@ -137,4 +126,28 @@ const OtherEvents = ({events}:{
     </div>
   );
 };
+export async function generateMetadata(
+  { params, searchParams }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+   const data=await fetchEventById(params.event as string) 
+  return {
+    title: data.title,
+    description: data.excerpt,
+    keywords: "Qwani, young writers, events, writing, literature",
+    openGraph: {
+      title: data.title,
+      description: data.excerpt,
+      images: [
+        {
+          url: imageUrl(data.featuredImage),
+          width: 1200,
+          height: 630,
+          alt: data.title,
+        },
+      ],
+    },
+  }; 
+
+}
 export default Event;
