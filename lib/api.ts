@@ -1,20 +1,14 @@
-import { client } from "@/sanity/lib/client";
+import { client, sanityFetch } from "@/sanity/lib/client";
 import { IAboutPage, IEvent, IHomePage, ISeo } from "@/utils/data_types";
 import next from "next";
+const normal = 24 * 60 * 60 * 1000;
 
 export const fetchSeo = async (page: string): Promise<ISeo> => {
   const query = `*[_type == "seo" && page == "${page}"][0]`;
-  const data = await client.fetch(
+  const data = await sanityFetch<ISeo>({
     query,
-    {},
-    {
-      // cache: "no-cache",
-      next: {
-        tags: ["seo"],
-        revalidate: 3600 * 24 * 30,
-      },
-    }
-  );
+    tags: ["seo"],
+  });
   return data;
 };
 export const fetchBlogs = async () => {
@@ -24,17 +18,11 @@ export const fetchBlogs = async () => {
     categories[]->{title},
    
   }`;
-  const data = await client.fetch(
+  const data = await sanityFetch({
     query,
-    {},
-    {
-      // cache: "no-cache",
-      next: {
-        tags: ["blogs"],
-        revalidate: 3600 * 24 * 30,
-      },
-    }
-  );
+    tags: ["post"],
+  });
+
   return data;
 };
 
@@ -45,17 +33,10 @@ export const getHomePageContent = async (): Promise<IHomePage> => {
     blogs[]->{...},
     
   }`;
-  const data = await client.fetch(
+  const data = await sanityFetch<IHomePage>({
     query,
-    {},
-    {
-      // cache: "no-cache",
-      next: {
-        tags: ["homepage"],
-        revalidate: 3600 * 24 * 30,
-      },
-    }
-  );
+    tags: ["home"],
+  });
   return data;
 };
 
@@ -64,19 +45,11 @@ export const fetchAboutPageContent = async (): Promise<IAboutPage> => {
   const query = `*[_type == "about"][0]{
     ...,
      teamMembers[]->{...},
-    
   }`;
-  const data = await client.fetch(
+  const data = await sanityFetch<IAboutPage>({
     query,
-    {},
-    {
-      cache: "no-cache",
-      next: {
-        tags: ["aboutpage"],
-        // revalidate: 3600 * 24 * 30,
-      },
-    }
-  );
+    tags: ["about"],
+  });
   return data;
 };
 
@@ -84,17 +57,11 @@ export const fetchEvents = async (): Promise<IEvent[]> => {
   const query = `*[_type == "event"]{
     ...
   }`;
-  const data = await client.fetch(
+  const data = await sanityFetch<IEvent[]>({
     query,
-    {},
-    {
-      // cache: "no-cache",
-      next: {
-        tags: ["events"],
-        revalidate: 3600 * 24 * 30,
-      },
-    }
-  );
+    tags: ["event"],
+  });
+
   return data;
 };
 
@@ -103,17 +70,10 @@ export const fetchUpcomingEvents = async (): Promise<IEvent[]> => {
   const query = `*[_type == "event" && date > now()]{
     ...
   }`;
-  const data = await client.fetch(
+  const data = await sanityFetch<IEvent[]>({
     query,
-    {},
-    {
-      // cache: "no-cache",
-      next: {
-        tags: ["upcomingevents"],
-        revalidate: 3600 * 24 * 30,
-      },
-    }
-  );
+    tags: ["event"],
+  });
   return data;
 };
 //get event by id
@@ -121,16 +81,9 @@ export const fetchEventById = async (id: string): Promise<IEvent> => {
   const query = `*[_type == "event" && _id == "${id}"][0]{
     ...
   }`;
-  const data = await client.fetch(
+  const data = await sanityFetch<IEvent>({
     query,
-    {},
-    {
-      // cache: "no-cache",
-      next: {
-        tags: ["event"],
-        revalidate: 3600 * 24 * 30,
-      },
-    }
-  );
+    tags: ["event"],
+  });
   return data;
 };
