@@ -1,48 +1,51 @@
 import { Button } from "@/components/ui/button";
+import {
+  formatSanityText,
+  pageMetadata,
+} from "@/components/website/utils/functions";
+import { fetchContactPage } from "@/lib/api";
+import { imageUrl } from "@/sanity/lib/client";
+import { IContactPage } from "@/utils/data_types";
+import { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 
-const ContactPage = () => {
+const ContactPage = async () => {
+  const contact = await fetchContactPage();
   return (
     <div>
-      <HeroSection />
-      <PublicationsImagesSection />
+      <HeroSection contact={contact} />
+      <PublicationsImagesSection contact={contact} />
       <div className="flex flex-col md:flex-row web-px mt-10  gap-10">
-        <AddresssDetails />
+        <AddresssDetails contact={contact} />
         <ContactForm />
       </div>
     </div>
   );
 };
-const HeroSection = () => {
+const HeroSection = ({ contact }: { contact: IContactPage }) => {
   return (
     <div className="bg-foreground web-px h-screen text-background   pt-44">
       <div className="fx-col gap-3">
         <h1 className="ts3 font-bold">
-          Wanna
-          <span className="text-primary"> Talk</span>
+          {formatSanityText(contact.heroTitle, "text-primary")}
         </h1>
-        <p className="">
-          Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi.
-          Hello there! Ready to connect and bring ideas to life? Whether you
-          have a project in mind, a collaboration to propose, or just want to
-          chat about the latest tech trends, Im all ears. Drop me a line, and
-          lets turn pixels into possibilities.
-        </p>
+        <p className="">{contact.heroSubtitle}</p>
         <div className="flex">
           <Button variant={"noEffect"} className="border border-background">
-            Contact Us
+            <Link href={"#form"}>Contact Us</Link>
           </Button>
         </div>
       </div>
     </div>
   );
 };
-const PublicationsImagesSection = () => {
+const PublicationsImagesSection = ({ contact }: { contact: IContactPage }) => {
   return (
     <div className="-mt-[30vh]  web-px">
       <Image
-        alt="CONTACT IMAGE"
-        src="/contact.jpg"
+        alt="hero image"
+        src={imageUrl(contact.heroImage)}
         width={1920}
         height={1080}
         className="h-[50vh] md:h-[60vh] object-cover"
@@ -51,7 +54,7 @@ const PublicationsImagesSection = () => {
   );
 };
 
-const AddresssDetails = () => {
+const AddresssDetails = ({ contact }: { contact: IContactPage }) => {
   const Line = () => <div className="w-[100px] p-[.5px] bg-black  my-3"></div>;
   const Heading = ({ title }: { title: string }) => (
     <h5 className="h5">{title}</h5>
@@ -68,48 +71,35 @@ const AddresssDetails = () => {
   return (
     <div className="">
       <div className="flex-1 flex flex-col gap-5">
-        <Content>
-          <Heading title="Business Hours" />
-          <Paragraph>Monday - Friday: 9am - 5pm</Paragraph>
-          <Paragraph>Saturday: 9am - 1pm</Paragraph>
-          <Paragraph>Sunday: Closed</Paragraph>
-        </Content>
-        <Content>
-          <Heading title="Phone & Email" />
-          <p className="text-lg opacity-80">+254 798 694000</p>
-          <p className="text-lg opacity-80">
-            <a href="mailto:chari.rightson@gmail.com">qwanitrust@gmail.com</a>
-          </p>
-        </Content>
-        <Content>
-          <Heading title="Social Media" />
-
-          <p>
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-lg opacity-80"
-            >
-              Instagram
-            </a>
-          </p>
-          <p>
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-lg opacity-80"
-            >
-              Twitter
-            </a>
-          </p>
-        </Content>
+        {contact.contactInformation.map((info, index) => {
+          return (
+            <Content key={index}>
+              <Heading title={info.heading} />
+              {info.items.map((item, index) => {
+                return item.link ? (
+                  <a
+                    href={item.link}
+                    key={index}
+                    className="text-lg opacity-80"
+                  >
+                    {item.label}
+                  </a>
+                ) : (
+                  <p key={index} className="text-lg opacity-80">
+                    {item.label}
+                  </p>
+                );
+              })}
+            </Content>
+          );
+        })}
       </div>
     </div>
   );
 };
 const ContactForm = () => {
   return (
-    <form className="flex-[2] w-full  fx-col gap-5">
+    <form className="flex-[2] w-full  fx-col gap-5" id="form">
       <div className="fx-col gap-2">
         <label htmlFor="name">Name*</label>
         <input
@@ -149,4 +139,8 @@ const ContactForm = () => {
     </form>
   );
 };
+export async function generateMetadata(): Promise<Metadata> {
+  const results = pageMetadata("contact");
+  return results;
+}
 export default ContactPage;

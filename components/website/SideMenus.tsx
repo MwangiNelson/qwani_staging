@@ -50,10 +50,6 @@ const MobileMenu = () => {
           <CustomLink name="Publications" url="/publications" />
           <CustomLink name="Contact Us" url="/contact" />
         </div>
-        <div className="flex flex-col justify-center items-center gap-5  ">
-          <CustomLink name="Login" url="#" />
-          <CustomLink name="Register" url="#" />
-        </div>
       </div>
       <SocialLinks />
     </div>

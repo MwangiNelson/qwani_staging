@@ -135,7 +135,11 @@ export const TeamMemberCard = ({ member }: { member: ITeamMember }) => {
             size={"sm"}
             asChild
           >
-            <Link href={`/about/1234`}>
+            <Link
+              href={`
+            /about/${member._id}
+            `}
+            >
               <span>{member.role}</span>
               <FaAngleRight />
             </Link>

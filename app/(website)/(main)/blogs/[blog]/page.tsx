@@ -70,7 +70,12 @@ const Details = ({ blog }: { blog: IPost }) => {
           </div>
         </div>
         <Separator />
-        <PortableText value={blog.body} components={myPortableTextComponents} />
+        <div className="prose">
+          <PortableText
+            value={blog.body}
+            components={myPortableTextComponents}
+          />
+        </div>
       </div>
     </div>
   );

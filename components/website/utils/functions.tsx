@@ -1,18 +1,20 @@
 import { fetchSeo } from "@/lib/api";
 import { imageUrl } from "@/sanity/lib/client";
+import { TPages } from "@/utils/data_types";
 import { Metadata, ResolvingMetadata } from "next";
 
-export async function pageMetadata(page: string): Promise<Metadata> {
+export async function pageMetadata(page: TPages): Promise<Metadata> {
   try {
-    const seo = await fetchSeo("home");
-
+    const seo = await fetchSeo(page);
     return {
       title: seo.title,
       description: seo.description,
       keywords: seo.keywords,
+
       openGraph: {
         title: seo.ogTitle,
         description: seo.ogDescription,
+
         images: [
           {
             url: imageUrl(seo.ogImage),

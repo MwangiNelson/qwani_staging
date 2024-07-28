@@ -55,10 +55,6 @@ const HeroSection = ({ writer }: { writer: IWriter }) => {
       <div className="flex justify-end pt-10">
         <Sharing bg="foreground" />
       </div>
-      <PortableText
-        value={writer.description}
-        components={myPortableTextComponents}
-      />
     </div>
   );
 };

@@ -5,6 +5,8 @@ import { Separator } from "@/components/ui/separator";
 import { EventsCardsWrapper } from "@/components/website/shared/Wrappers";
 import { fetchEvents } from "@/lib/api";
 import { IEvent } from "@/utils/data_types";
+import { pageMetadata } from "@/components/website/utils/functions";
+import { Metadata } from "next";
 
 const Events = async () => {
   const events = await fetchEvents();
@@ -79,5 +81,9 @@ const PreviousEvents = ({ events }: { events: IEvent[] }) => {
     </div>
   );
 };
+export async function generateMetadata(): Promise<Metadata> {
+  const results = pageMetadata("events");
+  return results;
+}
 
 export default Events;

@@ -1,11 +1,14 @@
 import { client, sanityFetch } from "@/sanity/lib/client";
 import {
   IAboutPage,
+  IContactPage,
   IEvent,
   IHomePage,
   IPost,
+  IPublication,
   IPublicationsPage,
   ISeo,
+  ITeamMember,
   IWriter,
   IWritersPage,
 } from "@/utils/data_types";
@@ -164,6 +167,46 @@ export const fetchPublicationPage = async () => {
   const data = await sanityFetch<IPublicationsPage>({
     query,
     tags: ["publicationsPage"],
+  });
+
+  return data;
+};
+
+//
+export const fetchPublicationById = async (id: string) => {
+  const query = `*[_type == "publication" && _id == "${id}"][0]{
+    ...,
+    author->{name, image},
+  }`;
+  const data = await sanityFetch<IPublication>({
+    query,
+    tags: ["publication"],
+  });
+
+  return data;
+};
+
+//
+export const fetchContactPage = async () => {
+  const query = `*[_type == "contactPage"][0]{
+    ...
+  }`;
+  const data = await sanityFetch<IContactPage>({
+    query,
+    tags: ["contactPage"],
+  });
+
+  return data;
+};
+
+//get team member by id
+export const fetchTeamMemberById = async (id: string) => {
+  const query = `*[_type == "team" && _id == "${id}"][0]{
+    ...
+  }`;
+  const data = await sanityFetch<ITeamMember>({
+    query,
+    tags: ["team"],
   });
 
   return data;

@@ -5,9 +5,13 @@ import {
 } from "@/components/website/pageUIs";
 import { HeroUI } from "@/components/website/shared/CommonUi";
 import { TeamMemberWrapper } from "@/components/website/shared/Wrappers";
-import { formatSanityText } from "@/components/website/utils/functions";
+import {
+  formatSanityText,
+  pageMetadata,
+} from "@/components/website/utils/functions";
 import { fetchAboutPageContent } from "@/lib/api";
 import { IAboutPage } from "@/utils/data_types";
+import { Metadata } from "next";
 import Image from "next/image";
 import React from "react";
 import { FaArrowDown } from "react-icons/fa";
@@ -124,5 +128,8 @@ const OurTeamSection = ({ about }: { about: IAboutPage }) => {
     </div>
   );
 };
-
+export async function generateMetadata(): Promise<Metadata> {
+  const results = pageMetadata("about");
+  return results;
+}
 export default AboutPage;

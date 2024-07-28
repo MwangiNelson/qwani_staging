@@ -13,12 +13,14 @@ import homepage from './schemaTypes/homepage'
 import aboutpage from './schemaTypes/aboutpage'
 import writerspage from './schemaTypes/writerspage'
 import publicationsPage from './schemaTypes/publicationsPage'
+import contactPage from './schemaTypes/contactPage'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: 
   [post, author, category, blockContent,event,
     writers,team,publications,seo,homepage,
     aboutpage,writerspage,
-  publicationsPage
+  publicationsPage,
+  contactPage
   ],
 }

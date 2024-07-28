@@ -3,10 +3,14 @@ import {
   SeparatorTitle,
 } from "@/components/website/pageUIs";
 import { PublicationCards } from "@/components/website/shared/cards/common";
-import { formatSanityDate } from "@/components/website/utils/functions";
+import {
+  formatSanityDate,
+  pageMetadata,
+} from "@/components/website/utils/functions";
 import { fetchPublicationPage } from "@/lib/api";
 import { imageUrl } from "@/sanity/lib/client";
 import { IPublicationsPage } from "@/utils/data_types";
+import { Metadata } from "next";
 import Image from "next/image";
 
 const Publications = async () => {
@@ -72,4 +76,8 @@ const PublicationsSection = ({ content }: { content: IPublicationsPage }) => {
     </div>
   );
 };
+export async function generateMetadata(): Promise<Metadata> {
+  const results = pageMetadata("publications");
+  return results;
+}
 export default Publications;

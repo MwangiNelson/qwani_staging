@@ -5,9 +5,12 @@ import { WritersWrapper } from "@/components/website/shared/Wrappers";
 import {
   formatSanityDate,
   formatSanityText,
+  pageMetadata,
 } from "@/components/website/utils/functions";
 import { fetchWriters, fetchWritersPage } from "@/lib/api";
+import { imageUrl } from "@/sanity/lib/client";
 import { IWriter, IWritersPage } from "@/utils/data_types";
+import { Metadata } from "next";
 import React from "react";
 
 const Writers = async () => {
@@ -26,7 +29,7 @@ const Writers = async () => {
 
 const HeroSection = ({ content }: { content: IWritersPage }) => {
   return (
-    <HeroUI bgtype="default" imageLink="/writing.jpg">
+    <HeroUI bgtype="default" imageLink={imageUrl(content.heroImage)}>
       <div className="text-background  fx-col gap-5 justify-start md:mt-28 ">
         <h1 className=" h1 text-center ">
           {formatSanityText(content.heroTitle, "text-primary")}
@@ -51,4 +54,8 @@ const WritersSection = ({ writers }: { writers: IWriter[] }) => {
   );
 };
 
+export async function generateMetadata(): Promise<Metadata> {
+  const results = pageMetadata("writers");
+  return results;
+}
 export default Writers;

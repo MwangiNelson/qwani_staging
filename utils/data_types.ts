@@ -156,3 +156,24 @@ export interface IPublicationsPage extends ISanityFetched {
   publicationsTitle: string;
   publications: IPublication[];
 }
+export interface IContactPage extends ISanityFetched {
+  heroTitle: string;
+  heroSubtitle: string;
+  heroImage: ISanityAsset;
+  contactInformation: {
+    heading: string;
+    items: {
+      label: string;
+      link?: string;
+    }[];
+  }[];
+}
+
+export type TPages =
+  | "home"
+  | "about"
+  | "writers"
+  | "publications"
+  | "contact"
+  | "blogs"
+  | "events";

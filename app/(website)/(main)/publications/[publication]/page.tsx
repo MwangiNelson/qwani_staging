@@ -7,67 +7,77 @@ import { FaAngleRight, FaInstagram, FaXTwitter } from "react-icons/fa6";
 import { CiShare2 } from "react-icons/ci";
 import { MinimalFooter } from "@/components/website/shared/client";
 import { BackButton } from "@/components/website/utils";
-const Publication = () => {
+import { Props } from "@/utils/uitypes";
+import { fetchPublicationById } from "@/lib/api";
+import { IPublication } from "@/utils/data_types";
+import { formatSanityDate } from "@/components/website/utils/functions";
+import { imageUrl } from "@/sanity/lib/client";
+import { Sharing } from "@/components/website/shared/sharing";
+import { PortableText } from "next-sanity";
+import { myPortableTextComponents } from "@/components/website/utils/sanity_components";
+const Publication = async ({ params }: Props) => {
+  const publication = await fetchPublicationById(params.publication as string);
   return (
     <div className="pb-20">
-      <HeroSection />
-      <PublicationsImagesSection />
-      <EventDetails />
+      <HeroSection publication={publication} />
+      <PublicationsImagesSection publication={publication} />
+      <Details publication={publication} />
       <MinimalFooter />
     </div>
   );
 };
-const HeroSection = () => {
+const HeroSection = ({ publication }: { publication: IPublication }) => {
   return (
     <div className="bg-foreground web-px h-screen text-background pt-36 md:pt-44">
       <div className="fx-col gap-1">
         <div>
-          <BackButton />
+          <BackButton text="Back To Publications" />
         </div>
-        <h4 className="ts7  font-bold text-primary">Published April 1, 2024</h4>
+        <h4 className="ts7  font-bold text-primary">
+          Published{formatSanityDate(publication.publishDate)}
+        </h4>
         <h3 className="ts3 font-semibold">
-          QWANI BOOK 1<span className="ts6 font-thin italic"> By Qwani </span>
+          {publication.title}
+          <span className="ts6 font-thin italic"> {publication.author}</span>
         </h3>
 
-        <p className="">
-          Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi.
-          Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla,
-          mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis
-          tellus. Nullam quis imperdiet augue. Vestibulum auctor ornare leo, non
-          suscipit.
-        </p>
+        <p className="">{publication.description}</p>
         <div className="fx-jb">
           <div className="flex gap-2 mt-2">
-            <Badge className="bg-background text-foreground h-[35px]">
-              KSH 1,000
-            </Badge>
+            {/* <Badge className="bg-background text-foreground h-[35px]">
+              KSH {publication.price}
+            </Badge> */}
             <Button
               variant={"noEffect"}
               size="sm"
-              className="border border-primary text-primary rounded-full"
+              className="border border-primary text-primary rounded-full px-5"
             >
-              Buy Ticket
+              KSH {publication.price}
             </Button>
           </div>
-          <Button
+          {/* <Button
             variant={"noEffect"}
             size="sm"
             className="border border-background text-background rounded-full"
           >
             <span>Buy Ticket</span>
             <FaAngleRight />
-          </Button>
+          </Button> */}
         </div>
       </div>
     </div>
   );
 };
-const PublicationsImagesSection = () => {
+const PublicationsImagesSection = ({
+  publication,
+}: {
+  publication: IPublication;
+}) => {
   return (
     <div className="-mt-[25vh]  web-px">
       <Image
-        alt="CONTACT IMAGE"
-        src="/book1.png"
+        alt={publication.title}
+        src={imageUrl(publication.coverImage)}
         width={1920}
         height={1080}
         className="h-[50vh] md:h-[60vh] object-cover"
@@ -75,44 +85,31 @@ const PublicationsImagesSection = () => {
     </div>
   );
 };
-const EventDetails = () => {
+const Details = ({ publication }: { publication: IPublication }) => {
   return (
     <div className="web-px mt-5">
-      <div className="fx-jb mt-10">
+      <div className="fx flex-col md:flex-row md:justify-between mt-10">
         <div className="fx-col">
           <h3 className="ts5 font-semibold">Genre</h3>
           <p>
-            Flash Fiction, Film Reviews, Music Reviews, Poetry, Philosophy,
-            Science, Short Stories, Sheng
+            {publication.genre.map((genre, index) => (
+              <span key={index} className="mr-2">
+                {genre}
+              </span>
+            ))}
           </p>
         </div>
         <div className="fx-a-center gap-2">
-          <span>Share</span>
-          <Button variant={"outline"} size={"icon"}>
-            <FaXTwitter />
-          </Button>
-          <Button variant={"outline"} size={"icon"}>
-            <FaInstagram />
-          </Button>
-          <Button variant={"outline"} size={"icon"}>
-            <CiShare2 />
-          </Button>
+          <Sharing />
         </div>
       </div>
       <div className="ts5 mt-4 font-semibold">Description</div>
-      <p className="">
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Deleniti et
-        ad, eligendi atque possimus at odit, sit assumenda vitae quasi molestias
-        aliquid impedit vero, doloremque autem velit rem. Exercitationem quae
-        eaque cum voluptate non natus ipsam soluta illo sequi, perspiciatis, in
-        ut ipsum consequuntur quisquam. Asperiores libero ipsam aliquam rem
-        dolores magnam veniam architecto facere quisquam nemo esse suscipit
-        commodi reiciendis repudiandae nulla nobis accusantium expedita
-        consequuntur in voluptate molestiae iste, neque minus aperiam!
-        Architecto optio dolore quos? Sed ea praesentium libero, consequuntur
-        minima eos ratione corrupti accusamus voluptates molestiae doloribus
-        assumenda perferendis ipsum beatae eaque nam animi quidem maxime.
-      </p>
+      <div className={`prose   `}>
+        <PortableText
+          value={publication.content}
+          components={myPortableTextComponents}
+        />
+      </div>
     </div>
   );
 };

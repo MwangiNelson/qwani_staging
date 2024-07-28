@@ -57,7 +57,11 @@ export default function Footer() {
           <p>
             &copy; 2024 Qwani. All rights reserved. Designed by Qwani. Powered
             by{" "}
-            <Link className="text-primary" href="https://rightson.vercel.app">
+            <Link
+              className="text-primary"
+              target="_blank"
+              href="https://rightson.vercel.app"
+            >
               Chari Design
             </Link>
           </p>
@@ -110,10 +114,10 @@ const footer_links = [
     name: "Events",
     link: "/events",
   },
-  {
-    name: "Gallery",
-    link: "/gallery",
-  },
+  // {
+  //   name: "Gallery",
+  //   link: "/gallery",
+  // },
   {
     name: "Publications",
     link: "/publications",
