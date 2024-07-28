@@ -34,14 +34,9 @@ export interface IPost extends ISanityFetched {
     _type: string;
     current: string;
   };
-  author: {
-    name: string;
-    image: ISanityAsset;
-  };
+  author: IWriter;
   mainImage: ISanityAsset;
-  categories: {
-    title: string;
-  };
+  categories: [IPostCategory];
   publishedAt: string;
   excerpt: string;
   body: any;
@@ -74,6 +69,33 @@ export interface ITeamMember extends ISanityFetched {
     tiktok: string;
   };
   description: any;
+}
+export interface IWriter extends ISanityFetched {
+  name: string;
+  image: ISanityAsset;
+  specializations: string[];
+  socialLinks: {
+    twitter?: string;
+    instagram?: string;
+    tiktok?: string;
+  };
+  description: any;
+}
+export interface IPublication extends ISanityFetched {
+  title: string;
+  slug: {
+    _type: string;
+    current: string;
+  };
+  author: string;
+  publishDate: string;
+  description: string;
+  coverImage: ISanityAsset;
+  price: number;
+  buyLink: string;
+  genre: string[];
+  content: any[];
+  featuredWriters: IWriter[];
 }
 export interface IHomePage extends ISanityFetched {
   heroTitle: string;
@@ -115,4 +137,22 @@ export interface IAboutPage extends ISanityFetched {
   }[];
   teamTitle: string;
   teamMembers: ITeamMember[];
+}
+
+export interface IWritersPage extends ISanityFetched {
+  heroTitle: string;
+  heroSubtitle: string;
+  heroImage: ISanityAsset;
+  ctaText: string;
+  ctaButtonLink: string;
+  writersTitle: string;
+  writers: IWriter[];
+}
+
+export interface IPublicationsPage extends ISanityFetched {
+  heroTitle: string;
+  heroSubtitle: string;
+  heroImage: ISanityAsset;
+  publicationsTitle: string;
+  publications: IPublication[];
 }

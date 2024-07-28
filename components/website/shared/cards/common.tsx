@@ -6,9 +6,10 @@ import Image from "next/image";
 import { FaAngleRight, FaInstagram, FaXTwitter } from "react-icons/fa6";
 import { Bookmark } from "lucide-react";
 import Link from "next/link";
-import { IEvent, IPost, ITeamMember } from "@/utils/data_types";
+import { IEvent, IPost, ITeamMember, IWriter } from "@/utils/data_types";
 import { imageUrl } from "@/sanity/lib/client";
 import { formatSanityDate } from "../../utils/functions";
+import { FaTiktok } from "react-icons/fa";
 export const EventCard = ({ event }: { event: IEvent }) => {
   return (
     <Card className="w-full  z-[1]  p-0 bg-transparent border-none  ">
@@ -145,18 +146,18 @@ export const TeamMemberCard = ({ member }: { member: ITeamMember }) => {
   );
 };
 
-export const WriterCard = () => {
+export const WriterCard = ({ writer }: { writer: IWriter }) => {
   return (
     <Card className="p-0 relative h-[350px] z-[3]">
       <Image
-        src={randomImage()}
+        src={imageUrl(writer.image)}
         alt="Team Member"
         width={500}
         height={500}
         className="absolute-cover rounded-sm z-[-1]"
       />
       <div className="absolute top-1/2 -translate-y-1/2 fx-col right-0 ">
-        {["Art", "Poerty", "Fiction"].map((item, index) => {
+        {writer.specializations.map((item, index) => {
           return (
             <span
               key={index}
@@ -170,24 +171,62 @@ export const WriterCard = () => {
       <div className="absolute-cover bg-foreground/50 z-[-1]" />
       <CardContent className=" fx flex-col text-background py-4 h-full">
         <h1 className="ts5  font-semibold ">
-          Tole <br /> Rightson
+          {writer.name.split(" ").map((name, index) => (
+            <span key={index}>
+              {name}
+              <br />
+            </span>
+          ))}
         </h1>
         <div className="fx-jb flex-1  items-end ">
           <div className="fx-center gap-1">
-            <Button
-              variant={"ghost"}
-              className="blur-bg rounded-full"
-              size={"icon"}
-            >
-              <FaXTwitter />
-            </Button>
-            <Button
-              variant={"ghost"}
-              className="blur-bg rounded-full"
-              size={"icon"}
-            >
-              <FaInstagram />
-            </Button>
+            {writer.socialLinks.twitter && (
+              <Button
+                variant={"ghost"}
+                className="blur-bg rounded-full"
+                size={"icon"}
+                asChild
+              >
+                <a
+                  href={writer.socialLinks.twitter}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FaXTwitter />
+                </a>
+              </Button>
+            )}
+            {writer.socialLinks.instagram && (
+              <Button
+                variant={"ghost"}
+                className="blur-bg rounded-full"
+                size={"icon"}
+                asChild
+              >
+                <a
+                  href={writer.socialLinks.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FaInstagram />
+                </a>
+              </Button>
+            )}
+            {writer.socialLinks.tiktok && (
+              <Button
+                variant={"ghost"}
+                className="blur-bg rounded-full"
+                size={"icon"}
+              >
+                <a
+                  href={writer.socialLinks.tiktok}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FaTiktok />
+                </a>
+              </Button>
+            )}
           </div>
           <Button
             className="blur-bg rounded-full "
@@ -195,7 +234,7 @@ export const WriterCard = () => {
             size={"sm"}
             asChild
           >
-            <Link href={`/writers/1234`}>
+            <Link href={`/writers/${writer._id}`}>
               <span>Read More</span>
               <FaAngleRight />
             </Link>
@@ -211,10 +250,11 @@ export const PublicationCards = (props: {
   title: string;
   paragraph: string;
   date: string;
+  link: string;
 }) => {
   return (
     <Card className="w-full  z-[1]  p-0 bg-transparent border-none  shadow-none  ">
-      <Link href={`/publications/1234`}>
+      <Link href={props.link}>
         <CardContent className="w-full p-0 fx-col gap-3">
           <Image
             src={props.imageUrl}
@@ -233,16 +273,24 @@ export const PublicationCards = (props: {
     </Card>
   );
 };
-export const ProfileCard = () => {
+export const ProfileCard = ({
+  name,
+  date,
+  imageUrl,
+}: {
+  imageUrl: string;
+  name: string;
+  date: string;
+}) => {
   return (
     <div className="fx-a-center gap-2">
       <Avatar>
-        <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+        <AvatarImage src={imageUrl} alt={name} />
         <AvatarFallback>CN</AvatarFallback>
       </Avatar>
       <div className="fx-col">
-        <div className=" font-semibold text-sm">Tole Rightson</div>
-        <div className="fx font-light text-sm">20/20/2020 || 3 min read</div>
+        <div className=" font-semibold text-sm">{name}</div>
+        <div className="fx font-light text-sm">{date}</div>
       </div>
     </div>
   );
@@ -250,7 +298,7 @@ export const ProfileCard = () => {
 export const ProfileCardWithBookMark = () => {
   return (
     <div className="fx-jb items-center pt-2 w-full">
-      <ProfileCard />
+      {/* <ProfileCard /> */}
       <Bookmark size={15} />
     </div>
   );

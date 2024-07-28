@@ -12,7 +12,7 @@ import {
   TeamMemberCard,
   WriterCard,
 } from "./cards/common";
-import { IEvent, ITeamMember } from "@/utils/data_types";
+import { IEvent, ITeamMember, IWriter } from "@/utils/data_types";
 
 export const EventsCardsWrapper = ({
   events = [],
@@ -63,11 +63,11 @@ export const TeamMemberWrapper = ({
     </div>
   );
 };
-export const WritersWrapper = () => {
+export const WritersWrapper = ({ writers }: { writers: IWriter[] }) => {
   return (
     <div className="grid  gap-5  md:gap-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 ">
-      {Array.from({ length: 10 }).map((_, index) => {
-        return <WriterCard key={index} />;
+      {writers.map((item, index) => {
+        return <WriterCard key={index} writer={item} />;
       })}
     </div>
   );

@@ -2,43 +2,51 @@ import { Button } from "@/components/ui/button";
 import { SeparatorTitle } from "@/components/website/pageUIs";
 import { HeroUI } from "@/components/website/shared/CommonUi";
 import { WritersWrapper } from "@/components/website/shared/Wrappers";
+import {
+  formatSanityDate,
+  formatSanityText,
+} from "@/components/website/utils/functions";
+import { fetchWriters, fetchWritersPage } from "@/lib/api";
+import { IWriter, IWritersPage } from "@/utils/data_types";
 import React from "react";
 
-const Writers = () => {
+const Writers = async () => {
+  const writersPage = await fetchWritersPage();
+  if (!writersPage) {
+    return null;
+  }
+  const writers = writersPage.writers;
   return (
     <div className="">
-      <HeroSection />
-      <WritersSection />
+      <HeroSection content={writersPage} />
+      <WritersSection writers={writers} />
     </div>
   );
 };
 
-const HeroSection = () => {
+const HeroSection = ({ content }: { content: IWritersPage }) => {
   return (
     <HeroUI bgtype="default" imageLink="/writing.jpg">
       <div className="text-background  fx-col gap-5 justify-start md:mt-28 ">
         <h1 className=" h1 text-center ">
-          Meet Our
-          <span className="text-primary"> Writers</span>
+          {formatSanityText(content.heroTitle, "text-primary")}
         </h1>
-        <p className="text-xl text-center">
-          This time, our tour will be at the Kenya Railways Museum as a
-          continuation of our previous tour around the area. We will learn the
-          History of the Uganda Railway/Lunat
-        </p>
+        <p className="text-xl text-center">{content.heroSubtitle}</p>
         <div className="w-full place-content-center fx">
-          <Button>Join Our Writers</Button>
+          <Button asChild>
+            <a href={content.ctaButtonLink}>{content.ctaText}</a>
+          </Button>
         </div>
       </div>
     </HeroUI>
   );
 };
 
-const WritersSection = () => {
+const WritersSection = ({ writers }: { writers: IWriter[] }) => {
   return (
     <div className="web-px py-20 space-y-10 bg-bgsecondary">
       <SeparatorTitle title="Our Writers" />
-      <WritersWrapper />
+      <WritersWrapper writers={writers} />
     </div>
   );
 };
