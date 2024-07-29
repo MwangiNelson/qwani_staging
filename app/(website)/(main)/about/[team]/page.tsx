@@ -39,7 +39,7 @@ const HeroSection = ({ member }: { member: ITeamMember }) => {
         alt={member.name}
         width={1000}
         height={1000}
-        className="rounded-md h-[500px] object-cover object-center"
+        className="rounded-md h-[350px] object-cover object-center"
       />
       <div className="flex justify-end pt-10">
         <Sharing bg="foreground" />

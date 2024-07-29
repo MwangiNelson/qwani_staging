@@ -28,7 +28,7 @@ const Publication = async ({ params }: Props) => {
 };
 const HeroSection = ({ publication }: { publication: IPublication }) => {
   return (
-    <div className="bg-foreground web-px h-screen text-background pt-36 md:pt-44">
+    <div className="bg-foreground web-px min-h-[90vh] md:h-screen text-background pt-36 md:pt-44">
       <div className="fx-col gap-1">
         <div>
           <BackButton text="Back To Publications" />

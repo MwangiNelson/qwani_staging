@@ -74,6 +74,7 @@
 .blur-bg {
   @apply bg-background/20 border-[1px] border-background/60  backdrop-filter backdrop-blur-md;
 }
+
 /* 
 .blur_bg {
   border: 1px solid rgba(255, 255, 255, 0.64);

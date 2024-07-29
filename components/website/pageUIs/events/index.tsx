@@ -26,7 +26,7 @@ export const HeroSectionContent = ({
 }) => {
   const { activeIndex, itemRefs } = useIntersectionInCarousel();
   return (
-    <Carousel className="w-full md:px-12 h-full items-center justify-center fx ">
+    <Carousel className="w-full md:pt-20  md:px-12 h-full items-center justify-center fx ">
       <CarouselContent className="">
         {upcommingevents.map((event, index) => (
           <CarouselItem
@@ -37,7 +37,7 @@ export const HeroSectionContent = ({
             }}
             data-index={index}
           >
-            <div className="space-y-2 pt-10">
+            <div className="space-y-2">
               <h1 className="h7 opacity-50 font-semibold">{event.location}</h1>
               <h1 className="ts6 text-primary font-bold">
                 {formatSanityDate(event.date)} ,{event.time}

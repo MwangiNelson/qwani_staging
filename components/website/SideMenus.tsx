@@ -40,15 +40,15 @@ export default SideMenus;
 const MobileMenu = () => {
   return (
     <div className="flex lg:hidden py-20 flex-col h-full  ">
-      <div className="flex gap-10 flex-col flex-grow ">
-        <div className=" flex flex-col justify-center items-center gap-5  ">
+      <div className="flex gap-10 flex-col flex-grow justify-center">
+        <div className=" flex flex-col justify-center items-center gap-5 -mt-10 ">
           <CustomLink name="Home" url="/" />
           <CustomLink name="About" url="/about" />
           <CustomLink name="Events" url="/events" />
           <CustomLink name="Writers" url="/writers" />
           <CustomLink name="Blogs" url="/blogs" />
           <CustomLink name="Publications" url="/publications" />
-          <CustomLink name="Contact Us" url="/contact" />
+          <CustomLink name="Gallery" url="/gallery" />
         </div>
       </div>
       <SocialLinks />

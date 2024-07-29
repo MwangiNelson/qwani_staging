@@ -16,12 +16,14 @@ export default defineType({
       name: "role",
       title: "Role",
       type: "string",
+      validation: (Rule) => Rule.required(),
     }),
 
     defineField({
       name: "image",
       title: "Image",
       type: "image",
+      validation: (Rule) => Rule.required(),
     }),
 
     defineField({
@@ -37,6 +39,7 @@ export default defineType({
     defineField({
       name: "description",
       title: "Description",
+      validation: (Rule) => Rule.required(),
       type: "blockContent",
     }),
   ],

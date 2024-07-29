@@ -10,16 +10,19 @@ export default defineType({
       name: "heroTitle",
       title: "Hero Title",
       type: "string",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "heroSubtitle",
       title: "Hero Subtitle",
       type: "text",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "heroImage",
       title: "Hero Image",
       type: "image",
+      validation: (Rule) => Rule.required(),
     }),
 
     // Publications Section
@@ -27,11 +30,13 @@ export default defineType({
       name: "publicationsTitle",
       title: "Publications Section Title",
       type: "string",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "publications",
       title: "Publications",
       type: "array",
+
       of: [
         {
           type: "reference",

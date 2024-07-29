@@ -41,7 +41,7 @@ const Event = async ({
 };
 const HeroSection = ({ event }: { event: IEvent }) => {
   return (
-    <div className="bg-foreground web-px h-screen text-background pt-36 md:pt-44">
+    <div className="bg-foreground web-px min-h-[90vh] md:h-screen text-background pt-36 md:pt-44">
       <div className="fx-a-center gap-5 ">
         <div
           className="h-[100px] w-[10px] hidden md:flex"
@@ -51,7 +51,7 @@ const HeroSection = ({ event }: { event: IEvent }) => {
         />
         <div className="fx-col gap-1">
           <div>
-            <BackButton text="Back Button" />
+            <BackButton text="Go Back" />
           </div>
           <h4 className="ts7  font-bold text-primary">
             {formatSanityDate(event.date)} ,{event.time}
@@ -60,9 +60,16 @@ const HeroSection = ({ event }: { event: IEvent }) => {
 
           <p className="">{event.excerpt}</p>
           <div className="flex gap-2 mt-2">
-            <Badge className="bg-background text-foreground h-[35px]">
-             KSH {event.price}
-            </Badge>
+             <Button
+                variant={"noEffect"}
+                size="sm"
+                className="border border-primary text-primary rounded-full"
+              >
+               For Only {
+                  event.price
+                } Ksh
+              </Button>
+            
             {event.paymentLink && (
               <Button
                 variant={"noEffect"}

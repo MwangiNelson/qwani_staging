@@ -177,3 +177,11 @@ export type TPages =
   | "contact"
   | "blogs"
   | "events";
+
+export interface IBlogsPage extends ISanityFetched {
+  heroTitle: string;
+  heroBlog: IPost;
+  heroBlogs: IPost[];
+  trendingTitle: string;
+  trendingBlogs: IPost[];
+}

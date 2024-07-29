@@ -1,10 +1,12 @@
 import { client, sanityFetch } from "@/sanity/lib/client";
 import {
   IAboutPage,
+  IBlogsPage,
   IContactPage,
   IEvent,
   IHomePage,
   IPost,
+  IPostCategory,
   IPublication,
   IPublicationsPage,
   ISeo,
@@ -26,11 +28,11 @@ export const fetchSeo = async (page: string): Promise<ISeo> => {
 export const fetchBlogs = async () => {
   const query = `*[_type == "post"]{
    ...,
-    author->{name, image},
-    categories[]->{title},
+    author->{...},
+    categories[]->{...},
    
   }`;
-  const data = await sanityFetch({
+  const data = await sanityFetch<IPost[]>({
     query,
     tags: ["post"],
   });
@@ -207,6 +209,48 @@ export const fetchTeamMemberById = async (id: string) => {
   const data = await sanityFetch<ITeamMember>({
     query,
     tags: ["team"],
+  });
+
+  return data;
+};
+
+//get blogsPage
+export const fetchBlogsPageContent = async () => {
+  const query = `*[_type == "blogPage"][0]{
+    ...,
+    heroBlog->{
+      ...,
+      author->{name, image},
+      categories[]->{...},
+    },
+    heroBlogs[]->{
+      ...,
+      author->{...},
+      categories[]->{...},
+    },
+    trendingBlogs[]->{
+      ...,
+      author->{
+        ...,
+      },
+      categories[]->{...},
+    },
+  }`;
+  const data = await sanityFetch<IBlogsPage>({
+    query,
+    tags: ["blogPage"],
+  });
+
+  return data;
+};
+//get all categories
+export const fetchCategories = async () => {
+  const query = `*[_type == "category"]{
+    ...
+  }`;
+  const data = await sanityFetch<IPostCategory[]>({
+    query,
+    tags: ["category"],
   });
 
   return data;

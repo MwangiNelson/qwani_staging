@@ -10,16 +10,19 @@ export default defineType({
       name: "heroTitle",
       title: "Hero Title",
       type: "string",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "heroSubtitle",
       title: "Hero Subtitle",
       type: "string",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "heroImage",
       title: "Hero Image",
       type: "image",
+      validation: (Rule) => Rule.required(),
     }),
 
     // Call to Action
@@ -27,11 +30,13 @@ export default defineType({
       name: "ctaText",
       title: "Call to Action Text",
       type: "string",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "ctaButtonLink",
       title: "Call to Action Button Link",
       type: "url",
+      validation: (Rule) => Rule.required(),
     }),
 
     // Writers Section
@@ -39,6 +44,7 @@ export default defineType({
       name: "writersTitle",
       title: "Writers Section Title",
       type: "string",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "writers",

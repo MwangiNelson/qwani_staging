@@ -2,13 +2,17 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
-import { ProfileCardWithBookMark } from "./common";
-import { Separator } from "@/components/ui/separator";
+import { ProfileCard, ProfileCardWithBookMark } from "./common";
+
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { IPost } from "@/utils/data_types";
+import { imageUrl } from "@/sanity/lib/client";
+import { formatSanityDate } from "../../utils/functions";
 export const BlogCardMain: React.FC<{
+  blog: IPost;
   bg?: "background" | "foreground";
-}> = ({ bg = "background" }) => {
+}> = ({ bg = "background", blog }) => {
   return (
     <Card
       className={cn(
@@ -16,61 +20,75 @@ export const BlogCardMain: React.FC<{
         bg === "background" ? "text-foreground " : "text-background"
       )}
     >
-      <Link href={`/blogs/1`}>
-        <Badge className="top-0 absolute" variant={"outline"}>
-          <span className={cn("text-background")}>Trending</span>
-        </Badge>
+      <Link
+        href={`
+      /blogs/${blog?._id}
+      `}
+      >
+        <div className="top-0 absolute fx gap-1">
+          {blog?.categories.map((category, index) => (
+            <Badge key={index} variant={"outline"}>
+              <span className="text-background">{category.title}</span>
+            </Badge>
+          ))}
+        </div>
         <CardContent className="w-full p-0 fx-col gap-3">
           <Image
-            src={"/imgs/2.jpg"}
+            src={imageUrl(blog?.mainImage)}
             className="w-full h-[250px] rounded-sm object-cover "
             alt={"Card Image"}
             width={1000}
             height={1000}
           />
           <div className=" flex flex-col space-y-1">
-            <h4 className="ts6 font-semibold ">
-              The origin of the name shylock
-            </h4>
-            <p className="  ">
-              In modern society or today, the name shylock is used to refer to
-              an informal money lender. You may have come across such a person
-            </p>
-            <ProfileCardWithBookMark />
+            <h4 className="ts6 font-semibold ">{blog?.title}</h4>
+            <p className="  ">{blog?.excerpt.slice(0, 100)}...</p>
+            <ProfileCard
+              date={formatSanityDate(blog?.publishedAt)}
+              imageUrl={imageUrl(blog?.author?.image)}
+              name={blog?.author?.name}
+            />
           </div>
         </CardContent>
       </Link>
     </Card>
   );
 };
-export const BlogListHero = () => {
+export const BlogListHero = ({ blogs }: { blogs: IPost[] }) => {
   return (
     <div className="w-full fx-col gap-10">
-      {[1, 2].map((index) => (
-        <BlogHorizontalCard key={index} />
+      {blogs.map((blog, index) => (
+        <BlogHorizontalCard key={index} blog={blog} />
       ))}
     </div>
   );
 };
-const BlogHorizontalCard = () => {
+const BlogHorizontalCard = ({ blog }: { blog: IPost }) => {
   return (
     <Card className="w-full  z-[1]  p-0 bg-transparent border-none  shadow-none text-background relative  ">
-      <Link href={`/blogs/1`}>
+      <Link
+        href={`
+      /blogs/${blog?._id}
+      `}
+      >
         <CardContent className="w-full p-0 fx-col gap-3">
           <div className=" flex flex-col space-y-1">
-            <div>
-              <Badge className="top-0 " variant={"outline"}>
-                <span className="text-background">Trending</span>
-              </Badge>
+            <div className="fx gap-1">
+              {blog?.categories.map((category, index) => (
+                <Badge key={index} variant={"outline"}>
+                  <span className="text-background">{category.title}</span>
+                </Badge>
+              ))}
             </div>
-            <h4 className="ts6 font-semibold text-background">
-              The origin of the name shylock
-            </h4>
+            <h4 className="ts6 font-semibold text-background">{blog?.title}</h4>
             <p className=" text-md ">
-              In modern society or today, the name shylock is used to refer to
-              an informal money lender. You may have come across such a person
+              {blog?.excerpt.slice(0, 100).concat("...")}
             </p>
-            <ProfileCardWithBookMark />
+            <ProfileCard
+              date={formatSanityDate(blog?.publishedAt)}
+              imageUrl={imageUrl(blog?.author?.image)}
+              name={blog?.author?.name}
+            />
           </div>
         </CardContent>
       </Link>
@@ -80,28 +98,41 @@ const BlogHorizontalCard = () => {
 
 export const BlogCardPrimary: React.FC<{
   size?: "small" | "large";
-}> = ({ size = "large" }) => {
+  blog: IPost;
+}> = ({ size = "large", blog }) => {
   return (
-    <Card className="w-full bg-background  z-[1]   border-none  shadow-none text-foreground relative  ">
-      <Link href={`/blogs/1`}>
-        <CardContent className="w-full fx-col gap-3 py-5">
-          <div className=" flex flex-col gap-1">
-            <div>
-              <Badge className="top-0 " variant={"outline"}>
-                <span className="">Trending</span>
-              </Badge>
+    <Card
+      className={cn(
+        "w-full bg-background  z-[1]  h-auto border-none  shadow-none text-foreground relative  "
+      )}
+    >
+      <Link href={`/blogs/${blog?._id}`}>
+        <CardContent
+          className={cn(
+            "w-full fx-col gap-3 py-5 ",
+            size == "large" ? "h-[230px]" : ""
+          )}
+        >
+          <div className=" flex flex-col gap-2">
+            <div className="fx gap-1">
+              {blog?.categories.map((category, index) => (
+                <Badge key={index} variant={"outline"}>
+                  <span className="text-foreground">{category.title}</span>
+                </Badge>
+              ))}
             </div>
-            <h4 className="ts6 font-semibold ">
-              The origin of the name shylock
-            </h4>
+
+            <h4 className="ts6 font-semibold ">{blog?.title}</h4>
             <p className=" text-md ">
               {size == "large"
-                ? `In modern society or today, the name shylock is used to refer to an
-            informal money lender. You may have come across such a person`
-                : ` In modern society or today, the name shylock is used to refer to an
-            informal money lender...`}
+                ? blog?.excerpt.slice(0, 70)
+                : blog?.excerpt.slice(0, 50)}
             </p>
-            <ProfileCardWithBookMark />
+            <ProfileCard
+              date={formatSanityDate(blog?.publishedAt)}
+              imageUrl={imageUrl(blog?.author?.image)}
+              name={blog?.author?.name}
+            />
           </div>
         </CardContent>
       </Link>

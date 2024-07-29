@@ -10,6 +10,7 @@ export default defineType({
       name: "heroTitle",
       title: "Hero Title",
       type: "string",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "heroImage",
@@ -18,6 +19,7 @@ export default defineType({
       options: {
         hotspot: true,
       },
+      validation: (Rule) => Rule.required(),
     }),
 
     // About Section
@@ -25,11 +27,13 @@ export default defineType({
       name: "aboutTitle",
       title: "About Section Title",
       type: "string",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "aboutDescription",
       title: "About Section Description",
       type: "text",
+      validation: (Rule) => Rule.required(),
     }),
 
     // Statistics Section
@@ -41,7 +45,11 @@ export default defineType({
         {
           type: "object",
           fields: [
-            { name: "label", title: "Label", type: "string" },
+            {
+              name: "label",
+              title: "Label",
+              type: "string",
+            },
             { name: "number", title: "Number", type: "number" },
           ],
         },
@@ -53,11 +61,13 @@ export default defineType({
       name: "valuesTitle",
       title: "Values Section Title",
       type: "string",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "valuesDescription",
       title: "Values Section Description",
       type: "text",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "values",
@@ -79,6 +89,7 @@ export default defineType({
       name: "teamTitle",
       title: "Team Section Title",
       type: "string",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "teamMembers",

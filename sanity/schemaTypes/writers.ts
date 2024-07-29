@@ -16,9 +16,7 @@ export default defineType({
       name: "image",
       title: "Image",
       type: "image",
-      options: {
-        hotspot: true,
-      },
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "specializations",
@@ -28,6 +26,7 @@ export default defineType({
       options: {
         layout: "tags",
       },
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "socialLinks",
@@ -42,6 +41,7 @@ export default defineType({
     defineField({
       name: "description",
       title: "Description",
+      validation: (Rule) => Rule.required(),
       type: "blockContent",
     }),
   ],

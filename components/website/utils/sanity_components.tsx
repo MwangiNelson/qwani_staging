@@ -38,5 +38,6 @@ export const myPortableTextComponents: Partial<PortableTextReactComponents> = {
     image: ({ value }) => {
       return <SanityImage {...value} />;
     },
+    
   },
 };

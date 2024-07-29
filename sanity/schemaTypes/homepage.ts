@@ -10,16 +10,20 @@ export default defineType({
       name: "heroTitle",
       title: "Hero Title",
       type: "string",
+      validation: (Rule) => Rule.required(),
     }),
+
     defineField({
       name: "heroSubtitle",
       title: "Hero Subtitle",
       type: "string",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "heroButtonText",
       title: "Hero Button Text",
       type: "string",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "heroButtonLink",
@@ -30,9 +34,7 @@ export default defineType({
       name: "heroImage",
       title: "Hero Image",
       type: "image",
-      options: {
-        hotspot: true,
-      },
+      validation: (Rule) => Rule.required(),
     }),
 
     // About Section
@@ -40,19 +42,19 @@ export default defineType({
       name: "aboutTitle",
       title: "About Title",
       type: "string",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "aboutDescription",
       title: "About Description",
       type: "text",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "aboutImage",
       title: "About Image",
       type: "image",
-      options: {
-        hotspot: true,
-      },
+      validation: (Rule) => Rule.required(),
     }),
 
     // Literary Voices Unleashed Section
@@ -60,11 +62,13 @@ export default defineType({
       name: "about2Title",
       title: "About2 Title",
       type: "string",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "about2description",
       title: "About2 Description",
       type: "text",
+      validation: (Rule) => Rule.required(),
     }),
 
     // Highlights Section
@@ -76,13 +80,23 @@ export default defineType({
         {
           type: "object",
           fields: [
-            { name: "title", title: "Title", type: "string" },
-            { name: "description", title: "Description", type: "text" },
+            {
+              name: "title",
+              title: "Title",
+              type: "string",
+              validation: (Rule) => Rule.required(),
+            },
+            {
+              name: "description",
+              title: "Description",
+              type: "text",
+              validation: (Rule) => Rule.required(),
+            },
             {
               name: "image",
               title: "Image",
               type: "image",
-              options: { hotspot: true },
+              validation: (Rule) => Rule.required(),
             },
           ],
         },
@@ -94,35 +108,41 @@ export default defineType({
       name: "eventsTitle",
       title: "Events Title",
       type: "string",
+      validation: (Rule) => Rule.required(),
     }),
     //events description
     defineField({
       name: "eventsDescription",
       title: "Events Description",
       type: "string",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "events",
       title: "Events",
       type: "array",
       of: [{ type: "reference", to: { type: "event" } }],
+      validation: (Rule) => Rule.required(),
     }),
 
     defineField({
       name: "graySectionTitle",
       title: "Gray Section Title",
       type: "text",
+      validation: (Rule) => Rule.required(),
     }),
     // Blogs Section
     defineField({
       name: "blogsTitle",
       title: "Blogs Title",
       type: "string",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "blogs",
       title: "Blogs",
       type: "array",
+      validation: (Rule) => Rule.required(),
       of: [{ type: "reference", to: { type: "post" } }],
     }),
   ],

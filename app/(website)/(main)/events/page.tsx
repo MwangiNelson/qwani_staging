@@ -59,7 +59,7 @@ const UpcommingEvents = ({
     <div className="mt-10 web-px ">
       <div className="space-y-5">
         <div className="fx-a-center gap-5 ">
-          <Separator className="w-20 bg-foreground" />
+          <Separator className="w-10 bg-foreground" />
           Upcomming Events
         </div>
         <EventsCardsWrapper page="events" events={upcommingevents} />
@@ -73,7 +73,7 @@ const PreviousEvents = ({ events }: { events: IEvent[] }) => {
     <div className="mt-10 web-px ">
       <div className="space-y-5">
         <div className="fx-a-center gap-5 ">
-          <Separator className="w-20 bg-foreground" />
+          <Separator className="w-10 bg-foreground" />
           Previous Events
         </div>
         <EventsCardsWrapper page="events" events={events} />

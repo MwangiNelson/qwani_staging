@@ -50,10 +50,21 @@ const HeroSection = ({ writer }: { writer: IWriter }) => {
         alt="Writer"
         width={1000}
         height={1000}
-        className="rounded-md h-[500px] object-cover object-center mt-5"
+        className="rounded-md h-[350px] object-cover object-center mt-5"
       />
       <div className="flex justify-end pt-10">
         <Sharing bg="foreground" />
+      </div>
+      <div
+        className="prose  "
+        style={{
+          color: "#fff !important",
+        }}
+      >
+        <PortableText
+          value={writer.description}
+          components={myPortableTextComponents}
+        />
       </div>
     </div>
   );

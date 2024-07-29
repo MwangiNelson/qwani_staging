@@ -30,6 +30,7 @@ export default defineType({
       name: "featuredImage",
       title: "Featured Image",
       type: "image",
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "date",

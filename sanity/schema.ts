@@ -14,6 +14,7 @@ import aboutpage from './schemaTypes/aboutpage'
 import writerspage from './schemaTypes/writerspage'
 import publicationsPage from './schemaTypes/publicationsPage'
 import contactPage from './schemaTypes/contactPage'
+import blogsPage from './schemaTypes/blogsPage'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: 
@@ -21,6 +22,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     writers,team,publications,seo,homepage,
     aboutpage,writerspage,
   publicationsPage,
-  contactPage
+  contactPage,
+  blogsPage
   ],
 }

@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { ISwitch } from "@/utils/uitypes";
 import { cn } from "@/lib/utils";
 import { SideDrawer } from "./SideDrawer";
+import { Button } from "../ui/button";
 export interface TimeType {
   time: number;
   type: "before" | "after" | "last";
@@ -56,9 +57,14 @@ const Navbar = ({ open, setOpen }: ISwitch) => {
         <CustomLink name="Writers" url="/writers" />
         <CustomLink name="Blogs" url="/blogs" />
         <CustomLink name="Publications" url="/publications" />
-        <CustomLink name="Contact Us" url="/contact" />
+        <CustomLink name="Gallery" url="/gallery" />
       </div>
-      <SideDrawer />
+      <div className="flex md:hidden">
+        <SideDrawer />
+      </div>
+      <Button className="hidden md:flex" size={"sm"} asChild>
+        <Link href="/contact">Contact Us</Link>
+      </Button>
     </div>
   );
 };

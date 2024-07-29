@@ -1,50 +1,57 @@
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import {
-  AllBlogsCards,
   BlogCategoriesFilter,
+  AllBlogsCards,
   TrendingBlogsWrapper,
 } from "@/components/website/pageUIs/blogs";
 import {
   BlogCardMain,
   BlogListHero,
 } from "@/components/website/shared/cards/blogs";
+import { formatSanityText } from "@/components/website/utils/functions";
+import { fetchBlogs, fetchBlogsPageContent, fetchCategories } from "@/lib/api";
+import { IBlogsPage, IPost, IPostCategory } from "@/utils/data_types";
 import { PenIcon, Search } from "lucide-react";
 import React from "react";
+interface IContent {
+  content: IBlogsPage;
+}
+const Blogs = async () => {
+  const [content, categories, blogs] = await Promise.all([
+    fetchBlogsPageContent(),
+    fetchCategories(),
+    fetchBlogs(),
+  ]);
 
-const Blogs = () => {
   return (
     <div>
-      <HeroSection />
-      <TrendingBlogs />
-      <BlogCategories />
-      <AllBlogs />
+      <HeroSection content={content} />
+      <TrendingBlogs content={content} />
+      <BlogCategories categories={categories} blogs={blogs} />
+      <AllBlogs blogs={blogs} />
     </div>
   );
 };
-const HeroSection = () => {
+const HeroSection = ({ content }: IContent) => {
   return (
     <div className="bg-foreground min-h-screen web-px  relative text-background pt-32 pb-20">
       <div className="fx-center ">
         <h1 className="ts3 max-w-screen-md text-center font-semibold">
-          Were have
-          <span className="text-primary"> Trending </span>
-          and Latest
-          <span className="text-primary"> Blogs </span>
-          For You
+          {formatSanityText(content.heroTitle, "text-primary")}
         </h1>
       </div>
       <div className="fixed z-[6] -right-2 web-px top-32 fx-col">
-        <Button variant={"noEffect"} size={"icon"}>
+        {/* <Button variant={"noEffect"} size={"icon"}>
           <Search size={15} />
-        </Button>
+        </Button> */}
         <Button variant={"noEffect"} size={"icon"}>
           <PenIcon size={15} />
         </Button>
       </div>
       <div className="blog-px fx flex-col md:flex-row mt-10  gap-14 md:gap-10">
-        <BlogCardMain bg="foreground" />
-        <BlogListHero />
+        <BlogCardMain bg="foreground" blog={content.heroBlog} />
+        <BlogListHero blogs={content.heroBlogs} />
       </div>
     </div>
   );
@@ -57,35 +64,41 @@ const PageTitle = ({ title }: { title: string }) => {
     </div>
   );
 };
-const TrendingBlogs = () => {
+const TrendingBlogs = ({ content }: IContent) => {
   return (
     <div className="bg-[#F2F2F2] py-10 web-px">
       <div className="fx-center">
-        <PageTitle title={"Trending Blogs"} />
+        <PageTitle title={content.trendingTitle} />
       </div>
       <div className="mt-7">
-        <TrendingBlogsWrapper />
+        <TrendingBlogsWrapper blogs={content.trendingBlogs} />
       </div>
     </div>
   );
 };
-const BlogCategories = () => {
+const BlogCategories = ({
+  categories,
+  blogs,
+}: {
+  categories: IPostCategory[];
+  blogs: IPost[];
+}) => {
   return (
     <div className="mt-10">
       <div className="fx-center">
-        <PageTitle title={"Featured Blogs"} />
+        <PageTitle title={"Blog categories"} />
       </div>
-      <BlogCategoriesFilter />
+      <BlogCategoriesFilter blogs={blogs} categories={categories} />
     </div>
   );
 };
-const AllBlogs = () => {
+const AllBlogs = ({ blogs }: { blogs: IPost[] }) => {
   return (
     <div className="bg-[#F2F2F2] mt-10 py-10 web-px">
       <div className="fx-center">
         <PageTitle title={"All Blogs"} />
       </div>
-      <AllBlogsCards />
+      <AllBlogsCards blogs={blogs} />
     </div>
   );
 };

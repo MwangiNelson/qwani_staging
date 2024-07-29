@@ -26,22 +26,25 @@ export default defineType({
       name: "author",
       title: "Author",
       type: "string",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "publishDate",
       title: "Publish Date",
       type: "date",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "description",
       title: "Description",
       type: "text",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "coverImage",
       title: "Cover Image",
       type: "image",
-      options: { hotspot: true },
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "price",
@@ -64,6 +67,7 @@ export default defineType({
       title: "Content",
       type: "array",
       of: [{ type: "block" }],
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "featuredWriters",
