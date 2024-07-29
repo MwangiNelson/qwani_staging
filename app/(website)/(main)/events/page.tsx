@@ -82,7 +82,7 @@ const PreviousEvents = ({ events }: { events: IEvent[] }) => {
   );
 };
 export async function generateMetadata(): Promise<Metadata> {
-  const results = pageMetadata("events");
+  const results = await pageMetadata("events");
   return results;
 }
 

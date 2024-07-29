@@ -9,10 +9,15 @@ import {
   BlogCardMain,
   BlogListHero,
 } from "@/components/website/shared/cards/blogs";
-import { formatSanityText } from "@/components/website/utils/functions";
+import {
+  formatSanityText,
+  pageMetadata,
+} from "@/components/website/utils/functions";
 import { fetchBlogs, fetchBlogsPageContent, fetchCategories } from "@/lib/api";
 import { IBlogsPage, IPost, IPostCategory } from "@/utils/data_types";
 import { PenIcon, Search } from "lucide-react";
+import { Metadata } from "next";
+import Link from "next/link";
 import React from "react";
 interface IContent {
   content: IBlogsPage;
@@ -45,8 +50,14 @@ const HeroSection = ({ content }: IContent) => {
         {/* <Button variant={"noEffect"} size={"icon"}>
           <Search size={15} />
         </Button> */}
-        <Button variant={"noEffect"} size={"icon"}>
-          <PenIcon size={15} />
+        <Button variant={"noEffect"} size={"icon"} asChild>
+          <Link
+            target="_blank"
+            href={`mailto:qwanitrust@gmail.com?subject=Blog Submission
+          `}
+          >
+            <PenIcon size={15} />
+          </Link>
         </Button>
       </div>
       <div className="blog-px fx flex-col md:flex-row mt-10  gap-14 md:gap-10">
@@ -102,4 +113,8 @@ const AllBlogs = ({ blogs }: { blogs: IPost[] }) => {
     </div>
   );
 };
+export async function generateMetadata(): Promise<Metadata> {
+  const results = await pageMetadata("blogs");
+  return results;
+}
 export default Blogs;

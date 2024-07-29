@@ -9,7 +9,9 @@ import { myPortableTextComponents } from "@/components/website/utils/sanity_comp
 import { fetchWriterById } from "@/lib/api";
 import { imageUrl } from "@/sanity/lib/client";
 import { IWriter } from "@/utils/data_types";
+import { Props } from "@/utils/uitypes";
 import { ChevronLeft } from "lucide-react";
+import { Metadata, ResolvingMetadata } from "next";
 import { PortableText } from "next-sanity";
 import Image from "next/image";
 import Link from "next/link";
@@ -50,7 +52,7 @@ const HeroSection = ({ writer }: { writer: IWriter }) => {
         alt="Writer"
         width={1000}
         height={1000}
-        className="rounded-md h-[350px] object-cover object-center mt-5"
+        className="rounded-md h-[350px] md:h-[500px] object-cover object-center mt-5"
       />
       <div className="flex justify-end pt-10">
         <Sharing bg="foreground" />
@@ -69,4 +71,28 @@ const HeroSection = ({ writer }: { writer: IWriter }) => {
     </div>
   );
 };
+
+export async function generateMetadata(
+  { params, searchParams }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const data = await fetchWriterById(params.writer as string);
+  return {
+    title: data.name,
+    description: `${data.name} is a writer on Qwani.`,
+    keywords: "Qwani, young writers, events, writing, literature",
+    openGraph: {
+      title: data.name,
+      description: `${data.name} is a writer on Qwani.`,
+      images: [
+        {
+          url: imageUrl(data.image.asset || data.image),
+          width: 1200,
+          height: 630,
+          alt: data.name,
+        },
+      ],
+    },
+  };
+}
 export default Page;

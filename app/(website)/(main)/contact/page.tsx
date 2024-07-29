@@ -140,7 +140,7 @@ const ContactForm = () => {
   );
 };
 export async function generateMetadata(): Promise<Metadata> {
-  const results = pageMetadata("contact");
+  const results = await pageMetadata("contact");
   return results;
 }
 export default ContactPage;

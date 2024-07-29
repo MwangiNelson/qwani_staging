@@ -156,5 +156,8 @@ export async function generateMetadata(
     },
   }; 
 
+
+
 }
+
 export default Event;

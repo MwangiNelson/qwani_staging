@@ -12,7 +12,10 @@ const mont = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Welcome To Qwani",
+    title: {
+    default: "Qwani",
+    template: "%s | Qwani",
+  },
   description: "Qwani is a youth lead initiative created as a platform for young talented writers",
 };
 

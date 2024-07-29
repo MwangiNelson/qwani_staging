@@ -15,6 +15,7 @@ import { imageUrl } from "@/sanity/lib/client";
 import { Sharing } from "@/components/website/shared/sharing";
 import { PortableText } from "next-sanity";
 import { myPortableTextComponents } from "@/components/website/utils/sanity_components";
+import { Metadata, ResolvingMetadata } from "next";
 const Publication = async ({ params }: Props) => {
   const publication = await fetchPublicationById(params.publication as string);
   return (
@@ -113,4 +114,28 @@ const Details = ({ publication }: { publication: IPublication }) => {
     </div>
   );
 };
+
+export async function generateMetadata(
+  { params, searchParams }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const data = await fetchPublicationById(params.publication as string);
+  return {
+    title: data.title,
+    description: data.description,
+    keywords: "Qwani, young writers, events, writing, literature",
+    openGraph: {
+      title: data.title,
+      description: data.description,
+      images: [
+        {
+          url: imageUrl(data.coverImage),
+          width: 1200,
+          height: 630,
+          alt: data.title,
+        },
+      ],
+    },
+  };
+}
 export default Publication;

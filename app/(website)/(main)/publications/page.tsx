@@ -77,7 +77,7 @@ const PublicationsSection = ({ content }: { content: IPublicationsPage }) => {
   );
 };
 export async function generateMetadata(): Promise<Metadata> {
-  const results = pageMetadata("publications");
+  const results = await pageMetadata("publications");
   return results;
 }
 export default Publications;

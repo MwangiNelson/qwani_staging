@@ -129,7 +129,7 @@ const OurTeamSection = ({ about }: { about: IAboutPage }) => {
   );
 };
 export async function generateMetadata(): Promise<Metadata> {
-  const results = pageMetadata("about");
+  const results = await pageMetadata("about");
   return results;
 }
 export default AboutPage;

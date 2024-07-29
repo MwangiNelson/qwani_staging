@@ -10,6 +10,7 @@ import { fetchBlogById } from "@/lib/api";
 import { imageUrl } from "@/sanity/lib/client";
 import { IPost } from "@/utils/data_types";
 import { Props } from "@/utils/uitypes";
+import { Metadata, ResolvingMetadata } from "next";
 import { PortableText } from "next-sanity";
 import Image from "next/image";
 import React from "react";
@@ -53,7 +54,7 @@ const Details = ({ blog }: { blog: IPost }) => {
         />
       </div>
       <div className="descriptions mt-10 space-y-3">
-        <div className="fx items-cente flex-col r md:flex-row">
+        <div className="fx items-center flex-col  md:flex-row md:justify-between">
           <div className="fx gap-1">
             {blog.categories.map((category, index) => (
               <Button
@@ -80,4 +81,27 @@ const Details = ({ blog }: { blog: IPost }) => {
     </div>
   );
 };
+export async function generateMetadata(
+  { params, searchParams }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const data = await fetchBlogById(params.blog as string);
+  return {
+    title: data.title,
+    description: data.excerpt,
+    keywords: "Qwani, young writers, events, writing, literature",
+    openGraph: {
+      title: data.title,
+      description: data.excerpt,
+      images: [
+        {
+          url: imageUrl(data.mainImage.asset || data.mainImage),
+          width: 1200,
+          height: 630,
+          alt: data.title,
+        },
+      ],
+    },
+  };
+}
 export default Page;

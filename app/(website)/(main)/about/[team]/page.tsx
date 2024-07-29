@@ -8,6 +8,7 @@ import { fetchTeamMemberById } from "@/lib/api";
 import { imageUrl } from "@/sanity/lib/client";
 import { ITeamMember } from "@/utils/data_types";
 import { Props } from "@/utils/uitypes";
+import { Metadata, ResolvingMetadata } from "next";
 import { PortableText } from "next-sanity";
 import Image from "next/image";
 import React from "react";
@@ -39,7 +40,7 @@ const HeroSection = ({ member }: { member: ITeamMember }) => {
         alt={member.name}
         width={1000}
         height={1000}
-        className="rounded-md h-[350px] object-cover object-center"
+        className="rounded-md h-[350px] md:h-[500px] object-cover object-center"
       />
       <div className="flex justify-end pt-10">
         <Sharing bg="foreground" />
@@ -54,4 +55,25 @@ const HeroSection = ({ member }: { member: ITeamMember }) => {
     </div>
   );
 };
+export async function generateMetadata(
+  { params, searchParams }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const data = await fetchTeamMemberById(params.team as string);
+  return {
+    title: data.name,
+    keywords: "Qwani, young writers, events, writing, literature",
+    openGraph: {
+      title: data.name,
+
+      images: [
+        {
+          url: imageUrl(data.image.asset || data.image),
+          width: 1200,
+          height: 630,
+        },
+      ],
+    },
+  };
+}
 export default Page;

@@ -22,7 +22,14 @@ export default function Footer() {
               part of our literary mosaic today!
             </p>
             <div>
-              <Button size={"sm"}>Join Community</Button>
+              <Button size={"sm"} asChild>
+                <Link
+                  target="_blank"
+                  href="https://chat.whatsapp.com/BxWyzVrSJwcHoZgME3q0a0"
+                >
+                  Join Community
+                </Link>
+              </Button>
             </div>
           </div>
         </div>
@@ -126,14 +133,14 @@ const footer_links = [
 const socials = [
   {
     name: "Twitter",
-    link: "https://twitter.com",
+    link: "https://x.com/qwanibok",
   },
   {
     name: "Instagram",
-    link: "https://instagram.com",
+    link: "https://www.instagram.com/qwanibok",
   },
   {
     name: "Whatsap",
-    link: "https://whatsapp.com",
+    link: "https://chat.whatsapp.com/BQ3gjPMI6GUHa7qDqFVECF",
   },
 ];

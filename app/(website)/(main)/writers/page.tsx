@@ -55,7 +55,7 @@ const WritersSection = ({ writers }: { writers: IWriter[] }) => {
 };
 
 export async function generateMetadata(): Promise<Metadata> {
-  const results = pageMetadata("writers");
+  const results = await pageMetadata("writers");
   return results;
 }
 export default Writers;
