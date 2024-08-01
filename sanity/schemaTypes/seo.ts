@@ -21,7 +21,7 @@ export default defineType({
           { title: "Blogs", value: "blogs" },
           { title: "Publications", value: "publications" },
           { title: "Contact", value: "contact" },
-          // Add more pages as needed
+          { title: "Gallery", value: "gallery" },
         ],
       },
     }),

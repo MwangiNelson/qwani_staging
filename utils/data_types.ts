@@ -176,7 +176,8 @@ export type TPages =
   | "publications"
   | "contact"
   | "blogs"
-  | "events";
+  | "events"
+  | "gallery";
 
 export interface IBlogsPage extends ISanityFetched {
   heroTitle: string;
@@ -184,4 +185,16 @@ export interface IBlogsPage extends ISanityFetched {
   heroBlogs: IPost[];
   trendingTitle: string;
   trendingBlogs: IPost[];
+}
+
+export interface IGalleryPage extends ISanityFetched {
+  title: string;
+  description: string;
+}
+
+export interface IGallery extends ISanityFetched {
+  title: string;
+  description: string;
+  featuredImage: ISanityAsset;
+  galleryImages: ISanityAsset[];
 }

@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Inter, Montserrat } from "next/font/google";
 import "./globals.css";
 import "./website.css";
-import { cn } from "@/lib/utils";
+import "yet-another-react-lightbox/styles.css";
+
 const inter = Inter({ subsets: ["latin"] });
 const mont = Montserrat({
   variable: "--font-montserrat",

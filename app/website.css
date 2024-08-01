@@ -4,6 +4,9 @@
 .blog-px {
   @apply px-0 md:px-[86px] xl:px-[172px];
 }
+.gallery-px {
+  @apply px-4 md:px-[86px] xl:px-[172px];
+}
 
 .fx {
   @apply flex;

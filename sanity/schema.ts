@@ -15,11 +15,16 @@ import writerspage from './schemaTypes/writerspage'
 import publicationsPage from './schemaTypes/publicationsPage'
 import contactPage from './schemaTypes/contactPage'
 import blogsPage from './schemaTypes/blogsPage'
+import gallery from './schemaTypes/gallery'
+import galleryPage from './schemaTypes/galleryPage'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: 
   [post, author, category, blockContent,event,
-    writers,team,publications,seo,homepage,
+    writers,team,publications,seo,
+    gallery,
+    galleryPage,
+    homepage,
     aboutpage,writerspage,
   publicationsPage,
   contactPage,

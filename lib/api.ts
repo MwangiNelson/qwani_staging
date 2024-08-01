@@ -4,6 +4,8 @@ import {
   IBlogsPage,
   IContactPage,
   IEvent,
+  IGallery,
+  IGalleryPage,
   IHomePage,
   IPost,
   IPostCategory,
@@ -251,6 +253,42 @@ export const fetchCategories = async () => {
   const data = await sanityFetch<IPostCategory[]>({
     query,
     tags: ["category"],
+  });
+
+  return data;
+};
+
+//get gallerypage
+export const fetchGalleryPageContent = async () => {
+  const query = `*[_type == "galleryPage"][0]{
+    ...,
+  }`;
+  const data = await sanityFetch<IGalleryPage>({
+    query,
+    tags: ["galleryPage"],
+  });
+
+  return data;
+};
+//get all galleries
+export const fetchGalleries = async () => {
+  const query = `*[_type == "gallery"]{
+    ...
+  }`;
+  const data = await sanityFetch<IGallery[]>({
+    query,
+    tags: ["gallery"],
+  });
+
+  return data;
+};
+export const fetchGalleryById = async (id: string) => {
+  const query = `*[_type == "gallery" && _id == "${id}"][0]{
+    ...,
+  }`;
+  const data = await sanityFetch<IGallery>({
+    query,
+    tags: ["gallery"],
   });
 
   return data;

@@ -41,7 +41,7 @@ export default function Footer() {
       )}
       <div
         className={cn(
-          "bg-foreground py-5 web-px pt-10 ",
+          "bg-foreground py-5 web-px pt-10 border-background/50 border-t-[1px]",
           !minimalFooter &&
             "-mt-[200px] pt-[200px] md:-mt-[250px] md:pt-[270px] min-h-[50vh] "
         )}

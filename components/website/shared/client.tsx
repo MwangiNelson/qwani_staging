@@ -7,6 +7,7 @@ import { useEffect } from "react";
 export const MinimalFooter = () => {
   const { addMinimalFooterVisiblePages } = useWebsiteContext();
   const pathname = usePathname();
+  console.log(pathname);
   useEffect(() => {
     addMinimalFooterVisiblePages(pathname);
   }, [pathname]);

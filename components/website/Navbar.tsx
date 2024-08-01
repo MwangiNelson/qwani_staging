@@ -57,7 +57,7 @@ const Navbar = ({ open, setOpen }: ISwitch) => {
         <CustomLink name="Writers" url="/writers" />
         <CustomLink name="Blogs" url="/blogs" />
         <CustomLink name="Publications" url="/publications" />
-        {/* <CustomLink name="Gallery" url="/gallery" /> */}
+        <CustomLink name="Gallery" url="/gallery" />
       </div>
       <div className="flex md:hidden">
         <SideDrawer />

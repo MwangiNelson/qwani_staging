@@ -23,7 +23,7 @@ export const HeroUI = ({
       style={{
         background:
           bgtype == "default"
-            ? `linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0.80) 100%)`
+            ? `linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0.90) 100%)`
             : bgtype == "radial"
             ? ` linear-gradient(180deg, rgba(0, 0, 0, 0.50) 0%, 
         rgba(0, 0, 0, 0.01) 21%, rgba(0, 0, 0, 0.00) 100%),
