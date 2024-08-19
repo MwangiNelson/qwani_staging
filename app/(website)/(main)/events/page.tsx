@@ -60,7 +60,7 @@ const UpcommingEvents = ({
       <div className="space-y-5">
         <div className="fx-a-center gap-5 ">
           <Separator className="w-10 bg-foreground" />
-          Upcomming Events
+          Upcoming Events
         </div>
         <EventsCardsWrapper page="events" events={upcommingevents} />
       </div>

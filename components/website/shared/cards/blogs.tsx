@@ -22,7 +22,7 @@ export const BlogCardMain: React.FC<{
     >
       <Link
         href={`
-      /blogs/${blog?._id}
+      /blogs/${blog?.slug.current}
       `}
       >
         <div className="top-0 absolute fx gap-1">
@@ -68,7 +68,7 @@ const BlogHorizontalCard = ({ blog }: { blog: IPost }) => {
     <Card className="w-full  z-[1]  p-0 bg-transparent border-none  shadow-none text-background relative  ">
       <Link
         href={`
-      /blogs/${blog?._id}
+      /blogs/${blog?.slug.current}
       `}
       >
         <CardContent className="w-full p-0 fx-col gap-3">
@@ -106,11 +106,11 @@ export const BlogCardPrimary: React.FC<{
         "w-full bg-background  z-[1]  h-auto border-none  shadow-none text-foreground relative  "
       )}
     >
-      <Link href={`/blogs/${blog?._id}`}>
+      <Link href={`/blogs/${blog?.slug.current}`}>
         <CardContent
           className={cn(
             "w-full fx-col gap-3 py-5 ",
-            size == "large" ? "h-[230px]" : ""
+            size == "large" ? "h-[260px]" : ""
           )}
         >
           <div className=" flex flex-col gap-2">

@@ -26,18 +26,22 @@ export async function pageMetadata(page: TPages): Promise<Metadata> {
       },
     };
   } catch {
-    return {
+    return defaultMetadata();
+  }
+}
+
+export function defaultMetadata(): Metadata {
+  return {
+    title: "Qwani",
+    description:
+      "Qwani champions the artistry of young writers, curating a rich tapestry of narratives that resonate with the soul and spark imagination.",
+    keywords: "Qwani, young writers, events, writing, literature",
+    openGraph: {
       title: "Qwani",
       description:
         "Qwani champions the artistry of young writers, curating a rich tapestry of narratives that resonate with the soul and spark imagination.",
-      keywords: "Qwani, young writers, events, writing, literature",
-      openGraph: {
-        title: "Qwani",
-        description:
-          "Qwani champions the artistry of young writers, curating a rich tapestry of narratives that resonate with the soul and spark imagination.",
-      },
-    };
-  }
+    },
+  };
 }
 
 export function formatSanityText(text: string, style: string) {

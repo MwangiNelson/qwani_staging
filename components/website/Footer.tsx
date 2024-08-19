@@ -5,6 +5,7 @@ import VideoPlayer from "./shared/VideoPlayer";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
+import { JoinCommunityButton } from "./shared/atoms";
 
 export default function Footer() {
   const { minimalFooter } = useWebsiteContext();
@@ -22,14 +23,7 @@ export default function Footer() {
               part of our literary mosaic today!
             </p>
             <div>
-              <Button size={"sm"} asChild>
-                <Link
-                  target="_blank"
-                  href="https://chat.whatsapp.com/BxWyzVrSJwcHoZgME3q0a0"
-                >
-                  Join Community
-                </Link>
-              </Button>
+              <JoinCommunityButton size="sm" />
             </div>
           </div>
         </div>

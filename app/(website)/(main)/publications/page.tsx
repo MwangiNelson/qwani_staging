@@ -67,7 +67,7 @@ const PublicationsSection = ({ content }: { content: IPublicationsPage }) => {
                 title={item.title}
                 paragraph={item.description}
                 date={formatSanityDate(item.publishDate)}
-                link={`/publications/${item._id}`}
+                link={`/publications/${item.slug.current}`}
               />
             );
           })}

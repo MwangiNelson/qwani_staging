@@ -2,8 +2,10 @@ import { Separator } from "@/components/ui/separator";
 import { GalleryCards } from "@/components/website/pageUIs/gallery";
 import { MinimalFooter } from "@/components/website/shared/client";
 import { fetchGalleryById } from "@/lib/api";
+import { imageUrl } from "@/sanity/lib/client";
 import { IGallery } from "@/utils/data_types";
 import { Props } from "@/utils/uitypes";
+import { Metadata, ResolvingMetadata } from "next";
 import React from "react";
 
 const Gallery = async ({ params }: Props) => {
@@ -30,4 +32,27 @@ const HeroSection = ({ gallery }: { gallery: IGallery }) => {
   );
 };
 
+export async function generateMetadata(
+  { params, searchParams }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const data = await fetchGalleryById(params.gallery as string);
+  return {
+    title: data.title,
+    description: data.description,
+    keywords: "Qwani, young writers, events, writing, literature",
+    openGraph: {
+      title: data.title,
+      description: data.description,
+      images: [
+        {
+          url: imageUrl(data.featuredImage.asset || data.featuredImage),
+          width: 1200,
+          height: 630,
+          alt: data.title,
+        },
+      ],
+    },
+  };
+}
 export default Gallery;

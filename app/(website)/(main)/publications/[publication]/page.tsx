@@ -8,16 +8,23 @@ import { CiShare2 } from "react-icons/ci";
 import { MinimalFooter } from "@/components/website/shared/client";
 import { BackButton } from "@/components/website/utils";
 import { Props } from "@/utils/uitypes";
-import { fetchPublicationById } from "@/lib/api";
+import { fetchPublicationById, fetchPublicationBySlug } from "@/lib/api";
 import { IPublication } from "@/utils/data_types";
-import { formatSanityDate } from "@/components/website/utils/functions";
+import {
+  defaultMetadata,
+  formatSanityDate,
+} from "@/components/website/utils/functions";
 import { imageUrl } from "@/sanity/lib/client";
 import { Sharing } from "@/components/website/shared/sharing";
 import { PortableText } from "next-sanity";
 import { myPortableTextComponents } from "@/components/website/utils/sanity_components";
 import { Metadata, ResolvingMetadata } from "next";
+import Lost from "@/components/website/lost";
 const Publication = async ({ params }: Props) => {
-  const publication = await fetchPublicationById(params.publication as string);
+  const publication = await fetchPublicationBySlug(
+    params.publication as string
+  );
+  if (!publication) return <Lost />;
   return (
     <div className="pb-20">
       <HeroSection publication={publication} />
@@ -119,7 +126,10 @@ export async function generateMetadata(
   { params, searchParams }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const data = await fetchPublicationById(params.publication as string);
+  const data = await fetchPublicationBySlug(params.publication as string);
+  if (!data) {
+    return defaultMetadata();
+  }
   return {
     title: data.title,
     description: data.description,

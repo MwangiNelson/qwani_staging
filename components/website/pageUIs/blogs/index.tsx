@@ -18,10 +18,15 @@ import { Button } from "@/components/ui/button";
 
 export function TrendingBlogsWrapper({ blogs }: { blogs: IPost[] }) {
   return (
-    <Carousel className="w-full h-auto ">
-      <CarouselContent>
+    <Carousel className="w-full   ">
+      <CarouselContent className="gap-1 ">
         {blogs.map((item, index) => (
-          <CarouselItem key={index} className=" basis-[85%] md:basis-1/3  ">
+          <CarouselItem
+            key={index}
+            className=" basis-[85%] md:basis-1/3 
+          h-full
+          "
+          >
             <BlogCardPrimary blog={item} />
           </CarouselItem>
         ))}

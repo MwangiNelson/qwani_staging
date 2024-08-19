@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { JoinCommunityButton } from "@/components/website/shared/atoms";
 import { BlogCard } from "@/components/website/shared/cards/common";
 import { HeroUI } from "@/components/website/shared/CommonUi";
 import { EventsCardsWrapper } from "@/components/website/shared/Wrappers";
@@ -26,11 +27,12 @@ const Home = async () => {
           </h1>
           <p className="text-xl text-start">{homepage.heroSubtitle}</p>
           <div className="w-full items-start">
-            <Button>
+            {/* <Button>
               <Link href={homepage.heroButtonLink ?? "#"}>
                 {homepage.heroButtonText}
               </Link>
-            </Button>
+            </Button> */}
+            <JoinCommunityButton size="default" />
           </div>
         </div>
       </HeroUI>

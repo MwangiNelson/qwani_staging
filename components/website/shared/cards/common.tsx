@@ -66,7 +66,7 @@ export const EventCardMain = ({ event }: { event: IEvent }) => {
 export const BlogCard = (props: IPost) => {
   return (
     <Card className="w-full  z-[1]  p-0 bg-transparent border-none  shadow-none  ">
-      <Link href={`/blogs/${props._id}`}>
+      <Link href={`/blogs/${props.slug.current}`}>
         <CardContent className="w-full p-0 fx-col gap-3">
           <Image
             src={imageUrl(props.mainImage)}
@@ -114,20 +114,43 @@ export const TeamMemberCard = ({ member }: { member: ITeamMember }) => {
         </h1>
         <div className="fx-jb flex-1  items-end ">
           <div className="fx-center gap-1">
-            <Button
-              variant={"ghost"}
-              className="blur-bg rounded-full"
-              size={"icon"}
-            >
-              <FaXTwitter />
-            </Button>
-            <Button
-              variant={"ghost"}
-              className="blur-bg rounded-full"
-              size={"icon"}
-            >
-              <FaInstagram />
-            </Button>
+            {member && member.socialLinks?.twitter && (
+              <Button
+                variant={"ghost"}
+                className="blur-bg rounded-full"
+                size={"icon"}
+              >
+                <Link
+                  href={member.socialLinks.twitter}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FaXTwitter />
+                </Link>
+              </Button>
+            )}
+            {member && member?.socialLinks?.instagram && (
+              <Button
+                variant={"ghost"}
+                className="blur-bg rounded-full"
+                size={"icon"}
+              >
+                <Link href={member.socialLinks.instagram} target="_blank">
+                  <FaInstagram />
+                </Link>
+              </Button>
+            )}
+            {member && member?.socialLinks?.tiktok && (
+              <Button
+                variant={"ghost"}
+                className="blur-bg rounded-full"
+                size={"icon"}
+              >
+                <Link href={member.socialLinks.tiktok} target="_blank">
+                  <FaTiktok />
+                </Link>
+              </Button>
+            )}
           </div>
           <Button
             className="blur-bg rounded-full "
@@ -137,7 +160,7 @@ export const TeamMemberCard = ({ member }: { member: ITeamMember }) => {
           >
             <Link
               href={`
-            /about/${member._id}
+            /about/${member.slug?.current}
             `}
             >
               <span>{member.role}</span>
@@ -238,7 +261,7 @@ export const WriterCard = ({ writer }: { writer: IWriter }) => {
             size={"sm"}
             asChild
           >
-            <Link href={`/writers/${writer._id}`}>
+            <Link href={`/writers/${writer.slug.current}`}>
               <span>Read More</span>
               <FaAngleRight />
             </Link>

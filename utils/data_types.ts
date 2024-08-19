@@ -12,6 +12,10 @@ export interface ISanityAsset {
     _type: string;
   };
 }
+export interface ISlugSanity {
+  _type: string;
+  current: string;
+}
 
 export interface ISeo extends ISanityFetched {
   page: string;
@@ -62,16 +66,18 @@ export interface IEvent extends ISanityFetched {
 export interface ITeamMember extends ISanityFetched {
   name: string;
   role: string;
+  slug: ISlugSanity;
   image: ISanityAsset;
   socialLinks: {
-    twitter: string;
-    instagram: string;
-    tiktok: string;
+    twitter?: string;
+    instagram?: string;
+    tiktok?: string;
   };
   description: any;
 }
 export interface IWriter extends ISanityFetched {
   name: string;
+  slug: ISlugSanity;
   image: ISanityAsset;
   specializations: string[];
   socialLinks: {

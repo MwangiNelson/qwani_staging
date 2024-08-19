@@ -81,7 +81,7 @@ const TrendingBlogs = ({ content }: IContent) => {
       <div className="fx-center">
         <PageTitle title={content.trendingTitle} />
       </div>
-      <div className="mt-7">
+      <div className="mt-7 ">
         <TrendingBlogsWrapper blogs={content.trendingBlogs} />
       </div>
     </div>

@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 
 import Link from "next/link";
@@ -8,12 +8,24 @@ import { ISwitch } from "@/utils/uitypes";
 import { cn } from "@/lib/utils";
 import { SideDrawer } from "./SideDrawer";
 import { Button } from "../ui/button";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuIndicator,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  NavigationMenuViewport,
+} from "@/components/ui/navigation-menu";
+
 export interface TimeType {
   time: number;
   type: "before" | "after" | "last";
 }
 const Navbar = ({ open, setOpen }: ISwitch) => {
   const pathname = usePathname();
+  const [active, setActive] = useState<string | null>(null);
   const CustomLink = ({ name, url }: { name: string; url: string }) => {
     const isActive = pathname.split("/")[1] === url.split("/")[1];
 
@@ -59,12 +71,12 @@ const Navbar = ({ open, setOpen }: ISwitch) => {
         <CustomLink name="Publications" url="/publications" />
         <CustomLink name="Gallery" url="/gallery" />
       </div>
-      <div className="flex md:hidden">
-        <SideDrawer />
-      </div>
-      <Button className="hidden md:flex" size={"sm"} asChild>
+      <Button className="hidden lg:flex" size={"sm"} asChild>
         <Link href="/contact">Contact Us</Link>
       </Button>
+      <div className="flex lg:hidden">
+        <SideDrawer />
+      </div>
     </div>
   );
 };

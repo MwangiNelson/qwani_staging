@@ -20,6 +20,7 @@ export default defineType({
         maxLength: 96,
       },
       validation: (Rule) => Rule.required(),
+      //make sure the slug is unique
     }),
     defineField({
       name: "author",

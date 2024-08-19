@@ -134,6 +134,18 @@ export const fetchWriterById = async (id: string): Promise<IWriter> => {
   return data;
 };
 
+//get writer by slug
+export const fetchWriterBySlug = async (slug: string): Promise<IWriter> => {
+  const query = `*[_type == "writer" && slug.current == "${slug}"][0]{
+    ...
+  }`;
+  const data = await sanityFetch<IWriter>({
+    query,
+    tags: ["writer"],
+  });
+  return data;
+};
+
 //get  writers page
 export const fetchWritersPage = async () => {
   const query = `*[_type == "writersPage"][0]{
@@ -151,6 +163,21 @@ export const fetchWritersPage = async () => {
 
 export const fetchBlogById = async (id: string) => {
   const query = `*[_type == "post" && _id == "${id}"][0]{
+    ...,
+    author->{name, image},
+    categories[]->{...},
+  }`;
+  const data = await sanityFetch<IPost>({
+    query,
+    tags: ["post"],
+  });
+
+  return data;
+};
+
+//fetch by slug
+export const fetchBlogBySlug = async (slug: string) => {
+  const query = `*[_type == "post" && slug.current == "${slug}"][0]{
     ...,
     author->{name, image},
     categories[]->{...},
@@ -190,7 +217,19 @@ export const fetchPublicationById = async (id: string) => {
   return data;
 };
 
-//
+// by slug
+export const fetchPublicationBySlug = async (slug: string) => {
+  const query = `*[_type == "publication" && slug.current == "${slug}"][0]{
+    ...,
+    author->{name, image},
+  }`;
+  const data = await sanityFetch<IPublication>({
+    query,
+    tags: ["publication"],
+  });
+
+  return data;
+};
 export const fetchContactPage = async () => {
   const query = `*[_type == "contactPage"][0]{
     ...
@@ -206,6 +245,19 @@ export const fetchContactPage = async () => {
 //get team member by id
 export const fetchTeamMemberById = async (id: string) => {
   const query = `*[_type == "team" && _id == "${id}"][0]{
+    ...
+  }`;
+  const data = await sanityFetch<ITeamMember>({
+    query,
+    tags: ["team"],
+  });
+
+  return data;
+};
+
+//fetch team member by slug
+export const fetchTeamMemberBySlug = async (slug: string) => {
+  const query = `*[_type == "team" && slug.current == "${slug}"][0]{
     ...
   }`;
   const data = await sanityFetch<ITeamMember>({

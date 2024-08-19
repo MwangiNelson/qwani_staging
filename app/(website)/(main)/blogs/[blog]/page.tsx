@@ -6,7 +6,7 @@ import { Sharing } from "@/components/website/shared/sharing";
 import { BackButton } from "@/components/website/utils";
 import { formatSanityDate } from "@/components/website/utils/functions";
 import { myPortableTextComponents } from "@/components/website/utils/sanity_components";
-import { fetchBlogById } from "@/lib/api";
+import { fetchBlogById, fetchBlogBySlug } from "@/lib/api";
 import { imageUrl } from "@/sanity/lib/client";
 import { IPost } from "@/utils/data_types";
 import { Props } from "@/utils/uitypes";
@@ -15,7 +15,7 @@ import { PortableText } from "next-sanity";
 import Image from "next/image";
 import React from "react";
 const Page = async ({ params, searchParams }: Props) => {
-  const blog = await fetchBlogById(params.blog as string);
+  const blog = await fetchBlogBySlug(params.blog as string);
   return (
     <div className="bg-[#F2F2F2] text-foreground pb-20">
       <Hero />
@@ -85,7 +85,7 @@ export async function generateMetadata(
   { params, searchParams }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const data = await fetchBlogById(params.blog as string);
+  const data = await fetchBlogBySlug(params.blog as string);
   return {
     title: data.title,
     description: data.excerpt,

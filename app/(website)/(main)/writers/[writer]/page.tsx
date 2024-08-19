@@ -1,24 +1,17 @@
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ProfileCardWithBookMark } from "@/components/website/shared/cards/common";
 import { MinimalFooter } from "@/components/website/shared/client";
 import { Sharing } from "@/components/website/shared/sharing";
 import { BackButton } from "@/components/website/utils";
 import { formatSanityDate } from "@/components/website/utils/functions";
 import { myPortableTextComponents } from "@/components/website/utils/sanity_components";
-import { fetchWriterById } from "@/lib/api";
+import { fetchWriterById, fetchWriterBySlug } from "@/lib/api";
 import { imageUrl } from "@/sanity/lib/client";
 import { IWriter } from "@/utils/data_types";
 import { Props } from "@/utils/uitypes";
-import { ChevronLeft } from "lucide-react";
 import { Metadata, ResolvingMetadata } from "next";
 import { PortableText } from "next-sanity";
 import Image from "next/image";
-import Link from "next/link";
 import React from "react";
-import { CiShare2 } from "react-icons/ci";
-import { FaInstagram, FaXTwitter } from "react-icons/fa6";
-
 const Page = async ({
   params,
 }: {
@@ -26,7 +19,7 @@ const Page = async ({
     writer: string;
   };
 }) => {
-  const writer = await fetchWriterById(params.writer);
+  const writer = await fetchWriterBySlug(params.writer);
   return (
     <div className="bg-foreground min-h-screen text-background">
       <HeroSection writer={writer} />
@@ -57,12 +50,7 @@ const HeroSection = ({ writer }: { writer: IWriter }) => {
       <div className="flex justify-end pt-10">
         <Sharing bg="foreground" />
       </div>
-      <div
-        className="prose  "
-        style={{
-          color: "#fff !important",
-        }}
-      >
+      <div className="prose  txe-white">
         <PortableText
           value={writer.description}
           components={myPortableTextComponents}
@@ -76,7 +64,7 @@ export async function generateMetadata(
   { params, searchParams }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const data = await fetchWriterById(params.writer as string);
+  const data = await fetchWriterBySlug(params.writer as string);
   return {
     title: data.name,
     description: `${data.name} is a writer on Qwani.`,
