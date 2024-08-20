@@ -1,6 +1,7 @@
 import { client, sanityFetch } from "@/sanity/lib/client";
 import {
   IAboutPage,
+  IAuthor,
   IBlogsPage,
   IContactPage,
   IEvent,
@@ -341,6 +342,19 @@ export const fetchGalleryById = async (id: string) => {
   const data = await sanityFetch<IGallery>({
     query,
     tags: ["gallery"],
+  });
+
+  return data;
+};
+
+//get authors
+export const fetchAuthors = async () => {
+  const query = `*[_type == "author"]{
+    ...
+  }`;
+  const data = await sanityFetch<IAuthor[]>({
+    query,
+    tags: ["author"],
   });
 
   return data;

@@ -6,7 +6,13 @@ import Image from "next/image";
 import { FaAngleRight, FaInstagram, FaXTwitter } from "react-icons/fa6";
 import { Bookmark } from "lucide-react";
 import Link from "next/link";
-import { IEvent, IPost, ITeamMember, IWriter } from "@/utils/data_types";
+import {
+  IAuthor,
+  IEvent,
+  IPost,
+  ITeamMember,
+  IWriter,
+} from "@/utils/data_types";
 import { imageUrl } from "@/sanity/lib/client";
 import { formatSanityDate } from "../../utils/functions";
 import { FaTiktok } from "react-icons/fa";
@@ -328,5 +334,27 @@ export const ProfileCardWithBookMark = () => {
       {/* <ProfileCard /> */}
       <Bookmark size={15} />
     </div>
+  );
+};
+
+export const AuthorCard = ({ author }: { author: IAuthor }) => {
+  return (
+    <Card className="w-full  z-[1]  p-0 bg-transparent border-none  shadow-none  ">
+      <Link href={author.slug.current}>
+        <CardContent className="w-full p-0 fx-col gap-3">
+          <Image
+            src={imageUrl(author.image)}
+            className="w-full h-[300px] rounded-sm object-cover "
+            alt={"Card Image"}
+            width={1000}
+            height={1000}
+          />
+          <div className=" flex flex-col p">
+            <h5 className="ts5 font-semibold text-primary">{author.name}</h5>
+            <p className="font-light ">{author.bio.slice(0, 100)}...</p>
+          </div>
+        </CardContent>
+      </Link>
+    </Card>
   );
 };

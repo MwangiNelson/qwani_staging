@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { JoinCommunityButton } from "./shared/atoms";
+import FooterVideo from "./shared/footer_video";
 
 export default function Footer() {
   const { minimalFooter } = useWebsiteContext();
@@ -30,7 +31,8 @@ export default function Footer() {
       )}
       {!minimalFooter && (
         <div className="web-px py-10  ">
-          <VideoPlayer />
+          {/* <VideoPlayer /> */}
+          <FooterVideo />
         </div>
       )}
       <div

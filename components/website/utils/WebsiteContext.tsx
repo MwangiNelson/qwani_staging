@@ -10,6 +10,8 @@ interface IWebsiteContext {
   setSpeedDial: SetState<boolean>;
   addSpeedDialInvisiblePages: (page: string) => void;
   addMinimalFooterVisiblePages: (page: string) => void;
+  customActiveLink: string | null;
+  makeCustomActiveLink: (link: string) => void;
 }
 const WebsiteContext = createContext<IWebsiteContext | null>(null);
 export const WebsiteContextProvider = ({
@@ -27,6 +29,7 @@ export const WebsiteContextProvider = ({
   >(["/writers", "/blogs"]);
   const [minimalFooter, setMinimalFooter] = useState(false);
   const [speedDial, setSpeedDial] = useState(true);
+  const [customActiveLink, setCustomActiveLink] = useState<string | null>(null);
 
   useEffect(() => {
     setMinimalFooter(false);
@@ -42,6 +45,7 @@ export const WebsiteContextProvider = ({
     } else {
       setMinimalFooter(false);
     }
+    setCustomActiveLink(null);
   }, [pathName]);
   const addSpeedDialInvisiblePages = (page: string) => {
     if (!speedDialInvisiblePages.includes(page)) {
@@ -57,6 +61,9 @@ export const WebsiteContextProvider = ({
       setMinimalFooterVisiblePages(pages);
     }
   };
+  const makeCustomActiveLink = (link: string) => {
+    setCustomActiveLink(link);
+  };
   return (
     <WebsiteContext.Provider
       value={{
@@ -67,6 +74,8 @@ export const WebsiteContextProvider = ({
         addSpeedDialInvisiblePages,
         speedDial,
         addMinimalFooterVisiblePages,
+        customActiveLink,
+        makeCustomActiveLink,
       }}
     >
       {children}

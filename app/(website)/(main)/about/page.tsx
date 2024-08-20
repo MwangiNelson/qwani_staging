@@ -120,7 +120,7 @@ const DetailsCards = ({ about }: { about: IAboutPage }) => {
 };
 const OurTeamSection = ({ about }: { about: IAboutPage }) => {
   return (
-    <div className="web-px mt-20">
+    <div className="web-px mt-20" id="team">
       <CustomTitle title={about.teamTitle} titleNumber={3} />
       <div className="mt-5 mb-10">
         <TeamMemberWrapper teamMembers={about.teamMembers} />

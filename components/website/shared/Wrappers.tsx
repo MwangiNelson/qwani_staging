@@ -7,12 +7,13 @@ import {
 } from "@/components/ui/carousel";
 
 import {
+  AuthorCard,
   EventCard,
   EventCardMain,
   TeamMemberCard,
   WriterCard,
 } from "./cards/common";
-import { IEvent, ITeamMember, IWriter } from "@/utils/data_types";
+import { IAuthor, IEvent, ITeamMember, IWriter } from "@/utils/data_types";
 
 export const EventsCardsWrapper = ({
   events = [],
@@ -68,6 +69,15 @@ export const WritersWrapper = ({ writers }: { writers: IWriter[] }) => {
     <div className="grid  gap-5  md:gap-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 ">
       {writers.map((item, index) => {
         return <WriterCard key={index} writer={item} />;
+      })}
+    </div>
+  );
+};
+export const AuthorsWrapper = ({ authors }: { authors: IAuthor[] }) => {
+  return (
+    <div className="grid -mt-[130px] gap-5  md:gap-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 ">
+      {authors.map((item, index) => {
+        return <AuthorCard key={index} author={item} />;
       })}
     </div>
   );

@@ -15,6 +15,7 @@ export default defineType({
       name: "slug",
       title: "Slug",
       type: "slug",
+      // readOnly: ({ document }) => document?.title && document?.slug,
       options: {
         source: "name",
         maxLength: 96,
@@ -36,16 +37,7 @@ export default defineType({
     defineField({
       name: "bio",
       title: "Bio",
-      type: "array",
-      validation: (Rule) => Rule.required(),
-      of: [
-        {
-          title: "Block",
-          type: "block",
-          styles: [{ title: "Normal", value: "normal" }],
-          lists: [],
-        },
-      ],
+      type: "text",
     }),
   ],
   preview: {

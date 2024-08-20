@@ -1,57 +1,20 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
-
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ISwitch } from "@/utils/uitypes";
 import { cn } from "@/lib/utils";
 import { SideDrawer } from "./SideDrawer";
 import { Button } from "../ui/button";
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuIndicator,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-  NavigationMenuViewport,
-} from "@/components/ui/navigation-menu";
-
+import { CustomLink, OpenMenuOnHover } from "./utils/Menus";
+import { useWebsiteContext } from "./utils/WebsiteContext";
 export interface TimeType {
   time: number;
   type: "before" | "after" | "last";
 }
-const Navbar = ({ open, setOpen }: ISwitch) => {
+const Navbar = () => {
   const pathname = usePathname();
-  const [active, setActive] = useState<string | null>(null);
-  const CustomLink = ({ name, url }: { name: string; url: string }) => {
-    const isActive = pathname.split("/")[1] === url.split("/")[1];
-
-    return (
-      <button className="group relative flex flex-col text-white" key={name}>
-        <Link
-          key={name}
-          href={url}
-          className={cn(
-            `text-base
-               font-medium t-200  text-background hover:text-darkRed`,
-            isActive && "text-primary"
-          )}
-        >
-          {name}
-        </Link>
-        <span
-          className={`w-0 
-            h-[2px] bg-primary t-200  absolute 
-            -bottom-[5px] left-0 group-hover:w-full
-            ${isActive && "w-full"}
-            `}
-        ></span>
-      </button>
-    );
-  };
+  const { customActiveLink } = useWebsiteContext();
 
   return (
     <div
@@ -64,11 +27,33 @@ const Navbar = ({ open, setOpen }: ISwitch) => {
 
       <div className=" hidden lg:flex justify-center items-center gap-5 flex-1 ">
         <CustomLink name="Home" url="/" />
-        <CustomLink name="About" url="/about" />
-        <CustomLink name="Events" url="/events" />
-        <CustomLink name="Writers" url="/writers" />
+        <OpenMenuOnHover
+          link="/about"
+          title="About"
+          submenu={[
+            { title: "About Us", link: "/about" },
+            { title: "Our Team", link: "/about#team" },
+          ]}
+        />
+        <OpenMenuOnHover
+          link="/events"
+          title="Events"
+          submenu={[
+            { title: "Upcoming Events", link: "/events#upcoming" },
+            { title: "Past Events", link: "/events#past" },
+          ]}
+        />
+        <OpenMenuOnHover
+          link="/writers"
+          title="Writers"
+          submenu={[
+            { title: "Qwani Writers", link: "/writers" },
+            { title: "Contributers", link: "/contributers" },
+          ]}
+        />
         <CustomLink name="Blogs" url="/blogs" />
         <CustomLink name="Publications" url="/publications" />
+
         <CustomLink name="Gallery" url="/gallery" />
       </div>
       <Button className="hidden lg:flex" size={"sm"} asChild>

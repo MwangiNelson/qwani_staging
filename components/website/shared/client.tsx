@@ -7,9 +7,19 @@ import { useEffect } from "react";
 export const MinimalFooter = () => {
   const { addMinimalFooterVisiblePages } = useWebsiteContext();
   const pathname = usePathname();
-  console.log(pathname);
+
   useEffect(() => {
     addMinimalFooterVisiblePages(pathname);
+  }, [pathname]);
+  return <></>;
+};
+
+export const MakeActiveLink = ({ activeLink }: { activeLink: string }) => {
+  const { makeCustomActiveLink, customActiveLink } = useWebsiteContext();
+
+  const pathname = usePathname();
+  useEffect(() => {
+    makeCustomActiveLink(activeLink);
   }, [pathname]);
   return <></>;
 };

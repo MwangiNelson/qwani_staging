@@ -204,3 +204,10 @@ export interface IGallery extends ISanityFetched {
   featuredImage: ISanityAsset;
   galleryImages: ISanityAsset[];
 }
+
+export interface IAuthor extends ISanityFetched {
+  name: string;
+  slug: ISlugSanity;
+  image: ISanityAsset;
+  bio: string;
+}

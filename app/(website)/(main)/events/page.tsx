@@ -56,7 +56,7 @@ const UpcommingEvents = ({
   upcommingevents: IEvent[];
 }) => {
   return (
-    <div className="mt-10 web-px ">
+    <div className="mt-10 web-px " id="upcoming">
       <div className="space-y-5">
         <div className="fx-a-center gap-5 ">
           <Separator className="w-10 bg-foreground" />
@@ -70,7 +70,7 @@ const UpcommingEvents = ({
 
 const PreviousEvents = ({ events }: { events: IEvent[] }) => {
   return (
-    <div className="mt-10 web-px ">
+    <div className="mt-10 web-px " id="past">
       <div className="space-y-5">
         <div className="fx-a-center gap-5 ">
           <Separator className="w-10 bg-foreground" />
