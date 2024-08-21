@@ -40,7 +40,7 @@ export interface IPost extends ISanityFetched {
   };
   author: IWriter;
   mainImage: ISanityAsset;
-  categories: [IPostCategory];
+  categories?: [IPostCategory];
   publishedAt: string;
   excerpt: string;
   body: any;

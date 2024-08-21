@@ -26,11 +26,13 @@ export const BlogCardMain: React.FC<{
       `}
       >
         <div className="top-0 absolute fx gap-1">
-          {blog?.categories.map((category, index) => (
-            <Badge key={index} variant={"outline"}>
-              <span className="text-background">{category.title}</span>
-            </Badge>
-          ))}
+          {blog.categories
+            ? blog.categories.map((category, index) => (
+                <Badge key={index} variant={"outline"}>
+                  <span className="text-background">{category.title}</span>
+                </Badge>
+              ))
+            : "No Category"}
         </div>
         <CardContent className="w-full p-0 fx-col gap-3">
           <Image
@@ -74,11 +76,13 @@ const BlogHorizontalCard = ({ blog }: { blog: IPost }) => {
         <CardContent className="w-full p-0 fx-col gap-3">
           <div className=" flex flex-col space-y-1">
             <div className="fx gap-1">
-              {blog?.categories.map((category, index) => (
-                <Badge key={index} variant={"outline"}>
-                  <span className="text-background">{category.title}</span>
-                </Badge>
-              ))}
+              {blog.categories
+                ? blog?.categories.map((category, index) => (
+                    <Badge key={index} variant={"outline"}>
+                      <span className="text-background">{category.title}</span>
+                    </Badge>
+                  ))
+                : "No Category"}
             </div>
             <h4 className="ts6 font-semibold text-background">{blog?.title}</h4>
             <p className=" text-md ">
@@ -115,11 +119,13 @@ export const BlogCardPrimary: React.FC<{
         >
           <div className=" flex flex-col gap-2">
             <div className="fx gap-1">
-              {blog?.categories.map((category, index) => (
-                <Badge key={index} variant={"outline"}>
-                  <span className="text-foreground">{category.title}</span>
-                </Badge>
-              ))}
+              {blog.categories
+                ? blog?.categories.map((category, index) => (
+                    <Badge key={index} variant={"outline"}>
+                      <span className="text-foreground">{category.title}</span>
+                    </Badge>
+                  ))
+                : "No Category"}
             </div>
 
             <h4 className="ts6 font-semibold ">{blog?.title}</h4>

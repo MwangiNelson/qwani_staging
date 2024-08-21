@@ -56,15 +56,17 @@ const Details = ({ blog }: { blog: IPost }) => {
       <div className="descriptions mt-10 space-y-3">
         <div className="fx items-center flex-col  md:flex-row md:justify-between">
           <div className="fx gap-1">
-            {blog.categories.map((category, index) => (
-              <Button
-                variant={"outlineNoEffect"}
-                key={index}
-                className="rounded-full"
-              >
-                {category.title}
-              </Button>
-            ))}
+            {blog.categories
+              ? blog.categories.map((category, index) => (
+                  <Button
+                    variant={"outlineNoEffect"}
+                    key={index}
+                    className="rounded-full"
+                  >
+                    {category.title}
+                  </Button>
+                ))
+              : "No Category"}
           </div>
           <div className="flex justify-end ">
             <Sharing bg="foreground" />

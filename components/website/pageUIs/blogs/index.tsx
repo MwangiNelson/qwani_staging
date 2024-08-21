@@ -47,7 +47,7 @@ export const BlogCategoriesFilter = ({
     categories[0]
   );
   const activeBlogs = blogs.filter((blog) =>
-    blog.categories.find((category) => category._id === activeCategory._id)
+    blog.categories?.find((category) => category._id === activeCategory._id)
   );
   return (
     <div className="bg-background py-5 web-px">
