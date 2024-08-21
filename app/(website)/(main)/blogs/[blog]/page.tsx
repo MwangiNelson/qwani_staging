@@ -41,6 +41,7 @@ const Details = ({ blog }: { blog: IPost }) => {
           date={formatSanityDate(blog.publishedAt)}
           imageUrl={imageUrl(blog.author.image)}
           name={blog.author.name}
+          slug={blog.author.slug}
         />
       </div>
       <div className="blog mt-5 space-y-4">
@@ -54,8 +55,8 @@ const Details = ({ blog }: { blog: IPost }) => {
         />
       </div>
       <div className="descriptions mt-10 space-y-3">
-        <div className="fx items-center flex-col  md:flex-row md:justify-between">
-          <div className="fx gap-1">
+        <div className="fx items-start flex-col  md:flex-row md:justify-between">
+          <div className=" gap-1 hidden md:flex">
             {blog.categories
               ? blog.categories.map((category, index) => (
                   <Button

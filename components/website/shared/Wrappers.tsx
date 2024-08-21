@@ -13,7 +13,14 @@ import {
   TeamMemberCard,
   WriterCard,
 } from "./cards/common";
-import { IAuthor, IEvent, ITeamMember, IWriter } from "@/utils/data_types";
+import {
+  IAuthor,
+  IEvent,
+  IPost,
+  ITeamMember,
+  IWriter,
+} from "@/utils/data_types";
+import { BlogCardMain } from "./cards/blogs";
 
 export const EventsCardsWrapper = ({
   events = [],
@@ -75,9 +82,18 @@ export const WritersWrapper = ({ writers }: { writers: IWriter[] }) => {
 };
 export const AuthorsWrapper = ({ authors }: { authors: IAuthor[] }) => {
   return (
-    <div className="grid -mt-[130px] gap-5  md:gap-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 ">
+    <div className="grid  -mt-[110px] md:-mt-[130px] gap-5  md:gap-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 ">
       {authors.map((item, index) => {
         return <AuthorCard key={index} author={item} />;
+      })}
+    </div>
+  );
+};
+export const AuthorsBlogs = ({ blogs }: { blogs: IPost[] }) => {
+  return (
+    <div className="grid -mt-[110px] md:-mt-[130px] gap-5  md:gap-7 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 ">
+      {blogs.map((item, index) => {
+        return <BlogCardMain key={index} blog={item} bg="background" />;
       })}
     </div>
   );

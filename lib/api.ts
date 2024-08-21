@@ -359,3 +359,31 @@ export const fetchAuthors = async () => {
 
   return data;
 };
+
+//get author by slug
+export const fetchAuthorBySlug = async (slug: string) => {
+  const query = `*[_type == "author" && slug.current == "${slug}"][0]{
+    ...
+  }`;
+  const data = await sanityFetch<IAuthor>({
+    query,
+    tags: ["author"],
+  });
+
+  return data;
+};
+
+//get blogs by author
+export const fetchBlogsByAuthor = async (id: string) => {
+  const query = `*[_type == "post" && author._ref == "${id}"]{
+    ...,
+    author->{...},
+    categories[]->{...},
+  }`;
+  const data = await sanityFetch<IPost[]>({
+    query,
+    tags: ["post"],
+  });
+
+  return data;
+};

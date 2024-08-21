@@ -6,6 +6,7 @@ import {
 import { AuthorsWrapper } from "@/components/website/shared/Wrappers";
 import { fetchAuthors } from "@/lib/api";
 import { IAuthor } from "@/utils/data_types";
+import Link from "next/link";
 import React from "react";
 
 const Contributers = async () => {
@@ -29,7 +30,9 @@ const HeroSection = () => {
         mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis
         tellus..
       </p>
-      <Button variant={"outlineNoEffect"}>Write With Qwani</Button>
+      <Button variant={"outlineNoEffect"}>
+        <Link href="/blogs/qwani-submission-guidelines">Write With Qwani</Link>
+      </Button>
     </div>
   );
 };

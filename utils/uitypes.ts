@@ -9,3 +9,8 @@ export type Props = {
   };
   searchParams: { [key: string]: string | string[] | undefined };
 };
+
+export type PageProps<T extends string> = {
+  params: Record<T, string>;
+  searchParams: { [key: string]: string | string[] | undefined };
+};

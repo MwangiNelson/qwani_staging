@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { randomImage } from "@/lib/data";
@@ -10,12 +11,14 @@ import {
   IAuthor,
   IEvent,
   IPost,
+  ISlugSanity,
   ITeamMember,
   IWriter,
 } from "@/utils/data_types";
 import { imageUrl } from "@/sanity/lib/client";
 import { formatSanityDate } from "../../utils/functions";
 import { FaTiktok } from "react-icons/fa";
+import { useRouter } from "next/navigation";
 export const EventCard = ({ event }: { event: IEvent }) => {
   return (
     <Card className="w-full  z-[1]  p-0 bg-transparent border-none  ">
@@ -310,13 +313,22 @@ export const ProfileCard = ({
   name,
   date,
   imageUrl,
+  slug,
 }: {
   imageUrl: string;
   name: string;
   date: string;
+  slug: ISlugSanity;
 }) => {
+  const router = useRouter();
   return (
-    <div className="fx-a-center gap-2">
+    <div
+      onClick={(e) => {
+        e.preventDefault();
+        router.push(`/contributers/${slug.current}`);
+      }}
+      className="fx-a-center gap-2 cursor-pointer"
+    >
       <Avatar>
         <AvatarImage src={imageUrl} alt={name} />
         <AvatarFallback>CN</AvatarFallback>
@@ -340,7 +352,7 @@ export const ProfileCardWithBookMark = () => {
 export const AuthorCard = ({ author }: { author: IAuthor }) => {
   return (
     <Card className="w-full  z-[1]  p-0 bg-transparent border-none  shadow-none  ">
-      <Link href={author.slug.current}>
+      <Link href={`/contributers/${author.slug.current}`}>
         <CardContent className="w-full p-0 fx-col gap-3">
           <Image
             src={imageUrl(author.image)}

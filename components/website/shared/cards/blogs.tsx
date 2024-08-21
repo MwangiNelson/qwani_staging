@@ -49,6 +49,7 @@ export const BlogCardMain: React.FC<{
               date={formatSanityDate(blog?.publishedAt)}
               imageUrl={imageUrl(blog?.author?.image)}
               name={blog?.author?.name}
+              slug={blog.author.slug}
             />
           </div>
         </CardContent>
@@ -92,6 +93,7 @@ const BlogHorizontalCard = ({ blog }: { blog: IPost }) => {
               date={formatSanityDate(blog?.publishedAt)}
               imageUrl={imageUrl(blog?.author?.image)}
               name={blog?.author?.name}
+              slug={blog.author.slug}
             />
           </div>
         </CardContent>
@@ -138,6 +140,7 @@ export const BlogCardPrimary: React.FC<{
               date={formatSanityDate(blog?.publishedAt)}
               imageUrl={imageUrl(blog?.author?.image)}
               name={blog?.author?.name}
+              slug={blog?.author?.slug}
             />
           </div>
         </CardContent>
