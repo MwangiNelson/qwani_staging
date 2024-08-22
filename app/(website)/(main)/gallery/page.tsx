@@ -68,9 +68,14 @@ const GalleryCard = ({ item }: { item: IGallery }) => {
 const GalleryCards = ({ gallery }: { gallery: IGallery[] }) => {
   return (
     <div className="gap-10 web-px grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-5">
-      {gallery.map((item, i) => (
-        <GalleryCard key={i} item={item} />
-      ))}
+      {gallery
+        .sort((a, b) => {
+          return new Date(b.date).getTime() - new Date(a.date).getTime();
+        })
+
+        .map((item, i) => (
+          <GalleryCard key={i} item={item} />
+        ))}
     </div>
   );
 };

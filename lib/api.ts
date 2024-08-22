@@ -195,6 +195,7 @@ export const fetchPublicationPage = async () => {
   const query = `*[_type == "publicationsPage"][0]{
     ...,
     publications[]->{...},
+    "fileUrl": file.asset->url,
   }`;
   const data = await sanityFetch<IPublicationsPage>({
     query,

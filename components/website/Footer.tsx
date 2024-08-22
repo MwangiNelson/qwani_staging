@@ -135,8 +135,8 @@ const socials = [
     name: "Instagram",
     link: "https://www.instagram.com/qwanibok",
   },
-  {
-    name: "Whatsap",
-    link: "https://chat.whatsapp.com/BQ3gjPMI6GUHa7qDqFVECF",
-  },
+  // {
+  //   name: "Whatsap",
+  //   link: "https://chat.whatsapp.com/BQ3gjPMI6GUHa7qDqFVECF",
+  // },
 ];

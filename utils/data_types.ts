@@ -158,6 +158,8 @@ export interface IWritersPage extends ISanityFetched {
 export interface IPublicationsPage extends ISanityFetched {
   heroTitle: string;
   heroSubtitle: string;
+  ctaButton: string;
+  fileUrl: string;
   heroImage: ISanityAsset;
   publicationsTitle: string;
   publications: IPublication[];
@@ -203,6 +205,7 @@ export interface IGallery extends ISanityFetched {
   description: string;
   featuredImage: ISanityAsset;
   galleryImages: ISanityAsset[];
+  date: string;
 }
 
 export interface IAuthor extends ISanityFetched {

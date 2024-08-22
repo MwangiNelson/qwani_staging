@@ -1,3 +1,5 @@
+import { Button } from "@/components/ui/button";
+import Lost from "@/components/website/lost";
 import {
   QwaniPublicationImages,
   SeparatorTitle,
@@ -15,8 +17,7 @@ import Image from "next/image";
 
 const Publications = async () => {
   const publicationsPage = await fetchPublicationPage();
-  if (!publicationsPage) return null;
-
+  if (!publicationsPage) return <Lost />;
   return (
     <div>
       <HeroSection content={publicationsPage} />
@@ -31,6 +32,13 @@ const HeroSection = ({ content }: { content: IPublicationsPage }) => {
       <div className="fx-col gap-3">
         <h1 className="ts3 font-bold">{content.heroTitle}</h1>
         <p className="">{content.heroSubtitle}</p>
+        <div>
+          <Button asChild variant={"outlineNoEffect"}>
+            <a target="_blank" href={content.fileUrl}>
+              {content.ctaButton}
+            </a>
+          </Button>
+        </div>
       </div>
     </div>
   );
@@ -41,7 +49,7 @@ const PublicationsImagesSection = ({
   content: IPublicationsPage;
 }) => {
   return (
-    <div className="-mt-[30vh] md:-mt-[40vh]  web-px">
+    <div className="-mt-[30vh] md:-mt-[35vh]  web-px">
       <Image
         alt="CONTACT IMAGE"
         src={imageUrl(content.heroImage)}

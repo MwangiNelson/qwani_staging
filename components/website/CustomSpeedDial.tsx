@@ -41,11 +41,6 @@ export function CustomSpeedDial() {
             icon={IoMailOutline}
             text="Email"
           />
-          <CustomLink
-            link="https://chat.whatsapp.com/BQ3gjPMI6GUHa7qDqFVECF"
-            icon={FaWhatsapp}
-            text="Whatsapp"
-          />
           <CustomLink link="/contact" icon={GoArrowUpRight} text="Contact" />
         </div>
       </PopoverContent>

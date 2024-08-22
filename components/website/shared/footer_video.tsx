@@ -19,7 +19,7 @@ export default function FooterVideo() {
             alt="Pens"
           />
           <div
-            className="absolute top-1/2 right-1/2 translate-x-1/2 -translate-y-1/2 z-10 cursor-pointer"
+            className="absolute fx items-center transition duration-100 justify-center hover:bg-foreground/40 top-1/2 w-[100px] h-[100px] right-1/2 translate-x-1/2 -translate-y-1/2 z-10 cursor-pointer"
             onClick={() => setPlay(true)}
           >
             <FaPlay className="text-background text-3xl" />

@@ -18,6 +18,21 @@ export default defineType({
       type: "text",
       validation: (Rule) => Rule.required(),
     }),
+    //call to action button
+    defineField({
+      name: "ctaButton",
+      title: "CTA Button",
+      type: "string",
+      validation: (Rule) => Rule.required(),
+    }),
+    //cta file
+    defineField({
+      name: "file",
+      title: "Publish With Us File",
+      type: "file",
+      validation: (Rule) => Rule.required(),
+    }),
+
     defineField({
       name: "heroImage",
       title: "Hero Image",
