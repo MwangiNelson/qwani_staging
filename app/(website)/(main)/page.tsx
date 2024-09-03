@@ -108,6 +108,10 @@ const AboutCards = ({ homepage }: { homepage: IHomePage }) => {
   );
 };
 const EventCards = ({ homepage }: { homepage: IHomePage }) => {
+  const upcomingEvents = homepage.events?.filter((event) => {
+    //return only the upcoming events
+    return new Date(event.date) > new Date();
+  });
   return (
     <div className="web-px bg-[rgba(0,0,0,.98)] py-10 md:py-20 fx-col gap-5 mt-14 md:gap-10 relative">
       <Image
@@ -126,7 +130,16 @@ const EventCards = ({ homepage }: { homepage: IHomePage }) => {
           {homepage.eventsDescription}
         </p>
       </div>
-      <EventsCardsWrapper events={homepage.events} />
+      {upcomingEvents.length > 0 && (
+        <EventsCardsWrapper events={upcomingEvents} />
+      )}
+      {!upcomingEvents.length && (
+        <div className="fx-center min-h-[200px]">
+          <p className="text-center text-lg font-medium text-background">
+            No upcoming events
+          </p>
+        </div>
+      )}
       <div className="fx-center mt-5 ">
         <Button size={"sm"} className=" rounded-full" asChild>
           <Link href={"/events"}>View All Events</Link>

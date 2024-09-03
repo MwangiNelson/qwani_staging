@@ -17,7 +17,7 @@ import contactPage from './schemaTypes/contactPage'
 import blogsPage from './schemaTypes/blogsPage'
 import gallery from './schemaTypes/gallery'
 import galleryPage from './schemaTypes/galleryPage'
-
+import { InferSchemaValues } from "@sanity-typed/types";
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: 
   [post, author, category, blockContent,event,

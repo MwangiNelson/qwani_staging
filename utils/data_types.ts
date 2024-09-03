@@ -163,6 +163,8 @@ export interface IPublicationsPage extends ISanityFetched {
   heroImage: ISanityAsset;
   publicationsTitle: string;
   publications: IPublication[];
+  publishWithUsTitle: string;
+  publishWithUsSubtitle: string;
 }
 export interface IContactPage extends ISanityFetched {
   heroTitle: string;

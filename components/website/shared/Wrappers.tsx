@@ -31,7 +31,7 @@ export const EventsCardsWrapper = ({
 }) => {
   if (page === "home") {
     return (
-      <Carousel className="w-full">
+      <Carousel className="w-full min-h-[250px]">
         <CarouselContent className="gap-1 md:gap-5 h-auto">
           {events.map((item, index) => {
             return (

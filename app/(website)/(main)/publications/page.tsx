@@ -23,6 +23,7 @@ const Publications = async () => {
       <HeroSection content={publicationsPage} />
       <PublicationsImagesSection content={publicationsPage} />
       <PublicationsSection content={publicationsPage} />
+      <LastSection content={publicationsPage} />
     </div>
   );
 };
@@ -32,13 +33,6 @@ const HeroSection = ({ content }: { content: IPublicationsPage }) => {
       <div className="fx-col gap-3">
         <h1 className="ts3 font-bold">{content.heroTitle}</h1>
         <p className="">{content.heroSubtitle}</p>
-        <div>
-          <Button asChild variant={"outlineNoEffect"}>
-            <a target="_blank" href={content.fileUrl}>
-              {content.ctaButton}
-            </a>
-          </Button>
-        </div>
       </div>
     </div>
   );
@@ -88,4 +82,22 @@ export async function generateMetadata(): Promise<Metadata> {
   const results = await pageMetadata("publications");
   return results;
 }
+const LastSection = ({ content }: { content: IPublicationsPage }) => {
+  return (
+    <div className="bg-foreground web-px py-20 text-background">
+      <div className="fx-col gap-3">
+        <h1 className="ts3 font-bold">{content.publishWithUsTitle}</h1>
+        <p className="">{content.publishWithUsSubtitle}</p>
+        <div>
+          <Button asChild variant={"outlineNoEffect"}>
+            <a target="_blank" href={content.fileUrl}>
+              {content.ctaButton}
+            </a>
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export default Publications;

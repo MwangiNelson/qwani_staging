@@ -26,12 +26,6 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     }),
     //cta file
-    defineField({
-      name: "file",
-      title: "Publish With Us File",
-      type: "file",
-      validation: (Rule) => Rule.required(),
-    }),
 
     defineField({
       name: "heroImage",
@@ -58,6 +52,24 @@ export default defineType({
           to: [{ type: "publication" }],
         },
       ],
+    }),
+    defineField({
+      name: "publishWithUsTitle",
+      title: "Publish With Us Title",
+      type: "string",
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "publishWithUsSubtitle",
+      title: "Publish With Us Description",
+      type: "text",
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "file",
+      title: "Publish With Us File",
+      type: "file",
+      validation: (Rule) => Rule.required(),
     }),
   ],
   preview: {

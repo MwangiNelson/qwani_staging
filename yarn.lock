@@ -1762,6 +1762,13 @@
   resolved "https://registry.npmjs.org/@pkgjs/parseargs/-/parseargs-0.11.0.tgz"
   integrity sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==
 
+"@portabletext-typed/types@1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@portabletext-typed/types/-/types-1.0.2.tgz#b10b2da055511f03764ff7aaeab9bb071bef26be"
+  integrity sha512-meK8fLu6/24j3N6QDuaJJngd0W9r8WFy0mRVjDR0RSiVASzcNxad67JksN11sFLCV+yvpsXPhN/fL6HNmQp9og==
+  dependencies:
+    type-fest "4.9.0"
+
 "@portabletext/react@^3.0.0", "@portabletext/react@^3.1.0":
   version "3.1.0"
   resolved "https://registry.npmjs.org/@portabletext/react/-/react-3.1.0.tgz"
@@ -2531,6 +2538,14 @@
   version "1.10.3"
   resolved "https://registry.npmjs.org/@rushstack/eslint-patch/-/eslint-patch-1.10.3.tgz"
   integrity sha512-qC/xYId4NMebE6w/V33Fh9gWxLgURiNYgVNObbJl2LZv0GUUItCcCqC5axQSwRaAgaxl2mELq1rMzlswaQ0Zxg==
+
+"@sanity-typed/types@^6.3.6":
+  version "6.3.6"
+  resolved "https://registry.yarnpkg.com/@sanity-typed/types/-/types-6.3.6.tgz#b8ebb6f70c051b34cfb0391e64a58f9a43e39fc6"
+  integrity sha512-yp3dODhm8VnLwprzuh2kW7JaSCNf2NN9OwXaqBsKnNh7IGxzCfs2lnvae+0TCsUejCxf80aFPOMwY0IGkuOhOw==
+  dependencies:
+    "@portabletext-typed/types" "1.0.2"
+    type-fest "4.10.1"
 
 "@sanity/asset-utils@^1.2.5":
   version "1.3.0"
@@ -9338,6 +9353,16 @@ type-check@^0.4.0, type-check@~0.4.0:
   integrity sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew==
   dependencies:
     prelude-ls "^1.2.1"
+
+type-fest@4.10.1:
+  version "4.10.1"
+  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-4.10.1.tgz#35e6cd34d1fe331cf261d8ebb83e64788b89db4b"
+  integrity sha512-7ZnJYTp6uc04uYRISWtiX3DSKB/fxNQT0B5o1OUeCqiQiwF+JC9+rJiZIDrPrNCLLuTqyQmh4VdQqh/ZOkv9MQ==
+
+type-fest@4.9.0:
+  version "4.9.0"
+  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-4.9.0.tgz#d29c8efe5b1e703feeb29cef23d887b2f479844d"
+  integrity sha512-KS/6lh/ynPGiHD/LnAobrEFq3Ad4pBzOlJ1wAnJx9N4EYoqFhMfLIBjUT2UEx4wg5ZE+cC1ob6DCSpppVo+rtg==
 
 type-fest@^0.18.0:
   version "0.18.1"
