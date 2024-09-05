@@ -12,7 +12,7 @@ import React from "react";
 const Contributers = async () => {
   const writers = await fetchAuthors();
   return (
-    <div className="bg-[#F2F2F2]">
+    <div className="bg-[#F2F2F2] pb-20">
       <HeroSection />
       <Writers writers={writers} />
       <MinimalFooter />

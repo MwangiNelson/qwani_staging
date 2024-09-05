@@ -1,7 +1,10 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { MinimalFooter } from "@/components/website/shared/client";
-import { pageMetadata } from "@/components/website/utils/functions";
+import {
+  formatSanityDate,
+  pageMetadata,
+} from "@/components/website/utils/functions";
 import {
   fetchGalleries,
   fetchGalleryById,
@@ -66,16 +69,25 @@ const GalleryCard = ({ item }: { item: IGallery }) => {
 };
 
 const GalleryCards = ({ gallery }: { gallery: IGallery[] }) => {
+  //sort by date, from upcoming to past
+  const sortedGallery = gallery.sort((a, b) => {
+    const date = new Date(b.date).getTime() - new Date(a.date).getTime();
+
+    return date;
+  });
+  sortedGallery.map((a) => {
+    console.log({
+      event1: {
+        name: a.title,
+        date: formatSanityDate(a.date),
+        dateUnformatted: a.date,
+      },
+    });
+  });
   return (
     <div className="gap-10 web-px grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-5">
-      {gallery
-        .sort((a, b) => {
-          return new Date(b.date).getTime() - new Date(a.date).getTime();
-        })
-
-        .map((item, i) => (
-          <GalleryCard key={i} item={item} />
-        ))}
+      {sortedGallery &&
+        sortedGallery.map((item, i) => <GalleryCard key={i} item={item} />)}
     </div>
   );
 };

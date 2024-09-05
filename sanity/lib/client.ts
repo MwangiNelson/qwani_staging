@@ -16,7 +16,14 @@ export const client = createClient({
 
 export const builder = imageUrlBuilder(client);
 export function imageUrl(source: any) {
-  return builder.image(source).url();
+ try{
+   return builder.image(source).url();
+ }
+ catch (e){
+  return "/no-image.png"
+
+
+ }
 }
 
 export async function sanityFetch<QueryResponse>({

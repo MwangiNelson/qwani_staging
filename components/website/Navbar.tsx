@@ -22,7 +22,7 @@ const Navbar = () => {
     flex justify-between items-center web-px"
     >
       <Link className="flex items-center" href={"/"}>
-        <Image alt="logo" src="/logo.svg" width={100} height={100} />
+        <Image alt="logo" src="/logo-white.png" width={150} height={150} />
       </Link>
 
       <div className=" hidden lg:flex justify-center items-center gap-5 flex-1 ">

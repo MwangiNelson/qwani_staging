@@ -1,5 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import { toast } from "sonner";
 
 export const JoinCommunityButton = ({ size }: { size: "sm" | "default" }) => {
@@ -20,8 +21,8 @@ export const JoinCommunityButton = ({ size }: { size: "sm" | "default" }) => {
   };
 
   return (
-    <Button size={size} onClick={copyToClipboard}>
-      Join Community
+    <Button size={size}>
+      <Link href={"/events"}>View Our Events</Link>
     </Button>
   );
 };

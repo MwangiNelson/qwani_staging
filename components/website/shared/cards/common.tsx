@@ -363,7 +363,7 @@ export const AuthorCard = ({ author }: { author: IAuthor }) => {
           />
           <div className=" flex flex-col p">
             <h5 className="ts5 font-semibold text-primary">{author.name}</h5>
-            <p className="font-light ">{author.bio.slice(0, 100)}...</p>
+            <p className="font-light ">{author?.bio?.slice(0, 100)}...</p>
           </div>
         </CardContent>
       </Link>

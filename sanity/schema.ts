@@ -18,6 +18,7 @@ import blogsPage from './schemaTypes/blogsPage'
 import gallery from './schemaTypes/gallery'
 import galleryPage from './schemaTypes/galleryPage'
 import { InferSchemaValues } from "@sanity-typed/types";
+import contributersPage from './schemaTypes/contributersPage'
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: 
   [post, author, category, blockContent,event,
@@ -28,6 +29,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     aboutpage,writerspage,
   publicationsPage,
   contactPage,
-  blogsPage
+  blogsPage,
+  contributersPage,
   ],
 }
