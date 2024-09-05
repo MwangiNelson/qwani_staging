@@ -380,7 +380,7 @@ export const fetchBlogsByAuthor = async (id: string) => {
   const query = `*[_type == "post" && author._ref == "${id}"]{
     ...,
     author->{...},
-    categories[]->{...},
+    categories[]->{...}, 
   }`;
   const data = await sanityFetch<IPost[]>({
     query,
@@ -397,7 +397,7 @@ export const fetchContributersPage = async () => {
   }`;
   const data = await sanityFetch<IContributersPage>({
     query,
-    tags: ["contributersPage"],
+    tags: ["contributers"],
   });
 
   return data;
