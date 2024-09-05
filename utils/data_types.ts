@@ -216,3 +216,10 @@ export interface IAuthor extends ISanityFetched {
   image: ISanityAsset;
   bio: string;
 }
+
+export interface IContributersPage extends ISanityFetched {
+  title: string;
+  description: string;
+  btnText?: string;
+  post?: IPost;
+}

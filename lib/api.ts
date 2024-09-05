@@ -4,6 +4,7 @@ import {
   IAuthor,
   IBlogsPage,
   IContactPage,
+  IContributersPage,
   IEvent,
   IGallery,
   IGalleryPage,
@@ -384,6 +385,19 @@ export const fetchBlogsByAuthor = async (id: string) => {
   const data = await sanityFetch<IPost[]>({
     query,
     tags: ["post"],
+  });
+
+  return data;
+};
+
+export const fetchContributersPage = async () => {
+  const query = `*[_type == "contributersPage"][0]{
+    ...,
+    post->{...}
+  }`;
+  const data = await sanityFetch<IContributersPage>({
+    query,
+    tags: ["contributersPage"],
   });
 
   return data;

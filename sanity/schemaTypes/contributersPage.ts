@@ -9,18 +9,24 @@ export default defineType({
       name: "title",
       title: "Title",
       type: "string",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "description",
       title: "Description",
       type: "text",
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "btnText",
+      title: "Button Text",
+      type: "string",
     }),
     defineField({
       name: "post",
       title: "Publishing With Qwani Blog",
       type: "reference",
       to: { type: "post" },
-      validation: (Rule) => Rule.required(),
     }),
   ],
   preview: {
