@@ -65,7 +65,7 @@ export default function Footer() {
               target="_blank"
               href="https://rightson.vercel.app"
             >
-              Chari Design
+              Chari Designs
             </Link>
           </p>
         </div>
