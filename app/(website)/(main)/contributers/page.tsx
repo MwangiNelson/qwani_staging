@@ -12,6 +12,7 @@ import React from "react";
 const Contributers = async () => {
   const writers = await fetchAuthors();
   const page_content = await fetchContributersPage();
+  console.log(page_content);
   return (
     <div className="bg-[#F2F2F2] pb-20">
       <HeroSection page_content={page_content} />

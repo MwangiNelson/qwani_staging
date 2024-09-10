@@ -397,7 +397,7 @@ export const fetchContributersPage = async () => {
   }`;
   const data = await sanityFetch<IContributersPage>({
     query,
-    tags: ["contributers"],
+    tags: ["contributersPage"],
   });
 
   return data;
