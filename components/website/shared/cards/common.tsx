@@ -215,55 +215,57 @@ export const WriterCard = ({ writer }: { writer: IWriter }) => {
           ))}
         </h1>
         <div className="fx-jb flex-1  items-end ">
-          <div className="fx-center gap-1">
-            {writer.socialLinks.twitter && (
-              <Button
-                variant={"ghost"}
-                className="blur-bg rounded-full"
-                size={"icon"}
-                asChild
-              >
-                <a
-                  href={writer.socialLinks.twitter}
-                  target="_blank"
-                  rel="noopener noreferrer"
+          {writer.socialLinks && (
+            <div className="fx-center gap-1">
+              {writer.socialLinks.twitter && (
+                <Button
+                  variant={"ghost"}
+                  className="blur-bg rounded-full"
+                  size={"icon"}
+                  asChild
                 >
-                  <FaXTwitter />
-                </a>
-              </Button>
-            )}
-            {writer.socialLinks.instagram && (
-              <Button
-                variant={"ghost"}
-                className="blur-bg rounded-full"
-                size={"icon"}
-                asChild
-              >
-                <a
-                  href={writer.socialLinks.instagram}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  <a
+                    href={writer.socialLinks.twitter}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <FaXTwitter />
+                  </a>
+                </Button>
+              )}
+              {writer.socialLinks.instagram && (
+                <Button
+                  variant={"ghost"}
+                  className="blur-bg rounded-full"
+                  size={"icon"}
+                  asChild
                 >
-                  <FaInstagram />
-                </a>
-              </Button>
-            )}
-            {writer.socialLinks.tiktok && (
-              <Button
-                variant={"ghost"}
-                className="blur-bg rounded-full"
-                size={"icon"}
-              >
-                <a
-                  href={writer.socialLinks.tiktok}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  <a
+                    href={writer.socialLinks.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <FaInstagram />
+                  </a>
+                </Button>
+              )}
+              {writer.socialLinks.tiktok && (
+                <Button
+                  variant={"ghost"}
+                  className="blur-bg rounded-full"
+                  size={"icon"}
                 >
-                  <FaTiktok />
-                </a>
-              </Button>
-            )}
-          </div>
+                  <a
+                    href={writer.socialLinks.tiktok}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <FaTiktok />
+                  </a>
+                </Button>
+              )}
+            </div>
+          )}
           <Button
             className="blur-bg rounded-full "
             variant="ghost"
