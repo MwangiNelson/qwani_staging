@@ -4,9 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 import { Button } from "../ui/button";
-import { FaXTwitter } from "react-icons/fa6";
-import { FaGithub } from "react-icons/fa6";
-import { FaWhatsapp } from "react-icons/fa";
+import { FaInstagram, FaLink, FaLinkedin, FaXTwitter } from "react-icons/fa6";
 import { IoMdClose } from "react-icons/io";
 import { motion } from "framer-motion";
 import { useWebsiteContext } from "./utils/WebsiteContext";
@@ -108,15 +106,25 @@ const SocialLinks = () => {
         <Button
           className="text-xl text-background bg-transparent
              rounded-full "
+          asChild
         >
-          <FaXTwitter />
+          <Link href={"https://x.com/qwanibok"} target="_blank">
+            <FaXTwitter />
+          </Link>
         </Button>
-        <Button className="text-xl text-background rounded-full bg-transparent">
-          <FaGithub />
+        <Button
+          className="text-xl text-background rounded-full bg-transparent"
+          asChild
+        >
+          <Link href={"https://instagram.com/qwanibok"} target="_blank">
+            <FaInstagram />
+          </Link>
         </Button>
 
         <Button className="text-xl text-background rounded-full  bg-transparent">
-          <FaWhatsapp />
+          <Link href="https://www.linkedin.com/company/qwani/" target="_blank">
+            <FaLinkedin />
+          </Link>
         </Button>
       </div>
     </div>
