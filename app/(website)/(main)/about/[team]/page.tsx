@@ -1,6 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import Lost from "@/components/website/lost";
 import { MinimalFooter } from "@/components/website/shared/client";
+import Portable_Text_Editor from "@/components/website/shared/portable_text_editor";
 import { Sharing } from "@/components/website/shared/sharing";
 import { BackButton } from "@/components/website/utils";
 import { defaultMetadata } from "@/components/website/utils/functions";
@@ -46,10 +47,11 @@ const HeroSection = ({ member }: { member: ITeamMember }) => {
       </div>
 
       <div className="prose text-background">
-        <PortableText
+        {/* <PortableText
           value={member.description}
           components={myPortableTextComponents}
-        />
+        /> */}
+        <Portable_Text_Editor body={member.description} />
       </div>
     </div>
   );

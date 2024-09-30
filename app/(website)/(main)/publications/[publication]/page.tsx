@@ -20,6 +20,7 @@ import { PortableText } from "next-sanity";
 import { myPortableTextComponents } from "@/components/website/utils/sanity_components";
 import { Metadata, ResolvingMetadata } from "next";
 import Lost from "@/components/website/lost";
+import Portable_Text_Editor from "@/components/website/shared/portable_text_editor";
 const Publication = async ({ params }: Props) => {
   const publication = await fetchPublicationBySlug(
     params.publication as string
@@ -112,12 +113,7 @@ const Details = ({ publication }: { publication: IPublication }) => {
         </div>
       </div>
       <div className="ts5 mt-4 font-semibold">Description</div>
-      <div className={`prose   `}>
-        <PortableText
-          value={publication.content}
-          components={myPortableTextComponents}
-        />
-      </div>
+      <Portable_Text_Editor body={publication.content} />
     </div>
   );
 };

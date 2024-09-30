@@ -16,6 +16,7 @@ import { myPortableTextComponents } from "@/components/website/utils/sanity_comp
 import { Sharing } from "@/components/website/shared/sharing";
 import { Metadata, ResolvingMetadata } from "next";
 import { Props } from "@/utils/uitypes";
+import Portable_Text_Editor from "@/components/website/shared/portable_text_editor";
 
 const Event = async ({
   params,
@@ -112,9 +113,11 @@ const EventDetails = ({ event }: { event: IEvent }) => {
       </div>
       <div className="ts5 mt-5 font-semibold">Description</div>
         <div className={`prose  lg:prose-xl  `}>
-      <PortableText value={
+      {/* <PortableText value={
       event.description
-      } components={myPortableTextComponents} />
+      } components={myPortableTextComponents} /> */}
+      <Portable_Text_Editor body={event.description} />
+
     </div>
     </div>
   );

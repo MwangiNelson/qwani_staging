@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { MinimalFooter } from "@/components/website/shared/client";
+import Portable_Text_Editor from "@/components/website/shared/portable_text_editor";
 import { Sharing } from "@/components/website/shared/sharing";
 import { BackButton } from "@/components/website/utils";
 import { formatSanityDate } from "@/components/website/utils/functions";
@@ -51,10 +52,11 @@ const HeroSection = ({ writer }: { writer: IWriter }) => {
         <Sharing bg="foreground" />
       </div>
       <div className="prose  txe-white">
-        <PortableText
+        {/* <PortableText
           value={writer.description}
           components={myPortableTextComponents}
-        />
+        />{" "} */}
+        <Portable_Text_Editor body={writer.description} />
       </div>
     </div>
   );

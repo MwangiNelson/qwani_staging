@@ -100,6 +100,7 @@
 .txe-white h6,
 .txe-white p,
 .txe-white strong,
-.txe-white em {
+.txe-white em,
+.txe-white a {
   color: #fff !important;
 }
