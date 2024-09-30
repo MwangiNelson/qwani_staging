@@ -3,7 +3,7 @@
 import { usePathname } from "next/navigation";
 import { useWebsiteContext } from "../utils/WebsiteContext";
 import { useEffect } from "react";
-
+import React from "react";
 export const MinimalFooter = () => {
   const { addMinimalFooterVisiblePages } = useWebsiteContext();
   const pathname = usePathname();
@@ -11,7 +11,7 @@ export const MinimalFooter = () => {
   useEffect(() => {
     addMinimalFooterVisiblePages(pathname);
   }, [pathname]);
-  return <></>;
+  return <React.Fragment></React.Fragment>;
 };
 
 export const MakeActiveLink = ({ activeLink }: { activeLink: string }) => {

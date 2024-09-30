@@ -80,7 +80,7 @@ export const fetchEvents = async (): Promise<IEvent[]> => {
     tags: ["event"],
   });
 
-  return data;
+  return data || [];
 };
 
 //upcoming events

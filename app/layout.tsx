@@ -3,6 +3,7 @@ import { Inter, Montserrat } from "next/font/google";
 import "./globals.css";
 import "./website.css";
 import "yet-another-react-lightbox/styles.css";
+import { Toaster } from "sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 const mont = Montserrat({
@@ -31,6 +32,7 @@ export default function RootLayout({
         className={`
       ${mont.className} `}
       >
+        <Toaster/>
         {children}
       </body>
     </html>

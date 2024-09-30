@@ -1,6 +1,10 @@
 import Image from "next/image";
 import React from "react";
-import { HeroSectionContent } from "@/components/website/pageUIs/events";
+import {
+  HeroSectionContent,
+  PreviousEvents,
+  UpcommingEvents,
+} from "@/components/website/pageUIs/events";
 import { Separator } from "@/components/ui/separator";
 import { EventsCardsWrapper } from "@/components/website/shared/Wrappers";
 import { fetchEvents } from "@/lib/api";
@@ -14,17 +18,14 @@ const Events = async () => {
   const upcommingevents = events.filter(
     (event) => new Date(event.date) > new Date()
   );
-  const previousevents = events.filter(
-    (event) => new Date(event.date) < new Date()
-  );
 
   return (
     <div className="pb-20">
       <HeroSection>
-        <HeroSectionContent upcommingevents={upcommingevents} />
+        <HeroSectionContent events={events} />
       </HeroSection>
       <UpcommingEvents upcommingevents={upcommingevents} />
-      <PreviousEvents events={previousevents} />
+      <PreviousEvents events={events} />
     </div>
   );
 };
@@ -50,37 +51,6 @@ const HeroSection = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-const UpcommingEvents = ({
-  upcommingevents,
-}: {
-  upcommingevents: IEvent[];
-}) => {
-  return (
-    <div className="mt-10 web-px " id="upcoming">
-      <div className="space-y-5">
-        <div className="fx-a-center gap-5 ">
-          <Separator className="w-10 bg-foreground" />
-          Upcoming Events
-        </div>
-        <EventsCardsWrapper page="events" events={upcommingevents} />
-      </div>
-    </div>
-  );
-};
-
-const PreviousEvents = ({ events }: { events: IEvent[] }) => {
-  return (
-    <div className="mt-10 web-px " id="past">
-      <div className="space-y-5">
-        <div className="fx-a-center gap-5 ">
-          <Separator className="w-10 bg-foreground" />
-          Previous Events
-        </div>
-        <EventsCardsWrapper page="events" events={events} />
-      </div>
-    </div>
-  );
-};
 export async function generateMetadata(): Promise<Metadata> {
   const results = await pageMetadata("events");
   return results;
