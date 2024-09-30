@@ -3,6 +3,7 @@ import { Separator } from "@/components/ui/separator";
 import Lost from "@/components/website/lost";
 import { ProfileCard } from "@/components/website/shared/cards/common";
 import { MinimalFooter } from "@/components/website/shared/client";
+import Portable_Text_Editor from "@/components/website/shared/portable_text_editor";
 import { Sharing } from "@/components/website/shared/sharing";
 import { BackButton } from "@/components/website/utils";
 import {
@@ -81,12 +82,7 @@ const Details = ({ blog }: { blog: IPost }) => {
           </div>
         </div>
         <Separator />
-        <div className="prose">
-          <PortableText
-            value={blog.body}
-            components={myPortableTextComponents}
-          />
-        </div>
+        <Portable_Text_Editor body={blog.body} />
       </div>
     </div>
   );

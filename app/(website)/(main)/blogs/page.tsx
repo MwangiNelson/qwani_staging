@@ -52,7 +52,7 @@ const HeroSection = ({ content }: IContent) => {
         </Button> */}
         <Button variant={"noEffect"} size={"icon"} asChild>
           <Link
-            href={`/blogs/qwani-submission-guidelines
+            href={`/blogs/how-to-publish-with-qwani
           `}
           >
             <PenIcon size={15} />

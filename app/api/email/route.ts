@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
   const mail = mail_options({
     from: `"QWANI" <rightson@univora.store>`,
     replyTo: email,
-    to: "chari.rightson@gmail.com",
+    to: "qwanitrust@gmail.com",
     subject: "New Contact Form Submission",
     html,
   });

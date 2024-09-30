@@ -23,7 +23,7 @@ export const OpenMenuOnHover = (props: {
   return (
     <div className="group relative">
       <CustomLink name={title} url={link} dropdown />
-      <div className="absolute z-10  bg-foreground/80 left-0 hidden w-[150px] group-hover:block group-hover:flex flex-col">
+      <div className="absolute z-10  bg-foreground/80 left-0 hidden w-[200px] group-hover:block group-hover:flex flex-col">
         {submenu.map((submenuItem, subIndex) => (
           <Link
             key={subIndex}

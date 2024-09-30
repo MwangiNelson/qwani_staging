@@ -42,7 +42,15 @@ const MobileMenu = () => {
       <div className="flex gap-10 flex-col flex-grow justify-center">
         <div className=" flex flex-col justify-center  gap-5 -mt-20 ">
           <CustomLink name="Home" url="/" />
-          <CustomLink name="About" url="/about" />
+          <DropdownLink
+            link="/about"
+            title="About"
+            submenu={[
+              { title: "About Us", link: "/about" },
+              { title: "How It Started", link: "/blogs/how-it-started" },
+              { title: "How It Went", link: "/blogs/how-it-went" },
+            ]}
+          />
           <CustomLink name="Events" url="/events" />
           {/* <CustomLink name="Writers" url="/writers" />
            */}
@@ -54,7 +62,18 @@ const MobileMenu = () => {
               { title: "Contributers", link: "/contributers" },
             ]}
           />
-          <CustomLink name="Blogs" url="/blogs" />
+          <DropdownLink
+            link="/blogs"
+            title="Blogs"
+            submenu={[
+              { title: "Blogs", link: "/blogs" },
+              {
+                title: "Submit To Qwani",
+                link: "/blogs/how-to-publish-with-qwani",
+              },
+            ]}
+          />
+          {/* <CustomLink name="Blogs" url="/blogs" /> */}
           <CustomLink name="Publications" url="/publications" />
           <CustomLink name="Gallery" url="/gallery" />
           <CustomLink name="Contact " url="/contact" />

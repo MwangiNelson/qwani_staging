@@ -33,6 +33,8 @@ const Navbar = () => {
           submenu={[
             { title: "About Us", link: "/about" },
             { title: "Our Team", link: "/about#team" },
+            { title: "How It Started", link: "/blogs/how-it-started" },
+            { title: "How It Went", link: "/blogs/how-it-went" },
           ]}
         />
         <OpenMenuOnHover
@@ -51,9 +53,19 @@ const Navbar = () => {
             { title: "Contributers", link: "/contributers" },
           ]}
         />
-        <CustomLink name="Blogs" url="/blogs" />
+        {/* <CustomLink name="Blogs" url="/blogs" /> */}
+        <OpenMenuOnHover
+          link="/blogs"
+          title="Blogs"
+          submenu={[
+            { title: "Blogs", link: "/blogs" },
+            {
+              title: "Submit To Qwani",
+              link: "/blogs/how-to-publish-with-qwani",
+            },
+          ]}
+        />
         <CustomLink name="Publications" url="/publications" />
-
         <CustomLink name="Gallery" url="/gallery" />
       </div>
       <Button className="hidden lg:flex" size={"sm"} asChild>
