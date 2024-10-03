@@ -22,7 +22,7 @@ import { useRouter } from "next/navigation";
 export const EventCard = ({ event }: { event: IEvent }) => {
   return (
     <Card className="w-full  z-[1]  p-0 bg-transparent border-none  ">
-      <Link href={`/events/${event._id}`}>
+      <Link href={`/events/${event.slug.current}`}>
         <CardContent className="w-full p-0 fx-col gap-3">
           <Image
             src={imageUrl(event.featuredImage)}
@@ -51,7 +51,7 @@ export const EventCard = ({ event }: { event: IEvent }) => {
 export const EventCardMain = ({ event }: { event: IEvent }) => {
   return (
     <Card className="w-full  z-[1]   ">
-      <Link href={`/events/${event._id}`}>
+      <Link href={`/events/${event.slug.current}`}>
         <CardContent className="w-full p-0 fx-col gap-3">
           <Image
             src={imageUrl(event.featuredImage.asset)}

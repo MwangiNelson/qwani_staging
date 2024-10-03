@@ -105,6 +105,17 @@ export const fetchEventById = async (id: string): Promise<IEvent> => {
   });
   return data;
 };
+//event by slug
+export const fetchEventBySlug = async (slug: string): Promise<IEvent> => {
+  const query = `*[_type == "event" && slug.current == "${slug}"][0]{
+    ...
+  }`;
+  const data = await sanityFetch<IEvent>({
+    query,
+    tags: ["event"],
+  });
+  return data;
+};
 
 //get writers
 export const fetchWriters = async () => {

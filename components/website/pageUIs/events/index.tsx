@@ -98,7 +98,7 @@ const Event = ({
       </div>
       <div className="mt-4 ">
         <Button asChild>
-          <Link href={`/events/${event._id}`}>Learn More</Link>
+          <Link href={`/events/${event.slug.current}`}>Learn More</Link>
         </Button>
       </div>
       <div className="mt-5 fx gap-[1px]">

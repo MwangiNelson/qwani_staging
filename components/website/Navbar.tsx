@@ -53,20 +53,20 @@ const Navbar = () => {
             { title: "Contributers", link: "/contributers" },
           ]}
         />
-        {/* <CustomLink name="Blogs" url="/blogs" /> */}
+        <CustomLink name="Blogs" url="/blogs" />
+
+        <CustomLink name="Publications" url="/publications" />
+        <CustomLink name="Gallery" url="/gallery" />
         <OpenMenuOnHover
-          link="/blogs"
-          title="Blogs"
+          link="/blogs/how-to-publish-with-qwani"
+          title="How To Publish"
           submenu={[
-            { title: "Blogs", link: "/blogs" },
             {
               title: "Submit To Qwani",
               link: "/blogs/how-to-publish-with-qwani",
             },
           ]}
         />
-        <CustomLink name="Publications" url="/publications" />
-        <CustomLink name="Gallery" url="/gallery" />
       </div>
       <Button className="hidden lg:flex" size={"sm"} asChild>
         <Link href="/contact">Contact Us</Link>

@@ -6,9 +6,9 @@ import { CiShare2 } from "react-icons/ci";
 import { MinimalFooter } from "@/components/website/shared/client";
 import { EventsCardsWrapper } from "@/components/website/shared/Wrappers";
 import { BackButton } from "@/components/website/utils";
-import { fetchEventById, fetchUpcomingEvents } from "@/lib/api";
+import { fetchEventById, fetchEventBySlug, fetchUpcomingEvents } from "@/lib/api";
 import { IEvent } from "@/utils/data_types";
-import { formatSanityDate } from "@/components/website/utils/functions";
+import { defaultMetadata, formatSanityDate } from "@/components/website/utils/functions";
 import Link from "next/link";
 import { imageUrl } from "@/sanity/lib/client";
 import { PortableText, type PortableTextReactComponents } from 'next-sanity'
@@ -17,6 +17,7 @@ import { Sharing } from "@/components/website/shared/sharing";
 import { Metadata, ResolvingMetadata } from "next";
 import { Props } from "@/utils/uitypes";
 import Portable_Text_Editor from "@/components/website/shared/portable_text_editor";
+import NotFoundUI from "@/components/website/shared/NotFound";
 
 const Event = async ({
   params,
@@ -25,9 +26,16 @@ const Event = async ({
     event: string;
   };
 }) => {
-  const event = await fetchEventById(params.event);
+  const event = await fetchEventBySlug(params.event);
   const upcommingEvents = await fetchUpcomingEvents();
-
+if(!event){
+  return <NotFoundUI
+  message="Event Not Found"
+  title="Event Not Found"
+  
+  
+  />
+}
   return (
     <div>
       <HeroSection event={event} />
@@ -140,7 +148,11 @@ export async function generateMetadata(
   { params, searchParams }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-   const data=await fetchEventById(params.event as string) 
+   const data=await fetchEventBySlug(params.event as string) 
+   if(!data){
+    return defaultMetadata()
+
+   }
   return {
     title: data.title,
     description: data.excerpt,
