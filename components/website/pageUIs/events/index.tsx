@@ -22,7 +22,6 @@ import { Separator } from "@/components/ui/separator";
 import { EventsCardsWrapper } from "../../shared/Wrappers";
 
 export const HeroSectionContent = ({ events }: { events: IEvent[] }) => {
-  const { activeIndex, itemRefs } = useIntersectionInCarousel();
   const [allEvents, setAllEvents] = useState<IEvent[]>([]);
   useEffect(() => {
     const upcomming = events.filter(
@@ -35,7 +34,12 @@ export const HeroSectionContent = ({ events }: { events: IEvent[] }) => {
       .slice(0, 5);
     //set all events, if upcomming events are there, set all events to upcomming, otherwise set all events to previous
     if (upcomming.length > 0) {
-      setAllEvents(upcomming);
+      setAllEvents(
+        upcomming.sort((a, b) => {
+          //sort by date, latest first
+          return new Date(a.date).getTime() - new Date(b.date).getTime();
+        })
+      );
     } else {
       setAllEvents(previus);
     }
@@ -47,8 +51,8 @@ export const HeroSectionContent = ({ events }: { events: IEvent[] }) => {
           <Event
             key={index}
             event={event}
-            activeIndex={activeIndex}
-            itemRefs={itemRefs}
+            // activeIndex={activeIndex}
+            // itemRefs={itemRefs}
             index={index}
             events={allEvents}
           />
@@ -69,17 +73,18 @@ export const HeroSectionContent = ({ events }: { events: IEvent[] }) => {
 };
 const Event = ({
   event,
-  activeIndex,
-  itemRefs,
+  // activeIndex,
+  // itemRefs,
   index,
   events,
 }: {
   event: IEvent;
-  activeIndex: number;
-  itemRefs: MutableRefObject<(HTMLDivElement | null)[]>;
+  // activeIndex: number;
+  // itemRefs: MutableRefObject<(HTMLDivElement | null)[]>;
   index: number;
   events: IEvent[];
 }) => {
+  const { activeIndex, itemRefs } = useIntersectionInCarousel();
   return (
     <CarouselItem
       className="text-background "
@@ -126,7 +131,11 @@ export const UpcommingEvents = ({
     const events = upcommingevents.filter(
       (event) => new Date(event.date) > new Date()
     );
-    setEvents(events);
+    setEvents(
+      events.sort(
+        (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+      )
+    );
   }, [upcommingevents]);
   return (
     <div className="mt-10 web-px " id="upcoming">
