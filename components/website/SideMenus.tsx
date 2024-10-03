@@ -62,7 +62,7 @@ const MobileMenu = () => {
               { title: "Contributers", link: "/contributers" },
             ]}
           />
-          <DropdownLink
+          {/* <DropdownLink
             link="/blogs"
             title="Blogs"
             submenu={[
@@ -72,11 +72,21 @@ const MobileMenu = () => {
                 link: "/blogs/how-to-publish-with-qwani",
               },
             ]}
-          />
-          {/* <CustomLink name="Blogs" url="/blogs" /> */}
+          /> */}
+          <CustomLink name="Blogs" url="/blogs" />
           <CustomLink name="Publications" url="/publications" />
           <CustomLink name="Gallery" url="/gallery" />
           <CustomLink name="Contact " url="/contact" />
+          <DropdownLink
+            link="/blogs/how-to-publish-with-qwani"
+            title="How To Publish"
+            submenu={[
+              {
+                title: "Publish With Qwani",
+                link: "/blogs/how-to-publish-with-qwani",
+              },
+            ]}
+          />
         </div>
       </div>
       <SocialLinks />

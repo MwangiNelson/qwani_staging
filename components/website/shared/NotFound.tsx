@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 
 export default function NotFoundUI(props: { title: string; message: string }) {
   const router = useRouter();
-  const [countdown, setCountdown] = useState(10);
+  const [countdown, setCountdown] = useState(4);
 
   useEffect(() => {
     const timer = setInterval(() => {

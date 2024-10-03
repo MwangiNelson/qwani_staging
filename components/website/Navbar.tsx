@@ -62,7 +62,7 @@ const Navbar = () => {
           title="How To Publish"
           submenu={[
             {
-              title: "Submit To Qwani",
+              title: "Publish With Qwani",
               link: "/blogs/how-to-publish-with-qwani",
             },
           ]}
