@@ -43,17 +43,28 @@ export const BlogCategoriesFilter = ({
   blogs: IPost[];
   categories: IPostCategory[];
 }) => {
+  // Filter categories to only include those with associated blogs
+  const categoriesWithBlogs = React.useMemo(() => {
+    return categories.filter((category) =>
+      blogs.some((blog) =>
+        blog.categories?.some((cat) => cat._id === category._id)
+      )
+    );
+  }, [blogs, categories]);
+
   const [activeCategory, setActiveCategory] = React.useState<IPostCategory>(
-    categories[0]
+    categoriesWithBlogs[0] || categories[0]
   );
+
   const activeBlogs = blogs.filter((blog) =>
     blog.categories?.find((category) => category._id === activeCategory._id)
   );
+
   return (
     <div className="bg-background py-5 web-px">
       <div className="fx-center">
         <div className="max-w-screen-sm flex flex-wrap fx-center ">
-          {categories.map((category, index) => (
+          {categoriesWithBlogs.map((category, index) => (
             <Badge
               key={index}
               className={cn(

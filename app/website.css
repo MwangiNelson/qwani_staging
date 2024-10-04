@@ -1,14 +1,14 @@
 .web-px {
-  @apply px-4 md:px-[64px] xl:px-[128px];
+  @apply px-4 md:px-[64px] xl:px-[100px];
 }
 .blog-px {
-  @apply px-0 md:px-[86px] xl:px-[172px];
+  @apply px-0 md:px-[86px] xl:px-[100px];
 }
 .team-member-px {
   @apply px-4 md:px-[80px]  lg:px-[140px] xl:px-[240px];
 }
 .gallery-px {
-  @apply px-4 md:px-[86px] xl:px-[172px];
+  @apply px-4 md:px-[86px] xl:px-[100px];
 }
 
 .fx {
