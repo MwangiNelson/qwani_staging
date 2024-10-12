@@ -129,7 +129,7 @@ export const UpcommingEvents = ({
   const [events, setEvents] = useState<IEvent[]>(upcommingevents);
   useEffect(() => {
     const events = upcommingevents.filter(
-      (event) => new Date(event.date) > new Date()
+      (event) => new Date(event.date) >= new Date()
     );
     setEvents(
       events.sort(

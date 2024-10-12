@@ -15,16 +15,13 @@ import { Metadata } from "next";
 const Events = async () => {
   const events = await fetchEvents();
   if (!events) return null;
-  const upcommingevents = events.filter(
-    (event) => new Date(event.date) > new Date()
-  );
 
   return (
     <div className="pb-20">
       <HeroSection>
         <HeroSectionContent events={events} />
       </HeroSection>
-      <UpcommingEvents upcommingevents={upcommingevents} />
+      <UpcommingEvents upcommingevents={events} />
       <PreviousEvents events={events} />
     </div>
   );
