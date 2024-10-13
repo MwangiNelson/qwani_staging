@@ -51,7 +51,10 @@ const HeroSection = ({ member }: { member: ITeamMember }) => {
           value={member.description}
           components={myPortableTextComponents}
         /> */}
-        <Portable_Text_Editor body={member.description} />
+        <Portable_Text_Editor
+          body={member.description}
+          classNames="text-background"
+        />
       </div>
     </div>
   );
