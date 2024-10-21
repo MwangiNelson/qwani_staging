@@ -55,6 +55,17 @@ export default defineType({
         },
       ],
     }),
+    //explore more image
+
+    defineField({
+      name: "exploreMoreImage",
+      title: "Explore More Image",
+      type: "image",
+      options: {
+        hotspot: true,
+      },
+      validation: (Rule) => Rule.required(),
+    }),
 
     // Values Section
     defineField({
@@ -103,6 +114,7 @@ export default defineType({
       ],
     }),
   ],
+
   preview: {
     select: {
       title: "heroTitle",

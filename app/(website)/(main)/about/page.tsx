@@ -10,6 +10,7 @@ import {
   pageMetadata,
 } from "@/components/website/utils/functions";
 import { fetchAboutPageContent } from "@/lib/api";
+import { imageUrl } from "@/sanity/lib/client";
 import { IAboutPage } from "@/utils/data_types";
 import { Metadata } from "next";
 import Image from "next/image";
@@ -30,7 +31,7 @@ async function AboutPage() {
 }
 const HeroSection = ({ about }: { about: IAboutPage }) => {
   return (
-    <HeroUI imageLink="/home.png">
+    <HeroUI imageLink={imageUrl(about.heroImage)}>
       <div className="  md:mt-28  text-background fx-col gap-5 justify-start ">
         <h1 className="mb:text-center text-5xl md:text-6xl lg:text-[90px] font-bold  leading-tight ">
           {formatSanityText(about.heroTitle, "text-primary")}
@@ -98,7 +99,7 @@ const DetailsCards = ({ about }: { about: IAboutPage }) => {
       <div className="gap-2 text-[#D9D9D9] py-20 relative h-[60vh] md:h-[70vh] fx-center fx-col ">
         <Image
           className="absolute z-[-1] -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2"
-          src="/imgs/1.jpg"
+          src={imageUrl(about.exploreMoreImage)}
           alt="Nice Image"
           height={500}
           width={500}

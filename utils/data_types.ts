@@ -135,6 +135,7 @@ export interface IAboutPage extends ISanityFetched {
     label: string;
     number: number;
   }[];
+  exploreMoreImage: ISanityAsset;
   valuesTitle: string;
   valuesDescription: string;
   values: {
