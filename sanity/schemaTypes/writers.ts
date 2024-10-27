@@ -29,7 +29,6 @@ export default defineType({
       name: "image",
       title: "Image",
       type: "image",
-      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "specializations",
