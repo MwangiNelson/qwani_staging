@@ -50,7 +50,7 @@ const Navbar = () => {
           title="Writers"
           submenu={[
             { title: "Qwani Writers", link: "/writers" },
-            { title: "Contributers", link: "/contributers" },
+            { title: "Contributors", link: "/contributers" },
           ]}
         />
         <CustomLink name="Blogs" url="/blogs" />

@@ -1,7 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import Lost from "@/components/website/lost";
-import { ProfileCard } from "@/components/website/shared/cards/common";
+import {
+  BlogProfileCard,
+  ProfileCard,
+} from "@/components/website/shared/cards/common";
 import { MinimalFooter } from "@/components/website/shared/client";
 import Portable_Text_Editor from "@/components/website/shared/portable_text_editor";
 import { Sharing } from "@/components/website/shared/sharing";
@@ -18,6 +21,7 @@ import { Props } from "@/utils/uitypes";
 import { Metadata, ResolvingMetadata } from "next";
 import { PortableText } from "next-sanity";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 const Page = async ({ params, searchParams }: Props) => {
   const blog = await fetchBlogBySlug(params.blog as string);
@@ -45,12 +49,14 @@ const Details = ({ blog }: { blog: IPost }) => {
         <span className="font-semibold">
           {formatSanityDate(blog.publishedAt)}
         </span>
-        <ProfileCard
-          date={formatSanityDate(blog.publishedAt)}
-          imageUrl={imageUrl(blog.author.image)}
-          name={blog.author.name}
-          slug={blog.author.slug}
-        />
+        {blog.author && (
+          <BlogProfileCard
+            date={formatSanityDate(blog.publishedAt)}
+            imageUrl={imageUrl(blog.author.image)}
+            name={blog.author?.name}
+            slug={blog.author?.slug}
+          />
+        )}
       </div>
       <div className="blog mt-5 space-y-4">
         <h3 className="ts3 font-semibold">{blog.title}</h3>
@@ -83,6 +89,29 @@ const Details = ({ blog }: { blog: IPost }) => {
         </div>
         <Separator />
         <Portable_Text_Editor body={blog.body} />
+      </div>
+      <Separator />
+      <div className="md:max-w-[600px] fx mt-4 flex-col p-4  gap-2 bg-foreground/5">
+        <div className="fx gap-3">
+          <Image
+            src={imageUrl(blog.author.image)}
+            className="rounded-full "
+            alt={"Card Image"}
+            width={70}
+            height={70}
+          />
+          <div className="fx gap-2">
+            <Link
+              href={`/contributers/${blog.author.slug.current}`}
+              className="underline font-bold text-lg  "
+            >
+              {blog.author.name}
+            </Link>
+            <Separator orientation="vertical" className="bg-black/40 h-5" />
+            <span className="text-lg">CONTRIBUTOR</span>
+          </div>
+          <Portable_Text_Editor body={blog.author.description} />
+        </div>
       </div>
     </div>
   );

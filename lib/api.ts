@@ -192,7 +192,7 @@ export const fetchBlogById = async (id: string) => {
 export const fetchBlogBySlug = async (slug: string) => {
   const query = `*[_type == "post" && slug.current == "${slug}"][0]{
     ...,
-    author->{name, image},
+    author->{...},
     categories[]->{...},
   }`;
   const data = await sanityFetch<IPost>({

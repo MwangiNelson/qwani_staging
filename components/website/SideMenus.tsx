@@ -59,7 +59,7 @@ const MobileMenu = () => {
             link="/writers"
             submenu={[
               { title: "Our Writers", link: "/writers" },
-              { title: "Contributers", link: "/contributers" },
+              { title: "Contributors", link: "/contributers" },
             ]}
           />
           {/* <DropdownLink
@@ -73,7 +73,6 @@ const MobileMenu = () => {
               },
             ]}
           /> */}
-          <CustomLink name="Blogs" url="/blogs" />
           <CustomLink name="Publications" url="/publications" />
           <CustomLink name="Gallery" url="/gallery" />
           <CustomLink name="Contact " url="/contact" />

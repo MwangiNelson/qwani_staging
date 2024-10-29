@@ -342,6 +342,33 @@ export const ProfileCard = ({
     </div>
   );
 };
+export const BlogProfileCard = ({
+  name,
+  date,
+  imageUrl,
+  slug,
+}: {
+  imageUrl: string;
+  name: string;
+  date: string;
+  slug: ISlugSanity;
+}) => {
+  return (
+    <Link
+      href={`/contributers/${slug?.current}`}
+      className="fx-a-center gap-2 cursor-pointer"
+    >
+      <Avatar>
+        <AvatarImage src={imageUrl} alt={name} />
+        <AvatarFallback>CN</AvatarFallback>
+      </Avatar>
+      <div className="fx-col">
+        <div className=" font-semibold text-sm">{name}</div>
+        <div className="fx font-light text-sm">{date}</div>
+      </div>
+    </Link>
+  );
+};
 export const ProfileCardWithBookMark = () => {
   return (
     <div className="fx-jb items-center pt-2 w-full">
