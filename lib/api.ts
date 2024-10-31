@@ -197,7 +197,7 @@ export const fetchBlogBySlug = async (slug: string) => {
   }`;
   const data = await sanityFetch<IPost>({
     query,
-    tags: ["post"],
+    tags: ["post", "author"],
   });
 
   return data;

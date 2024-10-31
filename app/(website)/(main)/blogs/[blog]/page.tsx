@@ -40,6 +40,7 @@ const Hero = () => {
   return <div className="h-[100px] bg-foreground"></div>;
 };
 const Details = ({ blog }: { blog: IPost }) => {
+  console.log(blog.author.bio);
   return (
     <div className="web-px  pt-10">
       <div className="fx flex-col items-start gap-2">
@@ -92,25 +93,27 @@ const Details = ({ blog }: { blog: IPost }) => {
       </div>
       <Separator />
       <div className="md:max-w-[600px] fx mt-4 flex-col p-4  gap-2 bg-foreground/5">
-        <div className="fx gap-3">
+        <div className="flex flex-col md:flex-row gap-3">
           <Image
             src={imageUrl(blog.author.image)}
-            className="rounded-full "
+            className="rounded-full min-w-[70px] min-h-[70px] object-cover object-center"
             alt={"Card Image"}
             width={70}
             height={70}
           />
-          <div className="fx gap-2">
-            <Link
-              href={`/contributers/${blog.author.slug.current}`}
-              className="underline font-bold text-lg  "
-            >
-              {blog.author.name}
-            </Link>
-            <Separator orientation="vertical" className="bg-black/40 h-5" />
-            <span className="text-lg">CONTRIBUTOR</span>
+          <div className="fx-col">
+            <div className="fx items-center gap-2 ">
+              <Link
+                href={`/contributers/${blog.author.slug.current}`}
+                className="underline font-bold text-lg  "
+              >
+                {blog.author.name}
+              </Link>
+              <Separator orientation="vertical" className="bg-black/40 h-5" />
+              <span className="text-lg">CONTRIBUTOR</span>
+            </div>
+            <p>{blog.author.bio}</p>
           </div>
-          <Portable_Text_Editor body={blog.author.description} />
         </div>
       </div>
     </div>

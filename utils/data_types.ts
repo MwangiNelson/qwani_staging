@@ -38,7 +38,7 @@ export interface IPost extends ISanityFetched {
     _type: string;
     current: string;
   };
-  author: IWriter;
+  author: IAuthor;
   mainImage: ISanityAsset;
   categories?: [IPostCategory];
   publishedAt: string;
