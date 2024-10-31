@@ -28,12 +28,11 @@ const Home = async () => {
           </h1>
           <p className="text-xl text-start">{homepage.heroSubtitle}</p>
           <div className="w-full items-start">
-            {/* <Button>
-              <Link href={homepage.heroButtonLink ?? "#"}>
-                {homepage.heroButtonText}
-              </Link>
-            </Button> */}
-            <JoinCommunityButton size="default" />
+            <JoinCommunityButton
+              size="default"
+              link={homepage.heroButtonLink}
+              text={homepage.heroButtonText}
+            />
           </div>
         </div>
       </HeroUI>
