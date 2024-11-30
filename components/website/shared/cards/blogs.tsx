@@ -44,7 +44,7 @@ export const BlogCardMain: React.FC<{
           />
           <div className=" flex flex-col space-y-1">
             <h4 className="ts6 font-semibold ">{blog?.title}</h4>
-            <p className="  ">{blog?.excerpt.slice(0, 100)}...</p>
+            <p className="  ">{blog?.excerpt?.slice(0, 100)}...</p>
             <ProfileCard
               date={formatSanityDate(blog?.publishedAt)}
               imageUrl={imageUrl(blog?.author?.image)}
@@ -133,8 +133,8 @@ export const BlogCardPrimary: React.FC<{
             <h4 className="ts6 font-semibold ">{blog?.title}</h4>
             <p className=" text-md ">
               {size == "large"
-                ? blog?.excerpt.slice(0, 70)
-                : blog?.excerpt.slice(0, 50)}
+                ? blog?.excerpt?.slice(0, 70)
+                : blog?.excerpt?.slice(0, 50)}
             </p>
             <ProfileCard
               date={formatSanityDate(blog?.publishedAt)}
