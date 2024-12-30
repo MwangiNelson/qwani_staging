@@ -104,3 +104,14 @@
 .txe-white a {
   color: #fff !important;
 }
+.btn-w{
+display: inline-flex;
+padding: 0.9375rem 1.25rem;
+justify-content: center;
+align-items: center;
+gap: 0.625rem;
+border-radius: 6.25rem;
+border: 2px solid rgba(255, 255, 255, 0.20);
+background: rgba(255, 255, 255, 0.12);
+backdrop-filter: blur(8.100000381469727px);
+}

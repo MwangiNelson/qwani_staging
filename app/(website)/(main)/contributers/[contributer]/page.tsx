@@ -46,7 +46,7 @@ const HeroSection = ({ writer }: { writer: IAuthor }) => {
 };
 const BlogsSection = ({ blogs }: { blogs: IPost[] }) => {
   return (
-    <div className=" w-full min-h-screen web-px">
+    <div className=" w-full min-h-screen web-px pt-10">
       <AuthorsBlogs blogs={blogs} />
     </div>
   );

@@ -1,49 +1,37 @@
 import { Button } from "@/components/ui/button";
-import {
-  MakeActiveLink,
-  MinimalFooter,
-} from "@/components/website/shared/client";
-import { AuthorsWrapper } from "@/components/website/shared/Wrappers";
+import { ContributersUI } from "@/components/website/pageUIs/contributers/contributersUI";
+import { MinimalFooter } from "@/components/website/shared/client";
 import { fetchAuthors, fetchContributersPage } from "@/lib/api";
-import { IAuthor, IContributersPage } from "@/utils/data_types";
-import Link from "next/link";
+import Image from "next/image";
 import React from "react";
 
-const Contributers = async () => {
+const CollaboratorsNew = async () => {
   const writers = await fetchAuthors();
   const page_content = await fetchContributersPage();
-  console.log(page_content);
   return (
-    <div className="bg-[#F2F2F2] pb-20">
-      <HeroSection page_content={page_content} />
-      <Writers writers={writers} />
+    <div className="bg-foreground text-background web-px">
       <MinimalFooter />
-      <MakeActiveLink activeLink="writers" />
-    </div>
-  );
-};
-const HeroSection: React.FC<{
-  page_content: IContributersPage;
-}> = ({ page_content }) => {
-  return (
-    <div className="bg-foreground web-px text-background space-y-2 min-h-[85vh] pt-40">
-      <h3 className="ts2 font-semibold">{page_content.title}</h3>
-      <p className="p">{page_content.description}</p>
-      {page_content.btnText && page_content.post && (
-        <Button variant={"outlineNoEffect"}>
-          <Link href={`/blog/${page_content.post.slug.current}`}>
-            {page_content.btnText}
-          </Link>
+      <div className="flex gap-5 flex-col justify-center items-center py-40 w-full ">
+        <Button className="inline-flex justify-center items-center w-min px-5 py-4 gap-2.5 rounded-full hover:bg-black border-2 border-white/20 bg-white/10 backdrop-blur-lg">
+          Can you write? Get started
         </Button>
-      )}
+        <p className="text-4xl font-semibold">
+          TO ALL OUR ESTEEMED CONTRIBUTORS
+        </p>
+        <span className="font-thin">Welcome to our Contributors page!</span>
+        <div className="w-full fx justify-center items-center">
+          <Image
+            src="/writer.jpg"
+            alt="Contributors"
+            width={1000}
+            height={1000}
+            className="max-h-[400px] object-cover rounded-md"
+          />
+        </div>
+      </div>
+      <ContributersUI contributers={writers} />
     </div>
   );
 };
-const Writers = ({ writers }: { writers: IAuthor[] }) => {
-  return (
-    <div className=" w-full min-h-screen web-px">
-      <AuthorsWrapper authors={writers} />
-    </div>
-  );
-};
-export default Contributers;
+
+export default CollaboratorsNew;
