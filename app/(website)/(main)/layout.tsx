@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, Suspense } from "react";
 import Navbar from "@/components/website/Navbar";
 import Footer from "@/components/website/Footer";
 import { SpeedDialViewer } from "@/components/website/utils/speed_dial_viewer";
@@ -8,7 +8,10 @@ const Layout = async ({ children }: { children: ReactNode }) => {
   return (
     <div className="overflow-x-hidden">
       <div className="h-[100px]">
-        <Navbar locations={locations} />
+        <Suspense>
+          {" "}
+          <Navbar locations={locations} />
+        </Suspense>
       </div>
       <SpeedDialViewer />
       <div className="-mt-[100px] ">{children}</div>
