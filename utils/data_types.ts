@@ -224,3 +224,8 @@ export interface IContributersPage extends ISanityFetched {
   btnText?: string;
   post?: IPost;
 }
+
+export interface ILocation extends ISanityFetched {
+  title: string;
+  slug: ISlugSanity;
+}

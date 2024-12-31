@@ -9,6 +9,7 @@ import {
   IGallery,
   IGalleryPage,
   IHomePage,
+  ILocation,
   IPost,
   IPostCategory,
   IPublication,
@@ -48,7 +49,11 @@ export const getHomePageContent = async (): Promise<IHomePage> => {
   const query = `*[_type == "home"][0]{
     ...,
     events[]->{...},
-    blogs[]->{...},
+     blogs[]->{ 
+      ...,
+      author->{...},
+      categories[]->{...}
+    }
     
   }`;
   const data = await sanityFetch<IHomePage>({
@@ -409,6 +414,18 @@ export const fetchContributersPage = async () => {
   const data = await sanityFetch<IContributersPage>({
     query,
     tags: ["contributersPage"],
+  });
+
+  return data;
+};
+//fetch locations
+export const fetchLocations = async () => {
+  const query = `*[_type == "location"]{
+    ...
+  }`;
+  const data = await sanityFetch<ILocation[]>({
+    query,
+    tags: ["location"],
   });
 
   return data;

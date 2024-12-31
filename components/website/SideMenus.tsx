@@ -150,7 +150,7 @@ const SocialLinks = () => {
         </Button>
 
         <Button className="text-xl text-background rounded-full  bg-transparent">
-          <Link href="https://www.linkedin.com/company/qwani/" target="_blank">
+          <Link href="" target="_blank">
             <FaLinkedin />
           </Link>
         </Button>

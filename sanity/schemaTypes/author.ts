@@ -38,6 +38,12 @@ export default defineType({
       title: "Bio",
       type: "text",
     }),
+    //location, nairobi or eldoret
+    defineField({
+      name: "location",
+      title: "Location",
+      type: "string",
+    }),
   ],
   preview: {
     select: {

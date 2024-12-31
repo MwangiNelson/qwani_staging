@@ -2,20 +2,20 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { SideDrawer } from "./SideDrawer";
 import { Button } from "../ui/button";
 import { CustomLink, OpenMenuOnHover } from "./utils/Menus";
 import { useWebsiteContext } from "./utils/WebsiteContext";
+import { ILocation } from "@/utils/data_types";
 export interface TimeType {
   time: number;
   type: "before" | "after" | "last";
 }
-const Navbar = () => {
-  const pathname = usePathname();
-  const { customActiveLink } = useWebsiteContext();
-
+const Navbar = ({ locations }: { locations: ILocation[] }) => {
+  const searchParams = useSearchParams();
+  const location = searchParams.get("location");
   return (
     <div
       className="h-full  sticky top-0 z-50 
@@ -40,10 +40,12 @@ const Navbar = () => {
         <OpenMenuOnHover
           link="/events"
           title="Events"
-          submenu={[
-            { title: "Upcoming Events", link: "/events#upcoming" },
-            { title: "Past Events", link: "/events#past" },
-          ]}
+          paramsName="location"
+          submenu={locations.map((location) => ({
+            title: location.title,
+            link: `/events?location=${location.slug.current}`,
+            isActive: location.slug.current === location.slug.current,
+          }))}
         />
         <OpenMenuOnHover
           link="/writers"

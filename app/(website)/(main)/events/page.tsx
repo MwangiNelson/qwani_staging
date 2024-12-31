@@ -12,7 +12,11 @@ import { IEvent } from "@/utils/data_types";
 import { pageMetadata } from "@/components/website/utils/functions";
 import { Metadata } from "next";
 
-const Events = async () => {
+const Events = async ({
+  searchParams,
+}: {
+  searchParams?: { location: string | undefined };
+}) => {
   const events = await fetchEvents();
   if (!events) return null;
 

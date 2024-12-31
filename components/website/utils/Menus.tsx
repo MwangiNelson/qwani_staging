@@ -1,6 +1,6 @@
 import React, { use } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useWebsiteContext } from "./WebsiteContext";
 import { cn } from "@/lib/utils";
 import { ChevronDown } from "lucide-react";
@@ -8,31 +8,42 @@ import { ChevronDown } from "lucide-react";
 export const OpenMenuOnHover = (props: {
   title: string;
   link: string;
+  paramsName?: string;
   submenu: {
     title: string;
     link: string;
+    isActive?: boolean;
   }[];
 }) => {
   const { title, link, submenu } = props;
   const pathname = usePathname();
-  const { customActiveLink } = useWebsiteContext();
-  const isActive =
-    pathname.split("/")[1] === link.split("/")[1] ||
-    link.split("/")[1] === customActiveLink;
-
+  const searchParams = useSearchParams();
+  const search = searchParams.get(props.paramsName || "");
   return (
     <div className="group relative">
       <CustomLink name={title} url={link} dropdown />
       <div className="absolute z-10  bg-foreground/80 left-0 hidden w-[200px] group-hover:block group-hover:flex flex-col">
-        {submenu.map((submenuItem, subIndex) => (
-          <Link
-            key={subIndex}
-            href={submenuItem.link}
-            className="block py-2 px-4 text-white hover:bg-gray-600"
-          >
-            {submenuItem.title}
-          </Link>
-        ))}
+        {submenu.map((submenuItem, subIndex) => {
+          const isActive =
+            pathname.split("/")[1] === submenuItem.link.split("/")[1] ||
+            submenuItem.link.split("=")[1] === search;
+          console.log({
+            search,
+            pathname: submenuItem.link.split("=")[1],
+          });
+          return (
+            <Link
+              key={subIndex}
+              href={submenuItem.link}
+              className={cn(
+                "block py-2 px-4 text-white hover:bg-gray-600",
+                isActive && "text-primary"
+              )}
+            >
+              {submenuItem.title}
+            </Link>
+          );
+        })}
       </div>
     </div>
   );

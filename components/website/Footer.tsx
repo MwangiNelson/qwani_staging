@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { Button } from "../ui/button";
 import { useWebsiteContext } from "./utils/WebsiteContext";
@@ -44,7 +45,7 @@ export default function Footer() {
       >
         <div className="grid grid-cols-2 md:grid-cols-4 w-full text-background gap-5">
           <Image
-            src="/logo.svg"
+            src="/logo-white.png"
             alt="Qwani Logo"
             width={500}
             height={500}
@@ -135,8 +136,8 @@ const socials = [
     name: "Instagram",
     link: "https://www.instagram.com/qwanibok",
   },
-  // {
-  //   name: "Whatsap",
-  //   link: "https://chat.whatsapp.com/BQ3gjPMI6GUHa7qDqFVECF",
-  // },
+  {
+    name: "LinkedIn",
+    link: "https://www.linkedin.com/company/qwani/",
+  },
 ];

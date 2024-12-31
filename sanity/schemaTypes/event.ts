@@ -63,6 +63,13 @@ export default defineType({
       title: "Location",
       type: "string",
     },
+    defineField({
+      name: "county",
+      title: "County",
+      description: "Qwani Nairobi,Eldoret or Mombasa",
+      type: "reference",
+      to: { type: "location" },
+    }),
     //google maps link
     {
       name: "googleMapsLink",
