@@ -48,8 +48,8 @@ const config = {
           foreground: "hsla(var(--destructive-foreground))",
         },
         muted: {
-          DEFAULT: "hsla(var(--muted))",
-          foreground: "hsla(var(--muted-foreground))",
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
         },
         accent: {
           DEFAULT: "hsla(var(--accent))",

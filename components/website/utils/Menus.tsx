@@ -27,10 +27,7 @@ export const OpenMenuOnHover = (props: {
           const isActive =
             pathname.split("/")[1] === submenuItem.link.split("/")[1] ||
             submenuItem.link.split("=")[1] === search;
-          console.log({
-            search,
-            pathname: submenuItem.link.split("=")[1],
-          });
+
           return (
             <Link
               key={subIndex}

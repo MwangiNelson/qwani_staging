@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.6.0",
+    "@portabletext/to-html": "^2.0.13",
     "@radix-ui/react-accordion": "^1.2.0",
     "@radix-ui/react-alert-dialog": "^1.1.1",
     "@radix-ui/react-aspect-ratio": "^1.1.0",
@@ -42,6 +43,7 @@
     "@sanity-typed/types": "^6.3.6",
     "@sanity/image-url": "^1.0.2",
     "@sanity/vision": "^3.48.1",
+    "@types/html-to-text": "^9.0.4",
     "add": "^2.0.6",
     "axios": "^1.7.2",
     "class-variance-authority": "^0.7.0",
@@ -50,6 +52,7 @@
     "date-fns": "^3.6.0",
     "embla-carousel-react": "^8.1.5",
     "framer-motion": "^11.3.7",
+    "html-to-text": "^9.0.5",
     "input-otp": "^1.2.4",
     "lint": "^0.8.19",
     "lucide-react": "^0.397.0",

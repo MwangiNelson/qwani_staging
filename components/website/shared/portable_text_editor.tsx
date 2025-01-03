@@ -5,6 +5,8 @@ import { myPortableTextComponents } from "../utils/sanity_components";
 import { TypedObject } from "sanity";
 import { cn } from "@/lib/utils";
 import { type ClassValue, clsx } from "clsx"
+import {toHTML} from '@portabletext/to-html'
+
 const Portable_Text_Editor = ({
   body,
   classNames,
@@ -20,3 +22,11 @@ const Portable_Text_Editor = ({
 };
 
 export default Portable_Text_Editor;
+
+export const portable_text_to_html = (body: TypedObject | TypedObject[]) => {
+  return  toHTML(body, {
+    components: {
+      
+    },
+  })
+}

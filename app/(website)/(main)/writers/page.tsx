@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { SeparatorTitle } from "@/components/website/pageUIs";
+import { WriterPageUI } from "@/components/website/pageUIs/writers/writers_page_ui";
 import { HeroUI } from "@/components/website/shared/CommonUi";
 import { WritersWrapper } from "@/components/website/shared/Wrappers";
 import {
@@ -49,7 +50,9 @@ const WritersSection = ({ writers }: { writers: IWriter[] }) => {
   return (
     <div className="web-px py-20 space-y-10 bg-bgsecondary">
       <SeparatorTitle title="Our Writers" />
-      <WritersWrapper writers={writers} />
+      {/* <WritersWrapper writers={writers} />
+       */}
+      <WriterPageUI writers={writers} />
     </div>
   );
 };

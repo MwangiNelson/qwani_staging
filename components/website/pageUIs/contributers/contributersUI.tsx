@@ -11,14 +11,16 @@ export const ContributersUI = ({
 }: {
   contributers: IAuthor[];
 }) => {
-  const [writers, setWriters] = React.useState<IAuthor[]>(contributers);
+  const sortedByName = contributers.sort((a, b) =>
+    a.name.localeCompare(b.name)
+  );
+  const [writers, setWriters] = React.useState<IAuthor[]>(sortedByName);
   const [searchQuery, setSearchQuery] = React.useState("");
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const query = e.target.value;
     setSearchQuery(query);
-
-    const filtered = contributers.filter((writer) =>
+    const filtered = sortedByName.filter((writer) =>
       writer.name.toLowerCase().includes(query.toLowerCase())
     );
     setWriters(filtered);
