@@ -93,7 +93,7 @@ export const WriterPageUI = ({ writers: writers_raw }: Props) => {
                     height={1000}
                   />
                   <Link
-                    href={`/contributers/${writer.slug.current}`}
+                    href={`/writers/${writer.slug.current}`}
                     className="h-8 w-8 fx items-center justify-center rounded-full shadow-md "
                   >
                     <ChevronRight />
