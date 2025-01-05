@@ -1,4 +1,4 @@
-import React, { use } from "react";
+import React, { use, useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useWebsiteContext } from "./WebsiteContext";
@@ -19,6 +19,7 @@ export const OpenMenuOnHover = (props: {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const search = searchParams.get(props.paramsName || "");
+
   return (
     <div className="group relative">
       <CustomLink name={title} url={link} dropdown />
@@ -26,7 +27,7 @@ export const OpenMenuOnHover = (props: {
         {submenu.map((submenuItem, subIndex) => {
           const isActive =
             pathname.split("/")[1] === submenuItem.link.split("/")[1] ||
-            submenuItem.link.split("=")[1] === search;
+            submenuItem.link.split("=")[1]?.split("#")[0] === search;
 
           return (
             <Link

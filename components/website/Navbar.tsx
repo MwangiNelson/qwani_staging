@@ -15,7 +15,7 @@ export interface TimeType {
 }
 const Navbar = ({ locations }: { locations: ILocation[] }) => {
   const searchParams = useSearchParams();
-  const location = searchParams.get("location");
+
   return (
     <div
       className="h-full  sticky top-0 z-50 
@@ -43,7 +43,7 @@ const Navbar = ({ locations }: { locations: ILocation[] }) => {
           paramsName="location"
           submenu={locations.map((location) => ({
             title: location.title,
-            link: `/events?location=${location.slug.current}`,
+            link: `/events?location=${location.slug.current}#location-events`,
             isActive: location.slug.current === location.slug.current,
           }))}
         />
@@ -74,7 +74,7 @@ const Navbar = ({ locations }: { locations: ILocation[] }) => {
         <Link href="/contact">Contact Us</Link>
       </Button>
       <div className="flex lg:hidden">
-        <SideDrawer />
+        <SideDrawer locations={locations} />
       </div>
     </div>
   );

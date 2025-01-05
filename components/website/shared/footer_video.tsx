@@ -12,7 +12,7 @@ export default function FooterVideo() {
       {!play && (
         <div>
           <Image
-            src={"/footer_image.png"}
+            src={"/thumbnail.jpg"}
             className="w-full h-[350px] md:h-[500px] object-cover object-center"
             width={1000}
             height={1000}

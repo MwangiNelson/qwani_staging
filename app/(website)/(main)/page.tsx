@@ -124,7 +124,7 @@ const BlogsSections = ({ homepage }: { homepage: IHomePage }) => {
       <div className="fx-col-mb mb:gap-3 md:justify-between md:items-center my-1">
         <div className="fx items-center gap-1">
           <Separator className="w-14 bg-foreground" />
-          <h4 className="font-medium text-xl">New & Stuff</h4>
+          <h4 className="font-medium text-xl">{homepage.blogsTitle}</h4>
         </div>
         <Link href={"#"}>See More</Link>
       </div>

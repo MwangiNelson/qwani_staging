@@ -1,28 +1,38 @@
 import Image from "next/image";
 import React from "react";
 import {
+  EventsDisplay,
+  EventsDisplayContainer,
   HeroSectionContent,
-  PreviousEvents,
-  UpcommingEvents,
 } from "@/components/website/pageUIs/events";
 import { Separator } from "@/components/ui/separator";
 import { EventsCardsWrapper } from "@/components/website/shared/Wrappers";
-import { fetchEvents } from "@/lib/api";
+import { fetchEvents, fetchLocations } from "@/lib/api";
 import { IEvent } from "@/utils/data_types";
 import { pageMetadata } from "@/components/website/utils/functions";
 import { Metadata } from "next";
 
-const Events = async () => {
-  const events = await fetchEvents();
+const Events = async ({
+  params,
+  searchParams,
+}: {
+  params: { slug: string };
+  searchParams?: { [key: string]: string };
+}) => {
+  const [events, locations] = await Promise.all([
+    fetchEvents(),
+    fetchLocations(),
+  ]);
   if (!events) return null;
-
+  const location = locations.find(
+    (location) => location.slug.current === searchParams?.location
+  );
   return (
     <div className="pb-20">
       <HeroSection>
         <HeroSectionContent events={events} />
       </HeroSection>
-      <UpcommingEvents upcommingevents={events} />
-      <PreviousEvents events={events} />
+      <EventsDisplayContainer locations={locations} events={events} />
     </div>
   );
 };

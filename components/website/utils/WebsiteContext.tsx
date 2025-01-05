@@ -1,6 +1,6 @@
 "use client";
 import { SetState } from "@/utils/uitypes";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useContext, createContext, useState, useEffect } from "react";
 interface IWebsiteContext {
   drawerOpen: boolean;
@@ -12,6 +12,8 @@ interface IWebsiteContext {
   addMinimalFooterVisiblePages: (page: string) => void;
   customActiveLink: string | null;
   makeCustomActiveLink: (link: string) => void;
+  preserveScroll: boolean;
+  setPreserveScroll: SetState<boolean>;
 }
 const WebsiteContext = createContext<IWebsiteContext | null>(null);
 export const WebsiteContextProvider = ({
@@ -20,6 +22,7 @@ export const WebsiteContextProvider = ({
   children: React.ReactNode;
 }) => {
   const pathName = usePathname();
+
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [speedDialInvisiblePages, setSpeedDialInvisiblePages] = useState<
     string[]
@@ -30,10 +33,12 @@ export const WebsiteContextProvider = ({
   const [minimalFooter, setMinimalFooter] = useState(false);
   const [speedDial, setSpeedDial] = useState(true);
   const [customActiveLink, setCustomActiveLink] = useState<string | null>(null);
+  const [preserveScroll, setPreserveScroll] = useState(false);
 
   useEffect(() => {
     setMinimalFooter(false);
     setDrawerOpen(false);
+    setPreserveScroll(false);
 
     if (speedDialInvisiblePages.includes(pathName)) {
       setSpeedDial(false);
@@ -76,6 +81,8 @@ export const WebsiteContextProvider = ({
         addMinimalFooterVisiblePages,
         customActiveLink,
         makeCustomActiveLink,
+        preserveScroll,
+        setPreserveScroll,
       }}
     >
       {children}

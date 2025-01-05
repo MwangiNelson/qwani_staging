@@ -61,6 +61,7 @@ export interface IEvent extends ISanityFetched {
   excerpt: string;
   description: any;
   gallery: ISanityAsset[];
+  county: ILocation;
 }
 
 export interface ITeamMember extends ISanityFetched {

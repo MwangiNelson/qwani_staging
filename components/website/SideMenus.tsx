@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import React, { useState } from "react";
 import { Button } from "../ui/button";
 import { FaInstagram, FaLink, FaLinkedin, FaXTwitter } from "react-icons/fa6";
@@ -9,8 +9,9 @@ import { IoMdClose } from "react-icons/io";
 import { motion } from "framer-motion";
 import { useWebsiteContext } from "./utils/WebsiteContext";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import { ILocation } from "@/utils/data_types";
 
-const SideMenus = () => {
+const SideMenus = ({ locations }: { locations: ILocation[] }) => {
   const { drawerOpen: open, setDrawerOpen: setOpen } = useWebsiteContext();
   return (
     <div className="h-screen relative bg-primary w-full">
@@ -30,13 +31,13 @@ const SideMenus = () => {
           <IoMdClose className="opacity-70" />
         </Button>
       </motion.div>
-      <MobileMenu />
+      <MobileMenu locations={locations} />
     </div>
   );
 };
 
 export default SideMenus;
-const MobileMenu = () => {
+const MobileMenu = ({ locations }: { locations: ILocation[] }) => {
   return (
     <div className="flex lg:hidden py-20 flex-col h-full px-8  ">
       <div className="flex gap-10 flex-col flex-grow justify-center">
@@ -47,13 +48,23 @@ const MobileMenu = () => {
             title="About"
             submenu={[
               { title: "About Us", link: "/about" },
+              //our team
+              { title: "Our Team", link: "/about#team" },
               { title: "How It Started", link: "/blogs/how-it-started" },
               { title: "How It Went", link: "/blogs/how-it-went" },
             ]}
           />
-          <CustomLink name="Events" url="/events" />
-          {/* <CustomLink name="Writers" url="/writers" />
-           */}
+          {/* <CustomLink name="Events" url="/events" /> */}
+          <DropdownLink
+            link="/events"
+            title="Events"
+            submenu={locations.map((location) => ({
+              title: location.title,
+              link: `/events?location=${location.slug.current}#location-events`,
+              isActive: location.slug.current === location.slug.current,
+            }))}
+          />
+
           <DropdownLink
             title="Writers"
             link="/writers"
@@ -162,10 +173,14 @@ const SocialLinks = () => {
 const DropdownLink = (props: {
   title: string;
   link: string;
+  paramsName?: string;
   submenu: { title: string; link: string }[];
 }) => {
   const { title, link, submenu } = props;
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const search = searchParams.get(props.paramsName || "");
 
   const toggleDropdown = () => setIsOpen(!isOpen);
 
@@ -186,15 +201,24 @@ const DropdownLink = (props: {
           transition={{ duration: 0.3 }}
           className="ml-4 flex flex-col overflow-hidden"
         >
-          {submenu.map((submenuItem, index) => (
-            <Link
-              key={index}
-              href={submenuItem.link}
-              className="py-2 px-4 text-white hover:bg-gray-600"
-            >
-              {submenuItem.title}
-            </Link>
-          ))}
+          {submenu.map((submenuItem, index) => {
+            const isActive =
+              pathname.split("/")[1] === submenuItem.link.split("/")[1] ||
+              submenuItem.link.split("=")[1]?.split("#")[0] === search;
+
+            return (
+              <Link
+                key={index}
+                href={submenuItem.link}
+                className={cn(
+                  "py-2 px-4 text-white hover:bg-gray-600",
+                  isActive && "underline underline-offset-4"
+                )}
+              >
+                {submenuItem.title}
+              </Link>
+            );
+          })}
         </motion.div>
       )}
     </div>

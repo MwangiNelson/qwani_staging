@@ -430,3 +430,15 @@ export const fetchLocations = async () => {
 
   return data;
 };
+//fetch location by slug
+export const fetchLocationBySlug = async (slug: string) => {
+  const query = `*[_type == "location" && slug.current == "${slug}"][0]{
+    ...
+  }`;
+  const data = await sanityFetch<ILocation>({
+    query,
+    tags: ["location"],
+  });
+
+  return data;
+};
