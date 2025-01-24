@@ -73,6 +73,9 @@ export interface ITeamMember extends ISanityFetched {
     twitter?: string;
     instagram?: string;
     tiktok?: string;
+    linkedIn?: string;
+    dribble?: string;
+    behance: string;
   };
   description: any;
 }

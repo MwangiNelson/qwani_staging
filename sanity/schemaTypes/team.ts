@@ -46,6 +46,22 @@ export default defineType({
         { name: "twitter", title: "Twitter", type: "url" },
         { name: "instagram", title: "Instagram", type: "url" },
         { name: "tiktok", title: "TikTok", type: "url" },
+        //linked in, dribble, behance
+        {
+          name: "linkedin",
+          title: "LinkedIn",
+          type: "url",
+        },
+        {
+          name: "dribble",
+          title: "Dribble",
+          type: "url",
+        },
+        {
+          name: "behance",
+          title: "Behance",
+          type: "url",
+        },
       ],
     }),
     defineField({

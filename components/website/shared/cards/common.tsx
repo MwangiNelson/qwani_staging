@@ -7,6 +7,8 @@ import Image from "next/image";
 import { FaAngleRight, FaInstagram, FaXTwitter } from "react-icons/fa6";
 import { Bookmark } from "lucide-react";
 import Link from "next/link";
+import { FaBehance } from "react-icons/fa";
+import { FaLinkedinIn } from "react-icons/fa";
 import {
   IAuthor,
   IEvent,
@@ -112,7 +114,7 @@ export const TeamMemberCard = ({ member }: { member: ITeamMember }) => {
       />
       <div className="absolute-cover bg-foreground/50 z-[-1]" />
       <CardContent className=" fx flex-col text-background py-4 h-full">
-        <h1 className="h3 ">
+        <h1 className="h3  flex-1">
           {/* Tole <br /> Rightson */}
           {member.name.split(" ").map((name, index) => (
             <span key={index}>
@@ -121,7 +123,7 @@ export const TeamMemberCard = ({ member }: { member: ITeamMember }) => {
             </span>
           ))}
         </h1>
-        <div className="fx-jb flex-1  items-end ">
+        <div className="fx-jb gap-1 items-end flex-wrap">
           <div className="fx-center gap-1">
             {member && member.socialLinks?.twitter && (
               <Button
@@ -157,6 +159,39 @@ export const TeamMemberCard = ({ member }: { member: ITeamMember }) => {
               >
                 <Link href={member.socialLinks.tiktok} target="_blank">
                   <FaTiktok />
+                </Link>
+              </Button>
+            )}
+            {member && member?.socialLinks?.behance && (
+              <Button
+                variant={"ghost"}
+                className="blur-bg rounded-full"
+                size={"icon"}
+              >
+                <Link href={member.socialLinks.behance} target="_blank">
+                  <FaLinkedinIn />
+                </Link>
+              </Button>
+            )}
+            {member && member?.socialLinks?.linkedIn && (
+              <Button
+                variant={"ghost"}
+                className="blur-bg rounded-full"
+                size={"icon"}
+              >
+                <Link href={member.socialLinks.linkedIn} target="_blank">
+                  <FaBehance />
+                </Link>
+              </Button>
+            )}
+            {member && member?.socialLinks?.dribble && (
+              <Button
+                variant={"ghost"}
+                className="blur-bg rounded-full"
+                size={"icon"}
+              >
+                <Link href={member.socialLinks.dribble} target="_blank">
+                  <FaBehance />
                 </Link>
               </Button>
             )}
