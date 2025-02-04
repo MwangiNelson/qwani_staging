@@ -155,7 +155,7 @@ export const EventsDisplay = ({
         return true;
       }
       if (event.county) {
-        return event.county.slug.current === location.slug.current;
+        return event?.county?.slug?.current === location?.slug?.current;
       }
 
       return false;
