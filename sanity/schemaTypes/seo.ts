@@ -22,6 +22,11 @@ export default defineType({
           { title: "Publications", value: "publications" },
           { title: "Contact", value: "contact" },
           { title: "Gallery", value: "gallery" },
+          //how it went
+          {
+            title: "How It Started",
+            value: "how-it-started",
+          },
         ],
       },
     }),

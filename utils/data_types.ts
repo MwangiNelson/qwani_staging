@@ -192,7 +192,8 @@ export type TPages =
   | "contact"
   | "blogs"
   | "events"
-  | "gallery";
+  | "gallery"
+  | "how-it-started";
 
 export interface IBlogsPage extends ISanityFetched {
   heroTitle: string;
