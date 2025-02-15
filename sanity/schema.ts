@@ -17,7 +17,7 @@ import contactPage from './schemaTypes/contactPage'
 import blogsPage from './schemaTypes/blogsPage'
 import gallery from './schemaTypes/gallery'
 import galleryPage from './schemaTypes/galleryPage'
-import { InferSchemaValues } from "@sanity-typed/types";
+import  how_it_started from "./schemaTypes/how_it_started.schema";
 import contributersPage from './schemaTypes/contributersPage'
 import location from './schemaTypes/location'
 export const schema: { types: SchemaTypeDefinition[] } = {
@@ -32,6 +32,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
   contactPage,
   blogsPage,
   contributersPage,
+  how_it_started,
   location
   ],
 }

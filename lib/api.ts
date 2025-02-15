@@ -9,6 +9,7 @@ import {
   IGallery,
   IGalleryPage,
   IHomePage,
+  IHowItStarted,
   ILocation,
   IPost,
   IPostCategory,
@@ -438,6 +439,18 @@ export const fetchLocationBySlug = async (slug: string) => {
   const data = await sanityFetch<ILocation>({
     query,
     tags: ["location"],
+  });
+
+  return data;
+};
+
+export const fetchHowItStartedPageContent = async () => {
+  const query = `*[_type == "how_it_started"][0]{
+    ...,
+  }`;
+  const data = await sanityFetch<IHowItStarted>({
+    query,
+    tags: ["how_it_started"],
   });
 
   return data;

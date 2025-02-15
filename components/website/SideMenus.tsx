@@ -50,7 +50,7 @@ const MobileMenu = ({ locations }: { locations: ILocation[] }) => {
               { title: "About Us", link: "/about" },
               //our team
               { title: "Our Team", link: "/about#team" },
-              { title: "How It Started", link: "/blogs/how-it-started" },
+              { title: "How It Started", link: "/how-it-started" },
               { title: "How It Went", link: "/blogs/how-it-went" },
             ]}
           />

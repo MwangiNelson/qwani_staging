@@ -15,7 +15,7 @@ const Portable_Text_Editor = ({
   classNames?: ClassValue
 }) => {
   return (
-    <div className={cn(`prose`, classNames)}>
+    <div className={cn(`prose max-w-full`, classNames)}>
       <PortableText value={body} components={myPortableTextComponents} />
     </div>
   );

@@ -233,3 +233,13 @@ export interface ILocation extends ISanityFetched {
   title: string;
   slug: ISlugSanity;
 }
+
+//HowItStartedPage
+
+export interface IHowItStarted extends ISanityFetched {
+  title: string;
+  description: string;
+  hero_images: ISanityAsset[];
+  body: any;
+  images: ISanityAsset[];
+}
