@@ -22,7 +22,7 @@ type Props = {
 export const How_It_Started_Hero = (props: Props) => {
   return (
     <div
-      className="bg-foreground min-h-screen
+      className="bg-foreground h-[60vh] md:h-screen  text-center p-4
      flex flex-col items-center pt-36"
     >
       <div className="max-w-md flex flex-col items-center gap-1">
@@ -39,7 +39,7 @@ export const How_It_Started_Hero = (props: Props) => {
 export const HowItStartedImage = (props: Props) => {
   const tabs = props.content.hero_images;
   return (
-    <div className="-mt-[360px] p-4 team-member-px ">
+    <div className="-mt-[200px] sm:-mt-[150px] md:-mt-[360px] p-4 team-member-px ">
       <Carousel className="text-background">
         <CarouselContent>
           {tabs.map((item, index) => {
@@ -93,7 +93,7 @@ const HeroEvent = ({
         width={2000}
         height={2000}
         objectFit="cover"
-        className="w-full object-cover h-[80vh]"
+        className="w-full object-cover h-[50vh] md:h-[80vh]"
       />
     </CarouselItem>
   );

@@ -59,7 +59,7 @@ export default function Footer() {
         </div>
         <div className="text-background mt-10 text-sm">
           <p>
-            &copy; 2024 Qwani. All rights reserved. Designed by Qwani. Powered
+            &copy; 2025 Qwani. All rights reserved. Designed by Qwani. Powered
             by{" "}
             <Link
               className="text-primary"

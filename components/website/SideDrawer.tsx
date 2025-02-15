@@ -34,10 +34,7 @@ export const SideDrawer = ({ locations }: { locations: ILocation[] }) => {
         ))}
       </button>
       {/* </SheetTrigger> */}
-      <SheetContent
-        closeBtn={false}
-        className="p-0 bg-primary outline-none border-none"
-      >
+      <SheetContent closeBtn={false} className="p-0  outline-none border-none">
         <SideMenus locations={locations} />
       </SheetContent>
     </Sheet>

@@ -39,9 +39,9 @@ const SideMenus = ({ locations }: { locations: ILocation[] }) => {
 export default SideMenus;
 const MobileMenu = ({ locations }: { locations: ILocation[] }) => {
   return (
-    <div className="flex lg:hidden py-20 flex-col h-full px-8  ">
-      <div className="flex gap-10 flex-col flex-grow justify-center">
-        <div className=" flex flex-col justify-center  gap-5 -mt-20 ">
+    <div className="flex lg:hidden py-10 flex-col h-[95vh] px-8">
+      <div className="flex gap-5 flex-col flex-1 overflow-y-auto">
+        <div className="flex flex-col gap-5 pt-10 pb-5">
           <CustomLink name="Home" url="/" />
           <DropdownLink
             link="/about"
@@ -108,7 +108,10 @@ const CustomLink = ({ name, url }: { name: string; url: string }) => {
   const isActive = pathname.split("/")[1] === url.split("/")[1];
 
   return (
-    <button className="group relative flex flex-col text-background" key={name}>
+    <button
+      className="group text-start relative flex flex-col  text-background"
+      key={name}
+    >
       <Link
         key={name}
         href={url}
