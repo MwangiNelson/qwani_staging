@@ -61,11 +61,16 @@ const Navbar = ({ locations }: { locations: ILocation[] }) => {
         <CustomLink name="Gallery" url="/gallery" />
         <OpenMenuOnHover
           link="/blogs/how-to-publish-with-qwani"
-          title="How To Publish"
+          title="Submit"
           submenu={[
             {
-              title: "Publish With Qwani",
+              title: "Submit to Qwani's blog",
               link: "/blogs/how-to-publish-with-qwani",
+            },
+            {
+              title: "How to publish your book with Qwani",
+              link:
+                "https://cdn.sanity.io/files/8w56yabk/production/bbed0ebb6e586f333c7e05fdf49f60ffa9079f5b.pdf",
             },
           ]}
         />
