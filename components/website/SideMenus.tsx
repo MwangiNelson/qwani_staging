@@ -92,7 +92,7 @@ const MobileMenu = ({ locations }: { locations: ILocation[] }) => {
             title="Submit"
             submenu={[
               {
-                title: "Submit to Qwani's blog",
+                title: "how to submit to Qwani's blog",
                 link: "/blogs/how-to-publish-with-qwani",
               },
               {
