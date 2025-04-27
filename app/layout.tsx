@@ -4,6 +4,8 @@ import "./globals.css";
 import "./website.css";
 import "yet-another-react-lightbox/styles.css";
 import { Toaster } from "sonner";
+import { TanstackProvider } from "@/components/providers/tanstack_provider";
+import { AuthContextProvider } from "@/components/providers/AuthContextProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 const mont = Montserrat({
@@ -32,8 +34,14 @@ export default function RootLayout({
         className={`
       ${mont.className} `}
       >
-        <Toaster/>
-        {children}
+        <TanstackProvider>
+          <AuthContextProvider>
+          <Toaster/>
+          {children}
+          </AuthContextProvider>
+     
+        </TanstackProvider> 
+      
       </body>
     </html>
   );

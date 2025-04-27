@@ -1,6 +1,8 @@
 import { fetchSeo } from "@/lib/api";
 import { imageUrl } from "@/sanity/lib/client";
 import { TPages } from "@/utils/data_types";
+import { createClient } from "@/utils/supabase/supabase_ client";
+import { Provider } from "@supabase/supabase-js";
 import { Metadata, ResolvingMetadata } from "next";
 
 export async function pageMetadata(page: TPages): Promise<Metadata> {
@@ -65,3 +67,20 @@ export const formatSanityDate = (date: string) => {
     day: "numeric",
   });
 };
+
+export async function socialAuth(provider: Provider) {
+  const url = `${window.location.origin}/auth/callback?next=${window.location.pathname}`;
+  await createClient()
+    .auth.signInWithOAuth({
+      provider,
+      options: {
+        redirectTo: url,
+      },
+    })
+    .then((res) => {
+      console.log({ res });
+    })
+    .catch((err) => {
+      throw new Error(err.message);
+    });
+}

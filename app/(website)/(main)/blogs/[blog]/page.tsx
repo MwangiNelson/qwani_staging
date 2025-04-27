@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import Lost from "@/components/website/lost";
+import CommentsBlogs from "@/components/website/pageUIs/blogs/comments.blogs";
 import {
   BlogProfileCard,
   ProfileCard,
@@ -40,9 +41,9 @@ const Hero = () => {
   return <div className="h-[100px] bg-foreground"></div>;
 };
 const Details = ({ blog }: { blog: IPost }) => {
-  console.log(blog.author.bio);
+  // console.log({ blog });
   return (
-    <div className="web-px  pt-10">
+    <div className="web-px  pt-10 space-y-4">
       <div className="fx flex-col items-start gap-2">
         <Button variant={"noEffect"} className="p-0 -ml-2" asChild>
           <BackButton text="Back to Blogs" />
@@ -92,6 +93,8 @@ const Details = ({ blog }: { blog: IPost }) => {
         <Portable_Text_Editor body={blog.body} />
       </div>
       <Separator />
+      <CommentsBlogs blogId={blog._id} />
+      <Separator />
       <div className="md:max-w-[600px] fx mt-4 flex-col p-4  gap-2 bg-foreground/5">
         <div className="flex flex-col md:flex-row gap-3">
           <Image
@@ -119,10 +122,10 @@ const Details = ({ blog }: { blog: IPost }) => {
     </div>
   );
 };
-export async function generateMetadata(
-  { params, searchParams }: Props,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+  searchParams,
+}: Props): Promise<Metadata> {
   const data = await fetchBlogBySlug(params.blog as string);
   if (!data) {
     return defaultMetadata();
