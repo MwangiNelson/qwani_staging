@@ -19,7 +19,14 @@ const SideMenus = ({ locations }: { locations: ILocation[] }) => {
         animate={{
           scale: open ? 1 : 0,
         }}
-        className="absolute z-20 top-5 right-5"
+        // className="absolute z-20 top-5 right-5"
+        style={{
+          scale: open ? 1 : 0,
+          display: "absolute",
+          zIndex: 20,
+          top: "20px",
+          right: "20px",
+        }}
       >
         <Button
           size={"icon"}
@@ -207,7 +214,13 @@ const DropdownLink = (props: {
           animate={{ height: "auto", opacity: 1 }}
           exit={{ height: 0, opacity: 0 }}
           transition={{ duration: 0.3 }}
-          className="ml-4 flex flex-col overflow-hidden"
+          // className="ml-4 flex flex-col overflow-hidden"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            overflow: "hidden",
+            marginLeft: "1rem",
+          }}
         >
           {submenu.map((submenuItem, index) => {
             const isActive =

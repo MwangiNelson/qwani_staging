@@ -88,7 +88,7 @@
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.13",
     "@types/node": "^20",
-    "@types/react": "^18",
+    "@types/react": "19.1.8",
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.2.4",
@@ -96,7 +96,7 @@
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "turbo": "^2.0.9",
-    "typescript": "^5"
+    "typescript": "5.8.3"
   },
   "peerDependencies": {
     "react": "^18.3.1",

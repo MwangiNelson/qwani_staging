@@ -6,6 +6,7 @@ import "yet-another-react-lightbox/styles.css";
 import { Toaster } from "sonner";
 import { TanstackProvider } from "@/components/providers/tanstack_provider";
 import { AuthContextProvider } from "@/components/providers/AuthContextProvider";
+import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
 const mont = Montserrat({
@@ -30,18 +31,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`
-      ${mont.className} `}
-      >
+      <body className={`${mont.className} `}>
+        <Script
+          src="https://onsite.optimonk.com/script.js?account=231860"
+          strategy="afterInteractive"
+        />
+
+        
         <TanstackProvider>
           <AuthContextProvider>
-          <Toaster/>
-          {children}
+            <Toaster/>
+            {children}
           </AuthContextProvider>
-     
-        </TanstackProvider> 
-      
+        </TanstackProvider>
       </body>
     </html>
   );

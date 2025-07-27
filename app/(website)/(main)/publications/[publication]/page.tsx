@@ -37,7 +37,7 @@ const Publication = async ({ params }: Props) => {
 };
 const HeroSection = ({ publication }: { publication: IPublication }) => {
   return (
-    <div className="bg-foreground web-px min-h-[90vh] md:h-screen text-background pt-36 md:pt-44">
+    <div className="bg-foreground web-px min-h-[90vh] md:h-screen text-background pt-36 md:pt-40">
       <div className="fx-col gap-1">
         <div>
           <BackButton text="Back To Publications" />
@@ -83,7 +83,7 @@ const PublicationsImagesSection = ({
   publication: IPublication;
 }) => {
   return (
-    <div className="-mt-[25vh]  web-px">
+    <div className="-mt-[23vh]  web-px">
       <Image
         alt={publication.title}
         src={imageUrl(publication.coverImage)}
@@ -101,7 +101,7 @@ const Details = ({ publication }: { publication: IPublication }) => {
         <div className="fx-col">
           <h3 className="ts5 font-semibold">Genre</h3>
           <p>
-            {publication.genre.map((genre, index) => (
+            {publication?.genre?.map((genre, index) => (
               <span key={index} className="mr-2">
                 {genre}
               </span>
