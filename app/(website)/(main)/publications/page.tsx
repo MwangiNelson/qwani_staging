@@ -33,6 +33,13 @@ const HeroSection = ({ content }: { content: IPublicationsPage }) => {
       <div className="fx-col gap-3">
         <h1 className="ts3 font-bold">{content.heroTitle}</h1>
         <p className="">{content.heroSubtitle}</p>
+        <div>
+          <Button asChild variant={"outlineNoEffect"}>
+            <a target="_blank" href={content.fileUrl}>
+              {content.ctaButton}
+            </a>
+          </Button>
+        </div>
       </div>
     </div>
   );

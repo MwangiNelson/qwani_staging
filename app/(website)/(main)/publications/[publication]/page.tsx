@@ -16,8 +16,6 @@ import {
 } from "@/components/website/utils/functions";
 import { imageUrl } from "@/sanity/lib/client";
 import { Sharing } from "@/components/website/shared/sharing";
-import { PortableText } from "next-sanity";
-import { myPortableTextComponents } from "@/components/website/utils/sanity_components";
 import { Metadata, ResolvingMetadata } from "next";
 import Lost from "@/components/website/lost";
 import Portable_Text_Editor from "@/components/website/shared/portable_text_editor";
