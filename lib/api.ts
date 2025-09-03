@@ -79,7 +79,8 @@ export const fetchAboutPageContent = async (): Promise<IAboutPage> => {
 
 export const fetchEvents = async (): Promise<IEvent[]> => {
   const query = `*[_type == "event"]{
-    ...
+    ...,
+    county->{...},
   }`;
   const data = await sanityFetch<IEvent[]>({
     query,

@@ -134,6 +134,11 @@ export const EventsDisplay = ({
   type,
 }: EventsDisplayProps) => {
   const [events, setEvents] = useState<IEvent[]>(initialEvents);
+  console.log({
+    location,
+    type,
+    initialEvents,
+  });
 
   useEffect(() => {
     const dateFiltered = initialEvents.filter((event) =>
@@ -255,7 +260,6 @@ export const EventsDisplayContainer = ({
   locations: ILocation[];
   events: IEvent[];
 }) => {
-  const pathname = usePathname();
   const searchParams = useSearchParams();
   const search = searchParams.get("location");
   const location = locations.find(

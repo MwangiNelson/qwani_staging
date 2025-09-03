@@ -6,15 +6,22 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-export const EventCardsHome = ({ homepage }: { homepage: IHomePage }) => {
-  const [events, setEvents] = useState<IEvent[]>(homepage.events);
-
+export const EventCardsHome = ({
+  homepage,
+  events,
+}: {
+  homepage: IHomePage;
+  events: IEvent[];
+}) => {
+  const [upcomingEvents, setUpcomingEvents] = useState<IEvent[]>([]);
   useEffect(() => {
-    const eventsFiltered = homepage.events.filter((event) => {
+    if (!events) return;
+    const upcomingEvents = events.filter((event) => {
+      if (!event) return false;
       return new Date(event.date) > new Date();
     });
-    setEvents(eventsFiltered);
-  }, [homepage]);
+    setUpcomingEvents(upcomingEvents);
+  }, [events]);
 
   return (
     <div className="web-px bg-[rgba(0,0,0,.98)] py-10 md:py-20 fx-col gap-5 mt-14 md:gap-10 relative">
@@ -34,8 +41,10 @@ export const EventCardsHome = ({ homepage }: { homepage: IHomePage }) => {
           {homepage.eventsDescription}
         </p>
       </div>
-      {events.length > 0 && <EventsCardsWrapper events={events} />}
-      {!events.length && (
+      {upcomingEvents.length > 0 && (
+        <EventsCardsWrapper events={upcomingEvents} />
+      )}
+      {!upcomingEvents.length && (
         <div className="fx-center min-h-[200px]">
           <p className="text-center text-lg font-medium text-background">
             No upcoming events

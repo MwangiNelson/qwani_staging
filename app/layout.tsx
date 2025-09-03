@@ -31,13 +31,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${mont.className} `}>
-        <Script
+        {/* <Script
           src="https://onsite.optimonk.com/script.js?account=231860"
           strategy="afterInteractive"
-        />
+        /> */}
+        <script type="text/javascript" src="https://onsite.optimonk.com/script.js?account=231860" async></script>
 
         
+      <body className={`${mont.className} `}>
+      
         <TanstackProvider>
           <AuthContextProvider>
             <Toaster/>
@@ -45,6 +47,7 @@ export default function RootLayout({
           </AuthContextProvider>
         </TanstackProvider>
       </body>
+      
     </html>
   );
 }

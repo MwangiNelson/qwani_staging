@@ -9,7 +9,7 @@ import {
   formatSanityText,
   pageMetadata,
 } from "@/components/website/utils/functions";
-import { fetchBlogs, fetchSeo, getHomePageContent } from "@/lib/api";
+import { fetchEvents, getHomePageContent } from "@/lib/api";
 import { cn } from "@/lib/utils";
 import { imageUrl } from "@/sanity/lib/client";
 import { IHomePage } from "@/utils/data_types";
@@ -17,7 +17,10 @@ import { Metadata, ResolvingMetadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 const Home = async () => {
-  const homepage = await getHomePageContent();
+  const [homepage, events] = await Promise.all([
+    getHomePageContent(),
+    fetchEvents(),
+  ]);
   if (!homepage) return null;
   return (
     <main className="">
@@ -38,7 +41,7 @@ const Home = async () => {
       </HeroUI>
       <AboutSection homepage={homepage} />
       <AboutCards homepage={homepage} />
-      <EventCardsHome homepage={homepage} />
+      <EventCardsHome homepage={homepage} events={events} />
       <Psection homepage={homepage} />
       <BlogsSections homepage={homepage} />
     </main>
