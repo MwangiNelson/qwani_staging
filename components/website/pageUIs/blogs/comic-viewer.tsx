@@ -12,43 +12,63 @@ interface ComicViewerProps {
 }
 
 export default function ComicViewer({ panels, title }: ComicViewerProps) {
-  const [currentPanel, setCurrentPanel] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set());
-  const touchStartX = useRef<number>(0);
-  const touchEndX = useRef<number>(0);
-  const lastTapTime = useRef<number>(0);
+  const [readingProgress, setReadingProgress] = useState(0);
+  const [autoScroll, setAutoScroll] = useState(false);
+  const [scrollSpeed, setScrollSpeed] = useState(1);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const autoScrollRef = useRef<NodeJS.Timeout | null>(null);
 
   const totalPanels = panels.length;
 
-  const goToNext = useCallback(() => {
-    if (currentPanel < totalPanels - 1) {
-      setCurrentPanel(currentPanel + 1);
-      if (!loadedImages.has(currentPanel + 1)) {
-        setIsLoading(true);
-      }
+  // Auto-scroll functionality
+  const startAutoScroll = useCallback(() => {
+    if (autoScrollRef.current) {
+      clearInterval(autoScrollRef.current);
     }
-  }, [currentPanel, totalPanels, loadedImages]);
 
-  const goToPrevious = useCallback(() => {
-    if (currentPanel > 0) {
-      setCurrentPanel(currentPanel - 1);
-      if (!loadedImages.has(currentPanel - 1)) {
-        setIsLoading(true);
+    autoScrollRef.current = setInterval(() => {
+      if (containerRef.current) {
+        containerRef.current.scrollTop += scrollSpeed;
       }
+    }, 50);
+  }, [scrollSpeed]);
+
+  const stopAutoScroll = useCallback(() => {
+    if (autoScrollRef.current) {
+      clearInterval(autoScrollRef.current);
+      autoScrollRef.current = null;
     }
-  }, [currentPanel, loadedImages]);
+  }, []);
 
-  const goToPanel = useCallback(
-    (index: number) => {
-      setCurrentPanel(index);
-      if (!loadedImages.has(index)) {
-        setIsLoading(true);
-      }
-    },
-    [loadedImages]
-  );
+  const toggleAutoScroll = useCallback(() => {
+    if (autoScroll) {
+      stopAutoScroll();
+      setAutoScroll(false);
+    } else {
+      startAutoScroll();
+      setAutoScroll(true);
+    }
+  }, [autoScroll, startAutoScroll, stopAutoScroll]);
+
+  // Scroll to top
+  const scrollToTop = useCallback(() => {
+    if (containerRef.current) {
+      containerRef.current.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, []);
+
+  // Scroll to bottom
+  const scrollToBottom = useCallback(() => {
+    if (containerRef.current) {
+      containerRef.current.scrollTo({
+        top: containerRef.current.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+  }, []);
 
   const toggleFullscreen = useCallback(() => {
     setIsFullscreen(!isFullscreen);
@@ -68,69 +88,68 @@ export default function ComicViewer({ panels, title }: ComicViewerProps) {
     }
   }, [isFullscreen]);
 
-  // Touch/Swipe handlers
-  const handleTouchStart = useCallback((e: React.TouchEvent) => {
-    touchStartX.current = e.targetTouches[0].clientX;
+  // Handle scroll progress
+  const handleScroll = useCallback(() => {
+    if (containerRef.current) {
+      const { scrollTop, scrollHeight, clientHeight } = containerRef.current;
+      const progress = (scrollTop / (scrollHeight - clientHeight)) * 100;
+      setReadingProgress(Math.min(100, Math.max(0, progress)));
+    }
   }, []);
 
-  const handleTouchMove = useCallback((e: React.TouchEvent) => {
-    touchEndX.current = e.targetTouches[0].clientX;
-  }, []);
-
-  const handleTouchEnd = useCallback(() => {
-    if (!touchStartX.current || !touchEndX.current) return;
-
-    const distance = touchStartX.current - touchEndX.current;
-    const isLeftSwipe = distance > 50;
-    const isRightSwipe = distance < -50;
-    const isTap = Math.abs(distance) < 10;
-
-    if (isLeftSwipe) {
-      goToNext();
-    } else if (isRightSwipe) {
-      goToPrevious();
-    } else if (isTap && isFullscreen) {
-      // Only handle taps in fullscreen mode to avoid interfering with normal navigation
+  // Double tap to toggle fullscreen
+  const lastTapTime = useRef<number>(0);
+  const handleDoubleTap = useCallback(
+    (e: React.MouseEvent) => {
       const currentTime = Date.now();
       const timeDiff = currentTime - lastTapTime.current;
 
       if (timeDiff < 300) {
-        // Double tap - exit fullscreen
-        setIsFullscreen(false);
-      } else {
-        // Single tap - show controls
-        resetControlsTimer();
+        toggleFullscreen();
       }
 
       lastTapTime.current = currentTime;
-    }
-  }, [goToNext, goToPrevious, isFullscreen, resetControlsTimer]);
+    },
+    [toggleFullscreen]
+  );
 
   // Handle image load
-  const handleImageLoad = useCallback(() => {
-    console.log(`Image loaded for panel ${currentPanel + 1}`);
-    setLoadedImages((prev) => new Set([...prev, currentPanel]));
-    setIsLoading(false);
-  }, [currentPanel]);
+  const handleImageLoad = useCallback(
+    (index: number) => {
+      console.log(`Image loaded for panel ${index + 1}`);
+      setLoadedImages((prev) => new Set([...prev, index]));
+
+      // Check if all images are loaded
+      const newLoadedImages = new Set([...loadedImages, index]);
+      if (newLoadedImages.size === panels.length) {
+        setIsLoading(false);
+      }
+    },
+    [loadedImages, panels.length]
+  );
 
   // Handle image error
-  const handleImageError = useCallback(() => {
-    console.warn(`Failed to load comic panel ${currentPanel + 1}`);
-    setIsLoading(false);
-  }, [currentPanel]);
+  const handleImageError = useCallback((index: number) => {
+    console.warn(`Failed to load comic panel ${index + 1}`);
+    setLoadedImages((prev) => new Set([...prev, index]));
+  }, []);
 
   // Keyboard navigation
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
-      if (e.key === "ArrowLeft") goToPrevious();
-      if (e.key === "ArrowRight") goToNext();
       if (e.key === "Escape") setIsFullscreen(false);
       if (e.key === "f" || e.key === "F") toggleFullscreen();
+      if (e.key === " ") {
+        e.preventDefault();
+        toggleAutoScroll();
+      }
+      if (e.key === "Home") scrollToTop();
+      if (e.key === "End") scrollToBottom();
     };
 
     window.addEventListener("keydown", handleKeyPress);
     return () => window.removeEventListener("keydown", handleKeyPress);
-  }, [goToPrevious, goToNext, toggleFullscreen]);
+  }, [toggleFullscreen, toggleAutoScroll, scrollToTop, scrollToBottom]);
 
   // Reset loading state when panel changes
   useEffect(() => {

@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import Lost from "@/components/website/lost";
 import CommentsBlogs from "@/components/website/pageUIs/blogs/comments.blogs";
-import ComicViewer from "@/components/website/pageUIs/blogs/comic-viewer";
+import VerticalComicViewer from "@/components/website/pageUIs/blogs/vertical-comic-viewer";
 import {
   BlogProfileCard,
   ProfileCard,
@@ -108,7 +108,10 @@ const Details = ({ blog }: { blog: IPost }) => {
         {isComic ? (
           <div className="comic-content">
             {blog.comicContent && blog.comicContent.length > 0 ? (
-              <ComicViewer panels={blog.comicContent} title={blog.title} />
+              <VerticalComicViewer
+                panels={blog.comicContent}
+                title={blog.title}
+              />
             ) : (
               <div className="flex items-center justify-center h-96 bg-gray-100 rounded-lg">
                 <p className="text-gray-500">No comic panels available</p>
