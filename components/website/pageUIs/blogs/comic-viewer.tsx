@@ -312,21 +312,27 @@ export default function ComicViewer({ panels, title }: ComicViewerProps) {
           showControls || !isFullscreen ? "opacity-100" : "opacity-0"
         }`}
       >
-        <div className="web-px py-4">
+        <div className="web-px py-3 md:py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <h2 className="text-xl font-bold text-primary">{title}</h2>
-              <span className="text-sm text-gray-500">
-                Panel {currentPanel + 1} of {totalPanels}
+            <div className="flex items-center gap-2 md:gap-4 min-w-0 flex-1">
+              <h2 className="text-lg md:text-xl font-bold text-primary truncate">
+                {title}
+              </h2>
+              <span className="text-xs md:text-sm text-gray-500 whitespace-nowrap">
+                {currentPanel + 1}/{totalPanels}
               </span>
             </div>
             <Button
               variant="ghost"
               size="sm"
               onClick={toggleFullscreen}
-              className="text-primary bg-primary/10 hover:bg-primary/20"
+              className="text-primary bg-primary/10 hover:bg-primary/20 flex-shrink-0"
             >
-              {isFullscreen ? <Minimize2 size={20} /> : <Maximize2 size={20} />}
+              {isFullscreen ? (
+                <Minimize2 size={18} className="md:w-5 md:h-5" />
+              ) : (
+                <Maximize2 size={18} className="md:w-5 md:h-5" />
+              )}
             </Button>
           </div>
         </div>
@@ -347,6 +353,27 @@ export default function ComicViewer({ panels, title }: ComicViewerProps) {
           onTouchEnd={handleTouchEnd}
           onClick={isFullscreen ? resetControlsTimer : undefined}
         >
+          {/* Mobile Touch Areas for Navigation */}
+          {!isFullscreen && (
+            <>
+              {/* Left touch area for previous */}
+              <div
+                className="absolute left-0 top-0 bottom-0 w-1/3 z-10 md:hidden"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  goToPrevious();
+                }}
+              />
+              {/* Right touch area for next */}
+              <div
+                className="absolute right-0 top-0 bottom-0 w-1/3 z-10 md:hidden"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  goToNext();
+                }}
+              />
+            </>
+          )}
           <div className="relative group">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -359,14 +386,15 @@ export default function ComicViewer({ panels, title }: ComicViewerProps) {
               }
               className={`${
                 isFullscreen
-                  ? "max-h-[98vh] max-w-[95vw] w-auto h-auto object-contain"
-                  : "w-full h-auto max-h-[80vh] object-contain rounded-lg cursor-pointer hover:opacity-95 transition-all duration-300"
+                  ? "max-h-[96vh] max-w-[98vw] w-auto h-auto object-contain"
+                  : "w-full h-auto max-h-[85vh] md:max-h-[80vh] object-contain rounded-lg cursor-pointer hover:opacity-95 transition-all duration-300"
               } transition-all duration-300`}
               onLoad={handleImageLoad}
               onError={handleImageError}
               onClick={toggleFullscreen}
               style={{
                 imageRendering: "-webkit-optimize-contrast",
+                minHeight: isFullscreen ? "auto" : "60vh",
               }}
               loading="eager"
             />
@@ -390,14 +418,14 @@ export default function ComicViewer({ panels, title }: ComicViewerProps) {
             <div
               className={`${
                 isFullscreen
-                  ? "absolute bottom-0 left-0 right-0 bg-black/80 backdrop-blur-sm p-4"
-                  : "mt-4 p-4 bg-gray-50 rounded-lg"
+                  ? "absolute bottom-0 left-0 right-0 bg-black/80 backdrop-blur-sm p-3 md:p-4"
+                  : "mt-3 md:mt-4 p-3 md:p-4 bg-gray-50 rounded-lg"
               }`}
             >
               <p
                 className={`${
                   isFullscreen ? "text-white text-center" : "text-gray-700"
-                } text-sm leading-relaxed`}
+                } text-sm md:text-base leading-relaxed`}
               >
                 {currentPanelData.caption}
               </p>
@@ -416,8 +444,8 @@ export default function ComicViewer({ panels, title }: ComicViewerProps) {
           showControls || !isFullscreen ? "opacity-100" : "opacity-0"
         }`}
       >
-        <div className="web-px py-4">
-          <div className="flex items-center justify-between">
+        <div className="web-px py-3 md:py-4">
+          <div className="flex items-center justify-between gap-2">
             {/* Previous Button */}
             <Button
               variant="ghost"
@@ -426,14 +454,14 @@ export default function ComicViewer({ panels, title }: ComicViewerProps) {
               disabled={currentPanel === 0}
               className={`${
                 isFullscreen ? "text-white hover:bg-white/20" : ""
-              } disabled:opacity-50`}
+              } disabled:opacity-50 text-sm md:text-base px-2 md:px-4`}
             >
-              <ChevronLeft size={20} />
-              Previous
+              <ChevronLeft size={18} className="md:w-5 md:h-5" />
+              <span className="hidden sm:inline ml-1">Previous</span>
             </Button>
 
-            {/* Panel Thumbnails */}
-            <div className="flex gap-2 max-w-md overflow-x-auto">
+            {/* Panel Thumbnails - Hidden on mobile, shown on larger screens */}
+            <div className="hidden md:flex gap-2 max-w-md overflow-x-auto">
               {panels.map((panel, index) => (
                 <button
                   key={panel._key}
@@ -454,6 +482,13 @@ export default function ComicViewer({ panels, title }: ComicViewerProps) {
               ))}
             </div>
 
+            {/* Mobile Panel Counter */}
+            <div className="md:hidden flex items-center gap-2">
+              <span className="text-sm font-medium text-gray-600">
+                {currentPanel + 1} / {totalPanels}
+              </span>
+            </div>
+
             {/* Next Button */}
             <Button
               variant="ghost"
@@ -462,10 +497,10 @@ export default function ComicViewer({ panels, title }: ComicViewerProps) {
               disabled={currentPanel === totalPanels - 1}
               className={`${
                 isFullscreen ? "text-white hover:bg-white/20" : ""
-              } disabled:opacity-50`}
+              } disabled:opacity-50 text-sm md:text-base px-2 md:px-4`}
             >
-              Next
-              <ChevronRight size={20} />
+              <span className="hidden sm:inline mr-1">Next</span>
+              <ChevronRight size={18} className="md:w-5 md:h-5" />
             </Button>
           </div>
         </div>
@@ -510,8 +545,8 @@ export default function ComicViewer({ panels, title }: ComicViewerProps) {
 
       {/* Mobile Swipe Indicator */}
       {!isFullscreen && (
-        <div className="md:hidden text-center text-sm text-gray-500 mt-2">
-          Swipe to navigate • Tap image to fullscreen
+        <div className="md:hidden text-center text-xs text-gray-500 mt-2 px-4">
+          Swipe left/right to navigate • Tap image to fullscreen
         </div>
       )}
 
