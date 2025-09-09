@@ -12,6 +12,7 @@ interface ComicViewerProps {
 }
 
 export default function ComicViewer({ panels, title }: ComicViewerProps) {
+  const [currentPanel, setCurrentPanel] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set());
@@ -22,6 +23,28 @@ export default function ComicViewer({ panels, title }: ComicViewerProps) {
   const autoScrollRef = useRef<NodeJS.Timeout | null>(null);
 
   const totalPanels = panels.length;
+
+  // Navigation functions
+  const goToNext = useCallback(() => {
+    if (currentPanel < totalPanels - 1) {
+      setCurrentPanel(currentPanel + 1);
+    }
+  }, [currentPanel, totalPanels]);
+
+  const goToPrevious = useCallback(() => {
+    if (currentPanel > 0) {
+      setCurrentPanel(currentPanel - 1);
+    }
+  }, [currentPanel]);
+
+  const goToPanel = useCallback(
+    (index: number) => {
+      if (index >= 0 && index < totalPanels) {
+        setCurrentPanel(index);
+      }
+    },
+    [totalPanels]
+  );
 
   // Auto-scroll functionality
   const startAutoScroll = useCallback(() => {
@@ -97,6 +120,32 @@ export default function ComicViewer({ panels, title }: ComicViewerProps) {
     }
   }, []);
 
+  // Touch event handlers for mobile navigation
+  const touchStartX = useRef<number>(0);
+  const touchEndX = useRef<number>(0);
+
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    touchStartX.current = e.targetTouches[0].clientX;
+  }, []);
+
+  const handleTouchMove = useCallback((e: React.TouchEvent) => {
+    touchEndX.current = e.targetTouches[0].clientX;
+  }, []);
+
+  const handleTouchEnd = useCallback(() => {
+    if (!touchStartX.current || !touchEndX.current) return;
+
+    const distance = touchStartX.current - touchEndX.current;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+
+    if (isLeftSwipe) {
+      goToNext();
+    } else if (isRightSwipe) {
+      goToPrevious();
+    }
+  }, [goToNext, goToPrevious]);
+
   // Double tap to toggle fullscreen
   const lastTapTime = useRef<number>(0);
   const handleDoubleTap = useCallback(
@@ -114,25 +163,18 @@ export default function ComicViewer({ panels, title }: ComicViewerProps) {
   );
 
   // Handle image load
-  const handleImageLoad = useCallback(
-    (index: number) => {
-      console.log(`Image loaded for panel ${index + 1}`);
-      setLoadedImages((prev) => new Set([...prev, index]));
-
-      // Check if all images are loaded
-      const newLoadedImages = new Set([...loadedImages, index]);
-      if (newLoadedImages.size === panels.length) {
-        setIsLoading(false);
-      }
-    },
-    [loadedImages, panels.length]
-  );
+  const handleImageLoad = useCallback(() => {
+    console.log(`Image loaded for panel ${currentPanel + 1}`);
+    setLoadedImages((prev) => new Set([...prev, currentPanel]));
+    setIsLoading(false);
+  }, [currentPanel]);
 
   // Handle image error
-  const handleImageError = useCallback((index: number) => {
-    console.warn(`Failed to load comic panel ${index + 1}`);
-    setLoadedImages((prev) => new Set([...prev, index]));
-  }, []);
+  const handleImageError = useCallback(() => {
+    console.warn(`Failed to load comic panel ${currentPanel + 1}`);
+    setLoadedImages((prev) => new Set([...prev, currentPanel]));
+    setIsLoading(false);
+  }, [currentPanel]);
 
   // Keyboard navigation
   useEffect(() => {
@@ -143,13 +185,22 @@ export default function ComicViewer({ panels, title }: ComicViewerProps) {
         e.preventDefault();
         toggleAutoScroll();
       }
+      if (e.key === "ArrowLeft") goToPrevious();
+      if (e.key === "ArrowRight") goToNext();
       if (e.key === "Home") scrollToTop();
       if (e.key === "End") scrollToBottom();
     };
 
     window.addEventListener("keydown", handleKeyPress);
     return () => window.removeEventListener("keydown", handleKeyPress);
-  }, [toggleFullscreen, toggleAutoScroll, scrollToTop, scrollToBottom]);
+  }, [
+    toggleFullscreen,
+    toggleAutoScroll,
+    goToPrevious,
+    goToNext,
+    scrollToTop,
+    scrollToBottom,
+  ]);
 
   // Reset loading state when panel changes
   useEffect(() => {
@@ -174,6 +225,8 @@ export default function ComicViewer({ panels, title }: ComicViewerProps) {
       setIsLoading(true);
       // Reset loaded images when panels change
       setLoadedImages(new Set());
+      // Reset to first panel when panels change
+      setCurrentPanel(0);
     }
   }, [panels]);
 
