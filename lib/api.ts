@@ -36,7 +36,12 @@ export const fetchBlogs = async () => {
    ...,
     author->{...},
     categories[]->{...},
-   
+    comicContent[]{
+      _key,
+      _type,
+      image,
+      caption
+    }
   }`;
   const data = await sanityFetch<IPost[]>({
     query,
@@ -53,7 +58,13 @@ export const getHomePageContent = async (): Promise<IHomePage> => {
      blogs[]->{ 
       ...,
       author->{...},
-      categories[]->{...}
+      categories[]->{...},
+      comicContent[]{
+        _key,
+        _type,
+        image,
+        caption
+      }
     }
     
   }`;
@@ -186,6 +197,12 @@ export const fetchBlogById = async (id: string) => {
     ...,
     author->{name, image},
     categories[]->{...},
+    comicContent[]{
+      _key,
+      _type,
+      image,
+      caption
+    }
   }`;
   const data = await sanityFetch<IPost>({
     query,
@@ -201,6 +218,12 @@ export const fetchBlogBySlug = async (slug: string) => {
     ...,
     author->{...},
     categories[]->{...},
+    comicContent[]{
+      _key,
+      _type,
+      image,
+      caption
+    }
   }`;
   const data = await sanityFetch<IPost>({
     query,

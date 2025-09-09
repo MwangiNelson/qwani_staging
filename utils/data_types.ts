@@ -32,6 +32,13 @@ export interface IPostCategory extends ISanityFetched {
   description: string;
 }
 
+export interface IComicPanel {
+  _key: string;
+  _type: string;
+  image: ISanityAsset;
+  caption?: string;
+}
+
 export interface IPost extends ISanityFetched {
   title: string;
   slug: {
@@ -43,7 +50,9 @@ export interface IPost extends ISanityFetched {
   categories?: [IPostCategory];
   publishedAt: string;
   excerpt: string;
-  body: any;
+  postType: "blog" | "comic";
+  body?: any;
+  comicContent?: IComicPanel[];
 }
 export interface IEvent extends ISanityFetched {
   title: string;

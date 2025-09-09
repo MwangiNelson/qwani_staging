@@ -3,16 +3,18 @@ import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { ProfileCard, ProfileCardWithBookMark } from "./common";
+import { formatSanityDate } from "@/components/website/utils/functions";
 
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { IPost } from "@/utils/data_types";
 import { imageUrl } from "@/sanity/lib/client";
-import { formatSanityDate } from "../../utils/functions";
 export const BlogCardMain: React.FC<{
   blog: IPost;
   bg?: "background" | "foreground";
 }> = ({ bg = "background", blog }) => {
+  const isComic = blog.postType === "comic";
+
   return (
     <Card
       className={cn(
@@ -26,6 +28,11 @@ export const BlogCardMain: React.FC<{
       `}
       >
         <div className="top-0 absolute fx gap-1">
+          {isComic && (
+            <Badge variant={"default"} className="bg-blue-500 text-white">
+              COMIC
+            </Badge>
+          )}
           {blog.categories
             ? blog.categories.map((category, index) => (
                 <Badge key={index} variant={"outline"}>

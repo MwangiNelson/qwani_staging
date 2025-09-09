@@ -58,10 +58,30 @@ export default defineType({
           .warning("Shorter is better"),
     }),
     defineField({
+      name: "postType",
+      title: "Post Type",
+      type: "string",
+      options: {
+        list: [
+          { title: "Blog Post", value: "blog" },
+          { title: "Comic", value: "comic" },
+        ],
+        layout: "radio",
+      },
+      initialValue: "blog",
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: "body",
       title: "Body",
       type: "blockContent",
-      validation: (Rule) => Rule.required(),
+      hidden: ({ parent }) => parent?.postType !== "blog",
+    }),
+    defineField({
+      name: "comicContent",
+      title: "Comic Content",
+      type: "comicContent",
+      hidden: ({ parent }) => parent?.postType !== "comic",
     }),
   ],
 
@@ -70,10 +90,15 @@ export default defineType({
       title: "title",
       author: "author.name",
       media: "mainImage",
+      postType: "postType",
     },
     prepare(selection) {
-      const { author } = selection;
-      return { ...selection, subtitle: author && `by ${author}` };
+      const { author, postType } = selection;
+      const typeLabel = postType === "comic" ? "Comic" : "Blog";
+      return {
+        ...selection,
+        subtitle: author && `by ${author} • ${typeLabel}`,
+      };
     },
   },
 });
