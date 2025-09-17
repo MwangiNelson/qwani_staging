@@ -44,7 +44,7 @@
     "@sanity-typed/types": "^6.3.6",
     "@sanity/image-url": "^1.0.2",
     "@sanity/vision": "^3.48.1",
-    "@supabase/ssr": "^0.6.1",
+    "@supabase/ssr": "^0.7.0",
     "@supabase/supabase-js": "^2.49.4",
     "@tanstack/react-query": "^5.74.4",
     "@tanstack/react-query-devtools": "^5.74.6",

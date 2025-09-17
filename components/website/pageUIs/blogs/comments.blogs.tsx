@@ -147,8 +147,8 @@ export default function CommentsBlogs({ blogId }: Props) {
                   ? "Updating..."
                   : "Submitting..."
                 : editingCommentId
-                ? "Update"
-                : "Submit"}
+                  ? "Update"
+                  : "Submit"}
             </Button>
           </div>
         </form>
