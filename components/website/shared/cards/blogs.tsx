@@ -94,7 +94,7 @@ const BlogHorizontalCard = ({ blog }: { blog: IPost }) => {
             </div>
             <h4 className="ts6 font-semibold text-background">{blog?.title}</h4>
             <p className=" text-md ">
-              {blog?.excerpt.slice(0, 100).concat("...")}
+              {blog?.excerpt?.slice(0, 100).concat("...")}
             </p>
             <ProfileCard
               date={formatSanityDate(blog?.publishedAt)}

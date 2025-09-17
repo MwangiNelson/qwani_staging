@@ -42,7 +42,8 @@ export const fetchBlogs = async () => {
       image,
       caption
     }
-  }`;
+  }|order(publishedAt desc)`;
+
   const data = await sanityFetch<IPost[]>({
     query,
     tags: ["post"],
@@ -479,3 +480,4 @@ export const fetchHowItStartedPageContent = async () => {
 
   return data;
 };
+//fetch ;ates 6 blogs

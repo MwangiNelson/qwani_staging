@@ -3,6 +3,8 @@ import { Separator } from "@/components/ui/separator";
 import Lost from "@/components/website/lost";
 import CommentsBlogs from "@/components/website/pageUIs/blogs/comments.blogs";
 import VerticalComicViewer from "@/components/website/pageUIs/blogs/vertical-comic-viewer";
+import FlipbookComicViewer from "@/components/website/pageUIs/blogs/flipbook-comic-viewer";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   BlogProfileCard,
   ProfileCard,
@@ -108,10 +110,24 @@ const Details = ({ blog }: { blog: IPost }) => {
         {isComic ? (
           <div className="comic-content">
             {blog.comicContent && blog.comicContent.length > 0 ? (
-              <VerticalComicViewer
-                panels={blog.comicContent}
-                title={blog.title}
-              />
+              <Tabs defaultValue="flipbook" className="w-full">
+                <TabsList className="mb-4">
+                  <TabsTrigger value="flipbook">Flipbook</TabsTrigger>
+                  <TabsTrigger value="vertical">Vertical</TabsTrigger>
+                </TabsList>
+                <TabsContent value="flipbook">
+                  <FlipbookComicViewer
+                    panels={blog.comicContent}
+                    title={blog.title}
+                  />
+                </TabsContent>
+                <TabsContent value="vertical">
+                  <VerticalComicViewer
+                    panels={blog.comicContent}
+                    title={blog.title}
+                  />
+                </TabsContent>
+              </Tabs>
             ) : (
               <div className="flex items-center justify-center h-96 bg-gray-100 rounded-lg">
                 <p className="text-gray-500">No comic panels available</p>

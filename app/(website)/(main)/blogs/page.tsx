@@ -21,6 +21,7 @@ import Link from "next/link";
 import React from "react";
 interface IContent {
   content: IBlogsPage;
+  blogs: IPost[];
 }
 const Blogs = async () => {
   const [content, categories, blogs] = await Promise.all([
@@ -31,14 +32,14 @@ const Blogs = async () => {
 
   return (
     <div>
-      <HeroSection content={content} />
-      <TrendingBlogs content={content} />
+      <HeroSection content={content} blogs={blogs} />
+      <TrendingBlogs content={content} blogs={blogs} />
       <BlogCategories categories={categories} blogs={blogs} />
       <AllBlogs blogs={blogs} />
     </div>
   );
 };
-const HeroSection = ({ content }: IContent) => {
+const HeroSection = ({ content, blogs }: IContent) => {
   return (
     <div className="bg-foreground min-h-screen web-px  relative text-background pt-32 pb-20">
       <div className="fx-center ">
@@ -60,8 +61,8 @@ const HeroSection = ({ content }: IContent) => {
         </Button>
       </div>
       <div className="blog-px fx flex-col md:flex-row mt-10  gap-14 md:gap-10">
-        <BlogCardMain bg="foreground" blog={content.heroBlog} />
-        <BlogListHero blogs={content.heroBlogs} />
+        <BlogCardMain bg="foreground" blog={blogs[0]} />
+        <BlogListHero blogs={blogs.slice(1, 3)} />
       </div>
     </div>
   );
