@@ -55,6 +55,7 @@ export default function Footer() {
             <Links links={footer_quickLinks} title={"Quick Links"} />
             <Links links={footer_links} title={"Links"} />
             <Links links={socials} title={"Socials"} />
+            <Links links={books_amazonLinks} title={"Books on Amazon"} />
           </div>
         </div>
         <div className="text-background mt-10 text-sm">
@@ -64,7 +65,7 @@ export default function Footer() {
             <Link
               className="text-primary"
               target="_blank"
-              href="https://rightson.vercel.app"
+              href="https://rightson.xyz"
             >
               Chari Designs
             </Link>
@@ -139,5 +140,11 @@ const socials = [
   {
     name: "LinkedIn",
     link: "https://www.linkedin.com/company/qwani/",
+  },
+];
+const books_amazonLinks = [
+  {
+    name: "Qwani Book One'",
+    link: "https://www.amazon.co.uk/dp/B0FVPMFFL2",
   },
 ];
