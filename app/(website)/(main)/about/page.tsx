@@ -95,7 +95,7 @@ const AboutQwaniSection = ({ about }: { about: IAboutPage }) => {
             </div>
             <div className="hidden md:block">
               <blockquote className="font-playfair text-2xl md:text-3xl italic text-foreground/60 border-l-4 border-primary pl-6">
-                "Empowering young voices to tell stories that matter."
+              &quot;Empowering young voices to tell stories that matter.&quot;
               </blockquote>
             </div>
           </div>
