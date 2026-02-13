@@ -199,7 +199,7 @@ export const AllBlogsCards = ({ blogs }: { blogs: IPost[] }) => {
       {/* End message */}
       {!hasMore && blogs.length > INITIAL_COUNT && (
         <p className="text-center font-dm-sans text-muted-foreground">
-          You've reached the end. {blogs.length} stories in total.
+          You&apos;ve reached the end. {blogs.length} stories in total.
         </p>
       )}
     </div>
