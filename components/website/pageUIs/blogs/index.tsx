@@ -9,33 +9,48 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { BlogCardMain, BlogCardPrimary } from "../../shared/cards/blogs";
+import { BlogCardEditorial } from "../../shared/cards/blogs";
 import { IPost, IPostCategory } from "@/utils/data_types";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
 
 export function TrendingBlogsWrapper({ blogs }: { blogs: IPost[] }) {
+  if (!blogs || blogs.length === 0) return null;
+
   return (
-    <Carousel className="w-full   ">
-      <CarouselContent className="gap-1 ">
+    <Carousel
+      className="w-full"
+      opts={{
+        align: "start",
+        loop: true,
+      }}
+    >
+      <CarouselContent className="-ml-4">
         {blogs.map((item, index) => (
           <CarouselItem
             key={index}
-            className=" basis-[85%] md:basis-1/3 
-          h-full
-          "
+            className="pl-4 basis-[85%] sm:basis-1/2 lg:basis-1/3"
           >
-            <BlogCardPrimary blog={item} />
+            <div
+              className="animate-fade-in opacity-0"
+              style={{ animationDelay: `${index * 0.1}s`, animationFillMode: "forwards" }}
+            >
+              <BlogCardEditorial blog={item} showExcerpt={false} />
+            </div>
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
+      <div className="flex justify-center gap-2 mt-8">
+        <CarouselPrevious className="relative inset-0 translate-x-0 translate-y-0 h-10 w-10 border-2 border-foreground/20 hover:border-primary hover:bg-primary hover:text-white transition-all" />
+        <CarouselNext className="relative inset-0 translate-x-0 translate-y-0 h-10 w-10 border-2 border-foreground/20 hover:border-primary hover:bg-primary hover:text-white transition-all" />
+      </div>
     </Carousel>
   );
 }
+
 export const BlogCategoriesFilter = ({
   blogs,
   categories,
@@ -43,7 +58,6 @@ export const BlogCategoriesFilter = ({
   blogs: IPost[];
   categories: IPostCategory[];
 }) => {
-  // Filter categories to only include those with associated blogs
   const categoriesWithBlogs = React.useMemo(() => {
     return categories.filter((category) =>
       blogs.some((blog) =>
@@ -52,48 +66,68 @@ export const BlogCategoriesFilter = ({
     );
   }, [blogs, categories]);
 
-  const [activeCategory, setActiveCategory] = React.useState<IPostCategory>(
-    categoriesWithBlogs[0] || categories[0]
+  const [activeCategory, setActiveCategory] = React.useState<IPostCategory | null>(
+    categoriesWithBlogs[0] || null
   );
 
-  const activeBlogs = blogs.filter((blog) =>
-    blog.categories?.find((category) => category._id === activeCategory._id)
-  );
+  const activeBlogs = React.useMemo(() => {
+    if (!activeCategory) return [];
+    return blogs.filter((blog) =>
+      blog.categories?.find((category) => category._id === activeCategory._id)
+    );
+  }, [blogs, activeCategory]);
+
+  if (categoriesWithBlogs.length === 0) return null;
 
   return (
-    <div className="bg-background py-5 web-px">
-      <div className="fx-center">
-        <div className="max-w-screen-sm flex flex-wrap fx-center ">
-          {categoriesWithBlogs.map((category, index) => (
-            <Badge
-              key={index}
-              className={cn(
-                "mr-2 mb-2 cursor-pointer",
-                activeCategory._id === category._id
-                  ? "bg-primary text-background "
-                  : "bg-transparent text-foreground border-border hover:text-background"
-              )}
-              onClick={() => setActiveCategory(category)}
-            >
-              {category.title}
-            </Badge>
-          ))}
-        </div>
+    <div className="space-y-8">
+      {/* Category Pills */}
+      <div className="flex flex-wrap justify-center gap-2">
+        {categoriesWithBlogs.map((category, index) => (
+          <button
+            key={index}
+            onClick={() => setActiveCategory(category)}
+            className={cn(
+              "px-5 py-2.5 rounded-full font-dm-sans text-sm font-medium transition-all duration-300",
+              activeCategory?._id === category._id
+                ? "bg-primary text-white shadow-md"
+                : "bg-white text-foreground border border-gray-200 hover:border-primary hover:text-primary"
+            )}
+          >
+            {category.title}
+          </button>
+        ))}
       </div>
-      <div className="w-full fx-center mt-5">
-        <div className="fx-col items-center">
-          <h1 className="ts7 font-semibold ">{activeCategory.title}</h1>
-          <Separator className="bg-secondary  w-[70px] h-[2px]" />
+
+      {/* Active Category Header */}
+      {activeCategory && (
+        <div className="text-center">
+          <h3 className="font-playfair text-xl font-semibold text-foreground">
+            {activeCategory.title}
+          </h3>
+          <p className="font-dm-sans text-sm text-muted-foreground mt-1">
+            {activeBlogs.length} {activeBlogs.length === 1 ? "story" : "stories"}
+          </p>
         </div>
-      </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 md:gap-5 mt-5 ">
+      )}
+
+      {/* Blog Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {activeBlogs.length > 0 ? (
           activeBlogs.map((blog, index) => (
-            <BlogCardMain bg="background" key={index} blog={blog} />
+            <div
+              key={blog._id || index}
+              className="animate-fade-in opacity-0"
+              style={{ animationDelay: `${index * 0.05}s`, animationFillMode: "forwards" }}
+            >
+              <BlogCardEditorial blog={blog} size="compact" />
+            </div>
           ))
         ) : (
-          <div className="fx-center w-full col-span-4">
-            <p className="text-center text-md">No blogs found</p>
+          <div className="col-span-full py-12 text-center">
+            <p className="font-dm-sans text-muted-foreground">
+              No stories found in this category.
+            </p>
           </div>
         )}
       </div>
@@ -102,37 +136,72 @@ export const BlogCategoriesFilter = ({
 };
 
 export const AllBlogsCards = ({ blogs }: { blogs: IPost[] }) => {
-  const [visibleBlogs, setVisibleBlogs] = React.useState<IPost[]>(
-    blogs.slice(0, 20)
-  );
-  const [moreBlogs, setMoreBlogs] = React.useState<boolean>(true);
-  React.useEffect(() => {
-    if (visibleBlogs.length >= blogs.length) {
-      setMoreBlogs(false);
-    }
-  }, [blogs, visibleBlogs]);
+  const INITIAL_COUNT = 12;
+  const LOAD_MORE_COUNT = 8;
+
+  const [visibleCount, setVisibleCount] = React.useState(INITIAL_COUNT);
+  const [isLoading, setIsLoading] = React.useState(false);
+
+  const visibleBlogs = blogs.slice(0, visibleCount);
+  const hasMore = visibleCount < blogs.length;
+
+  const handleLoadMore = () => {
+    setIsLoading(true);
+    // Simulate a slight delay for better UX
+    setTimeout(() => {
+      setVisibleCount((prev) => Math.min(prev + LOAD_MORE_COUNT, blogs.length));
+      setIsLoading(false);
+    }, 300);
+  };
+
   return (
-    <div className="fx-col gap-10">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5 mt-5 ">
+    <div className="space-y-10">
+      {/* Blog Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {visibleBlogs.map((blog, index) => (
-          <BlogCardPrimary key={index} size="small" blog={blog} />
+          <div
+            key={blog._id || index}
+            className="animate-fade-in opacity-0"
+            style={{ animationDelay: `${(index % LOAD_MORE_COUNT) * 0.05}s`, animationFillMode: "forwards" }}
+          >
+            <BlogCardEditorial blog={blog} />
+          </div>
         ))}
       </div>
-      <div className="fx-center">
-        {moreBlogs && (
+
+      {/* Load More Button */}
+      {hasMore && (
+        <div className="flex justify-center">
           <Button
-            size={"sm"}
-            onClick={() => {
-              setVisibleBlogs((prev) => [
-                ...prev,
-                ...blogs.slice(prev.length, prev.length + 20),
-              ]);
-            }}
+            variant="outline"
+            size="lg"
+            onClick={handleLoadMore}
+            disabled={isLoading}
+            className="font-dm-sans px-8 border-2 border-foreground/20 hover:border-primary hover:bg-primary hover:text-white transition-all"
           >
-            Read More
+            {isLoading ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Loading...
+              </>
+            ) : (
+              <>
+                Load More Stories
+                <span className="ml-2 text-muted-foreground">
+                  ({blogs.length - visibleCount} remaining)
+                </span>
+              </>
+            )}
           </Button>
-        )}
-      </div>
+        </div>
+      )}
+
+      {/* End message */}
+      {!hasMore && blogs.length > INITIAL_COUNT && (
+        <p className="text-center font-dm-sans text-muted-foreground">
+          You've reached the end. {blogs.length} stories in total.
+        </p>
+      )}
     </div>
   );
 };

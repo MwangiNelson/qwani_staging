@@ -2,173 +2,280 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import Lost from "@/components/website/lost";
 import CommentsBlogs from "@/components/website/pageUIs/blogs/comments.blogs";
-import VerticalComicViewer from "@/components/website/pageUIs/blogs/vertical-comic-viewer";
-import FlipbookComicViewer from "@/components/website/pageUIs/blogs/flipbook-comic-viewer";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  BlogProfileCard,
-  ProfileCard,
-} from "@/components/website/shared/cards/common";
+import ComicReader from "@/components/website/pageUIs/blogs/comic-reader";
 import { MinimalFooter } from "@/components/website/shared/client";
 import Portable_Text_Editor from "@/components/website/shared/portable_text_editor";
 import { Sharing } from "@/components/website/shared/sharing";
-import { BackButton } from "@/components/website/utils";
 import {
   defaultMetadata,
   formatSanityDate,
 } from "@/components/website/utils/functions";
-import { myPortableTextComponents } from "@/components/website/utils/sanity_components";
-import { fetchBlogById, fetchBlogBySlug } from "@/lib/api";
+import { fetchBlogBySlug } from "@/lib/api";
 import { imageUrl } from "@/sanity/lib/client";
 import { IPost } from "@/utils/data_types";
 import { Props } from "@/utils/uitypes";
-import { Metadata, ResolvingMetadata } from "next";
-import { PortableText } from "next-sanity";
+import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { ArrowLeft, Calendar, Clock, User } from "lucide-react";
+
 const Page = async ({ params, searchParams }: Props) => {
   const blog = await fetchBlogBySlug(params.blog as string);
   if (!blog) {
     return <Lost />;
   }
   return (
-    <div className="bg-[#F2F2F2] text-foreground pb-20">
-      <Hero />
-      <Details blog={blog} />
+    <article className="min-h-screen bg-white">
+      <BlogHeader blog={blog} />
+      <BlogHeroImage blog={blog} />
+      <BlogContent blog={blog} />
+      <AuthorCard blog={blog} />
+      <CommentsSection blog={blog} />
       <MinimalFooter />
-    </div>
+    </article>
   );
 };
-const Hero = () => {
-  return <div className="h-[100px] bg-foreground"></div>;
-};
-const Details = ({ blog }: { blog: IPost }) => {
+
+// Header with back navigation and meta
+const BlogHeader = ({ blog }: { blog: IPost }) => {
   const isComic = blog.postType === "comic";
 
   return (
-    <div className="web-px pt-10 space-y-4">
-      <div className="fx flex-col items-start gap-2">
-        <Button variant={"noEffect"} className="p-0 -ml-2" asChild>
-          <BackButton text="Back to Blogs" />
-        </Button>
-        <div className="flex items-center gap-2">
-          <span className="font-semibold">
-            {formatSanityDate(blog.publishedAt)}
-          </span>
+    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-sm border-b">
+      <div className="web-px py-4">
+        <div className="flex items-center justify-between">
+          {/* Back Button */}
+          <Link
+            href="/blogs"
+            className="inline-flex items-center gap-2 text-sm font-dm-sans text-muted-foreground hover:text-foreground transition-colors"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            <span>All Stories</span>
+          </Link>
+
+          {/* Share */}
+          <Sharing bg="foreground" />
+        </div>
+      </div>
+    </header>
+  );
+};
+
+// Hero Image Section
+const BlogHeroImage = ({ blog }: { blog: IPost }) => {
+  const isComic = blog.postType === "comic";
+
+  if (isComic) return null;
+
+  return (
+    <section className="relative">
+      <div className="aspect-[21/9] md:aspect-[3/1] relative overflow-hidden bg-gray-100">
+        <Image
+          src={imageUrl(blog.mainImage?.asset || blog.mainImage)}
+          alt={blog.title || "Blog image"}
+          fill
+          className="object-cover"
+          priority
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+      </div>
+
+      {/* Title Overlay */}
+      <div className="absolute inset-0 flex items-end">
+        <div className="web-px pb-8 md:pb-12 w-full">
+          <div className="max-w-4xl">
+            {/* Categories */}
+            <div className="flex flex-wrap gap-2 mb-4">
+              {blog.postType === "comic" && (
+                <span className="editorial-badge bg-blue-500 text-white">
+                  Comic
+                </span>
+              )}
+              {blog.categories?.map((category, index) => (
+                <span
+                  key={index}
+                  className="editorial-badge bg-white/90 text-foreground"
+                >
+                  {category.title}
+                </span>
+              ))}
+            </div>
+
+            {/* Title */}
+            <h1 className="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight">
+              {blog.title}
+            </h1>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// Main Content Area
+const BlogContent = ({ blog }: { blog: IPost }) => {
+  const isComic = blog.postType === "comic";
+
+  return (
+    <section className="web-px py-10 md:py-14">
+      <div className="max-w-3xl mx-auto">
+        {/* Meta Info */}
+        <div className="flex flex-wrap items-center gap-4 pb-8 border-b mb-8">
+          {/* Author */}
+          {blog.author && (
+            <Link
+              href={`/contributers/${blog.author.slug?.current}`}
+              className="flex items-center gap-3 group"
+            >
+              <div className="relative w-12 h-12 rounded-full overflow-hidden ring-2 ring-transparent group-hover:ring-primary transition-all">
+                <Image
+                  src={imageUrl(blog.author.image)}
+                  alt={blog.author.name || "Author"}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div>
+                <p className="font-dm-sans font-semibold text-foreground group-hover:text-primary transition-colors">
+                  {blog.author.name}
+                </p>
+                <p className="font-dm-sans text-xs text-muted-foreground uppercase tracking-wider">
+                  Contributor
+                </p>
+              </div>
+            </Link>
+          )}
+
+          <div className="h-8 w-px bg-gray-200 hidden sm:block" />
+
+          {/* Date */}
+          <div className="flex items-center gap-2 text-muted-foreground">
+            <Calendar className="h-4 w-4" />
+            <span className="font-dm-sans text-sm">
+              {formatSanityDate(blog.publishedAt)}
+            </span>
+          </div>
+
+          {/* Post Type Badge */}
           {isComic && (
-            <span className="px-2 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">
-              COMIC
+            <span className="ml-auto editorial-badge bg-blue-100 text-blue-700">
+              Comic
             </span>
           )}
         </div>
-        {blog.author && (
-          <BlogProfileCard
-            date={formatSanityDate(blog.publishedAt)}
-            imageUrl={imageUrl(blog.author.image)}
-            name={blog.author?.name}
-            slug={blog.author?.slug}
-          />
-        )}
-      </div>
 
-      <div className="blog mt-5 space-y-4">
-        <h3 className="ts3 font-semibold">{blog.title}</h3>
-        {!isComic && (
-          <Image
-            src={imageUrl(blog.mainImage.asset || blog.mainImage)}
-            className="rounded-md h-[300px] md:h-[500px] object-cover object-center w-full"
-            alt={"Card Image"}
-            width={1000}
-            height={1000}
-          />
-        )}
-      </div>
-
-      <div className="descriptions mt-10 space-y-3">
-        <div className="fx items-start flex-col md:flex-row md:justify-between">
-          <div className="gap-1 hidden md:flex">
-            {blog.categories
-              ? blog.categories.map((category, index) => (
-                  <Button
-                    variant={"outlineNoEffect"}
-                    key={index}
-                    className="rounded-full"
-                  >
-                    {category.title}
-                  </Button>
-                ))
-              : "No Category"}
+        {/* Title for comics (no hero image) */}
+        {isComic && (
+          <div className="mb-8">
+            <div className="flex flex-wrap gap-2 mb-4">
+              {blog.categories?.map((category, index) => (
+                <span key={index} className="editorial-badge">
+                  {category.title}
+                </span>
+              ))}
+            </div>
+            <h1 className="font-playfair text-3xl md:text-4xl font-bold text-foreground leading-tight">
+              {blog.title}
+            </h1>
           </div>
-          <div className="flex justify-end">
-            <Sharing bg="foreground" />
-          </div>
-        </div>
-        <Separator />
+        )}
 
-        {/* Conditional Content Rendering */}
+        {/* Content */}
         {isComic ? (
           <div className="comic-content">
             {blog.comicContent && blog.comicContent.length > 0 ? (
-              <Tabs defaultValue="flipbook" className="w-full">
-                <TabsList className="mb-4">
-                  <TabsTrigger value="flipbook">Flipbook</TabsTrigger>
-                  <TabsTrigger value="vertical">Vertical</TabsTrigger>
-                </TabsList>
-                <TabsContent value="flipbook">
-                  <FlipbookComicViewer
-                    panels={blog.comicContent}
-                    title={blog.title}
-                  />
-                </TabsContent>
-                <TabsContent value="vertical">
-                  <VerticalComicViewer
-                    panels={blog.comicContent}
-                    title={blog.title}
-                  />
-                </TabsContent>
-              </Tabs>
+              <ComicReader
+                panels={blog.comicContent}
+                title={blog.title}
+              />
             ) : (
-              <div className="flex items-center justify-center h-96 bg-gray-100 rounded-lg">
-                <p className="text-gray-500">No comic panels available</p>
+              <div className="flex items-center justify-center h-96 bg-gray-50 rounded-lg border border-dashed border-gray-200">
+                <p className="font-dm-sans text-muted-foreground">
+                  No comic panels available
+                </p>
               </div>
             )}
           </div>
         ) : (
-          <Portable_Text_Editor body={blog.body} />
+          <div className="prose prose-lg max-w-none font-dm-sans prose-headings:font-playfair prose-headings:font-semibold prose-p:text-foreground/80 prose-p:leading-relaxed prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-img:rounded-lg prose-blockquote:border-l-primary prose-blockquote:font-playfair prose-blockquote:italic">
+            <Portable_Text_Editor body={blog.body} />
+          </div>
         )}
       </div>
+    </section>
+  );
+};
 
-      <Separator />
-      <CommentsBlogs blogId={blog._id} />
-      <Separator />
-      <div className="md:max-w-[600px] fx mt-4 flex-col p-4 gap-2 bg-foreground/5">
-        <div className="flex flex-col md:flex-row gap-3">
-          <Image
-            src={imageUrl(blog.author.image)}
-            className="rounded-full min-w-[70px] min-h-[70px] object-cover object-center"
-            alt={"Card Image"}
-            width={70}
-            height={70}
-          />
-          <div className="fx-col">
-            <div className="fx items-center gap-2">
-              <Link
-                href={`/contributers/${blog.author.slug.current}`}
-                className="underline font-bold text-lg"
-              >
-                {blog.author.name}
-              </Link>
-              <Separator orientation="vertical" className="bg-black/40 h-5" />
-              <span className="text-lg">CONTRIBUTOR</span>
+// Author Card Section
+const AuthorCard = ({ blog }: { blog: IPost }) => {
+  if (!blog.author) return null;
+
+  return (
+    <section className="bg-editorial-ivory">
+      <div className="web-px py-12 md:py-16">
+        <div className="max-w-3xl mx-auto">
+          <div className="bg-white rounded-lg p-6 md:p-8 shadow-sm">
+            <div className="flex flex-col md:flex-row gap-6">
+              {/* Author Image */}
+              <div className="flex-shrink-0">
+                <Link href={`/contributers/${blog.author.slug?.current}`}>
+                  <div className="relative w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden ring-4 ring-primary/10">
+                    <Image
+                      src={imageUrl(blog.author.image)}
+                      alt={blog.author.name || "Author"}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                </Link>
+              </div>
+
+              {/* Author Info */}
+              <div className="flex-1">
+                <p className="font-dm-sans text-xs font-medium text-primary uppercase tracking-wider mb-1">
+                  Written by
+                </p>
+                <Link href={`/contributers/${blog.author.slug?.current}`}>
+                  <h3 className="font-playfair text-xl md:text-2xl font-semibold text-foreground hover:text-primary transition-colors">
+                    {blog.author.name}
+                  </h3>
+                </Link>
+                {blog.author.bio && (
+                  <p className="font-dm-sans text-muted-foreground mt-3 leading-relaxed">
+                    {blog.author.bio}
+                  </p>
+                )}
+                <Link
+                  href={`/contributers/${blog.author.slug?.current}`}
+                  className="inline-flex items-center gap-2 mt-4 font-dm-sans text-sm font-medium text-primary hover:underline"
+                >
+                  View all stories
+                  <ArrowLeft className="h-3 w-3 rotate-180" />
+                </Link>
+              </div>
             </div>
-            <p>{blog.author.bio}</p>
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
+
+// Comments Section
+const CommentsSection = ({ blog }: { blog: IPost }) => {
+  return (
+    <section className="bg-white border-t">
+      <div className="web-px py-12 md:py-16">
+        <div className="max-w-3xl mx-auto">
+          <CommentsBlogs blogId={blog._id} />
+        </div>
+      </div>
+    </section>
+  );
+};
+
 export async function generateMetadata({
   params,
   searchParams,
@@ -186,7 +293,7 @@ export async function generateMetadata({
       description: data.excerpt,
       images: [
         {
-          url: imageUrl(data.mainImage.asset || data.mainImage),
+          url: imageUrl(data.mainImage?.asset || data.mainImage),
           width: 1200,
           height: 630,
           alt: data.title,
@@ -195,4 +302,5 @@ export async function generateMetadata({
     },
   };
 }
+
 export default Page;

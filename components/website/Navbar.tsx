@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
@@ -15,11 +15,24 @@ export interface TimeType {
 }
 const Navbar = ({ locations }: { locations: ILocation[] }) => {
   const searchParams = useSearchParams();
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <div
-      className="h-full  sticky top-0 z-50 
-    flex justify-between items-center web-px"
+      className={cn(
+        "h-full flex justify-between items-center web-px transition-all duration-300",
+        isScrolled
+          ? "bg-foreground/95 backdrop-blur-md shadow-lg"
+          : "bg-foreground/70 backdrop-blur-sm"
+      )}
     >
       <Link className="flex items-center" href={"/"}>
         <Image alt="logo" src="/logo-white.png" width={150} height={150} />

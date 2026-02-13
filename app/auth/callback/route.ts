@@ -10,9 +10,26 @@ export async function GET(request: Request) {
 
   if (code) {
     const supabase = await supabaseServerClient();
-    const { error } = await supabase.auth.exchangeCodeForSession(code);
-    if (!error) {
-      return NextResponse.redirect(`${origin}/${next}`);
+    const { data, error } = await supabase.auth.exchangeCodeForSession(code);
+    
+    if (!error && data.user) {
+      // Create or update user profile after OAuth
+      const { error: profileError } = await supabase.from("users").upsert({
+        id: data.user.id,
+        email: data.user.email!,
+        display_name: data.user.user_metadata?.full_name || 
+                      data.user.user_metadata?.name || 
+                      data.user.email?.split("@")[0],
+        profile_image: data.user.user_metadata?.avatar_url || 
+                       data.user.user_metadata?.picture,
+        updated_at: new Date().toISOString(),
+      });
+
+      if (profileError) {
+        console.error("Error creating/updating user profile:", profileError);
+      }
+
+      return NextResponse.redirect(`${origin}${next}`);
     }
   }
   return NextResponse.redirect(`${origin}`);

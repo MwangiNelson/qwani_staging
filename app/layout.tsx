@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Montserrat } from "next/font/google";
+import { Inter, Montserrat, Playfair_Display, DM_Sans } from "next/font/google";
 import "./globals.css";
 import "./website.css";
 import "yet-another-react-lightbox/styles.css";
@@ -12,6 +12,20 @@ const inter = Inter({ subsets: ["latin"] });
 const mont = Montserrat({
   variable: "--font-montserrat",
   weight: ["300", "400", "500", "600", "700", "800"],
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
+  weight: ["400", "500", "600", "700", "800", "900"],
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const dmSans = DM_Sans({
+  variable: "--font-dm-sans",
+  weight: ["300", "400", "500", "600", "700"],
   subsets: ["latin"],
   display: "swap",
 });
@@ -38,7 +52,7 @@ export default function RootLayout({
         <script type="text/javascript" src="https://onsite.optimonk.com/script.js?account=231860" async></script>
 
         
-      <body className={`${mont.className} `}>
+      <body className={`${mont.className} ${playfair.variable} ${dmSans.variable}`}>
       
         <TanstackProvider>
           <AuthContextProvider>

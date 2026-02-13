@@ -7,9 +7,10 @@ export const useCreateComment = () => {
     mutationFn: async (data: any) => {
       const supabase = createClient();
       if (data.commentId) {
+        // Update existing comment - keep status as pending since content changed
         const { data: updatedComment, error } = await supabase
           .from("comments")
-          .update({ content: data.content })
+          .update({ content: data.content, status: "pending" })
           .eq("id", data.commentId)
           .select("*")
           .single();
@@ -18,11 +19,13 @@ export const useCreateComment = () => {
         return { ...updatedComment, blogId: data.blogId };
       }
 
+      // Create new comment with pending status
       const { data: newComment, error } = await supabase
         .from("comments")
         .insert({
           content: data.content,
           user_id: data.userId,
+          status: "pending", // New comments are pending by default
         })
         .select("*")
         .single();
@@ -44,7 +47,9 @@ export const useCreateComment = () => {
     },
   });
 };
-const get_comments = async (blogId: string) => {
+
+// Get comments - returns all published comments + user's own pending comments
+const get_comments = async (blogId: string, currentUserId?: string) => {
   const supabase = createClient();
   const { data, error } = await supabase
     .from("comments_post_link")
@@ -55,15 +60,34 @@ const get_comments = async (blogId: string) => {
     )
     .eq("post_id", blogId)
     .order("created_at", { ascending: false, referencedTable: "comments" });
+  
   if (error) throw error;
 
-  return data;
+  // Filter comments: show published OR user's own pending comments
+  const filteredData = data?.filter((item) => {
+    const comment = item.comments;
+    if (!comment) return false;
+    
+    // Show all published comments
+    if (comment.status === "published") return true;
+    
+    // Show user's own pending comments
+    if (currentUserId && comment.user_id === currentUserId && comment.status === "pending") {
+      return true;
+    }
+    
+    return false;
+  });
+
+  return filteredData;
 };
+
 export type ICommentsData = Awaited<ReturnType<typeof get_comments>>;
-export const useGetComments = (blogId: string) => {
+
+export const useGetComments = (blogId: string, currentUserId?: string) => {
   return useQuery({
-    queryKey: ["comments", blogId],
-    queryFn: () => get_comments(blogId),
+    queryKey: ["comments", blogId, currentUserId],
+    queryFn: () => get_comments(blogId, currentUserId),
     enabled: !!blogId,
   });
 };
