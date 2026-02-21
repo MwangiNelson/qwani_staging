@@ -1,5 +1,6 @@
 "use client";
 import * as React from "react";
+import { motion } from "framer-motion";
 
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -34,12 +35,14 @@ export function TrendingBlogsWrapper({ blogs }: { blogs: IPost[] }) {
             key={index}
             className="pl-4 basis-[85%] sm:basis-1/2 lg:basis-1/3"
           >
-            <div
+            <motion.div
               className="animate-fade-in opacity-0"
-              style={{ animationDelay: `${index * 0.1}s`, animationFillMode: "forwards" }}
+              style={{ animationDelay: `${index * 0.1}s`, animationFillMode: "forwards", perspective: 800 }}
+              whileHover={{ rotateY: 2, scale: 1.02 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
             >
               <BlogCardEditorial blog={item} showExcerpt={false} />
-            </div>
+            </motion.div>
           </CarouselItem>
         ))}
       </CarouselContent>

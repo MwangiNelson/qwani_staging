@@ -256,12 +256,16 @@ export const BlogCardHorizontal: React.FC<{
           </div>
         </div>
         
-        {/* Arrow */}
-        <div className={cn(
-          "flex items-center justify-center w-8 opacity-0 group-hover:opacity-100 transition-opacity",
-          isDark ? "text-white" : "text-foreground"
-        )}>
-          <ArrowRight className="h-4 w-4" />
+        {/* Thumbnail */}
+        <div className="relative flex-shrink-0 w-20 h-[60px] rounded-md overflow-hidden self-center">
+          <BlogImage
+            src={imageUrl(blog?.mainImage)}
+            alt={blog?.title || "Blog thumbnail"}
+            className="w-full h-full group-hover:scale-105 transition-transform duration-500"
+            aspectRatio="4/3"
+          />
+          {/* Hover border accent */}
+          <div className="absolute inset-0 rounded-md border border-transparent group-hover:border-primary/50 transition-colors duration-300 pointer-events-none" />
         </div>
       </article>
     </Link>
