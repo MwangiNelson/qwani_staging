@@ -67,7 +67,7 @@ export default function Footer() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.45, delay: 0.3 }}
                 >
-                  <JoinCommunityButton />
+                  <JoinCommunityButton size="sm" />
                 </motion.div>
               </div>
 
