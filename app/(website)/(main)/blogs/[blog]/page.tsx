@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import Lost from "@/components/website/lost";
 import CommentsBlogs from "@/components/website/pageUIs/blogs/comments.blogs";
-import ComicReader from "@/components/website/pageUIs/blogs/comic-reader";
 import { MinimalFooter } from "@/components/website/shared/client";
 import Portable_Text_Editor from "@/components/website/shared/portable_text_editor";
 import { Sharing } from "@/components/website/shared/sharing";
@@ -184,12 +183,27 @@ const BlogContent = ({ blog }: { blog: IPost }) => {
 
         {/* Content */}
         {isComic ? (
-          <div className="comic-content">
+          <div className="comic-content space-y-6">
             {blog.comicContent && blog.comicContent.length > 0 ? (
-              <ComicReader
-                panels={blog.comicContent}
-                title={blog.title}
-              />
+              blog.comicContent.map((panel, index) => (
+                <figure key={panel._key || index} className="relative">
+                  <div className="relative w-full rounded-lg overflow-hidden bg-gray-50">
+                    <Image
+                      src={imageUrl(panel.image)}
+                      alt={panel.caption || `Panel ${index + 1}`}
+                      width={1200}
+                      height={1600}
+                      className="w-full h-auto object-contain"
+                      sizes="(max-width: 768px) 100vw, 720px"
+                    />
+                  </div>
+                  {panel.caption && (
+                    <figcaption className="mt-2 text-center font-dm-sans text-sm text-muted-foreground italic">
+                      {panel.caption}
+                    </figcaption>
+                  )}
+                </figure>
+              ))
             ) : (
               <div className="flex items-center justify-center h-96 bg-gray-50 rounded-lg border border-dashed border-gray-200">
                 <p className="font-dm-sans text-muted-foreground">

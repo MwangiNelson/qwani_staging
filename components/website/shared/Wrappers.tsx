@@ -21,6 +21,7 @@ import {
   IWriter,
 } from "@/utils/data_types";
 import { BlogCardMain } from "./cards/blogs";
+import { TeamMemberSections } from "@/components/website/pageUIs/about/TeamMemberSections";
 
 export const EventsCardsWrapper = ({
   events = [],
@@ -63,13 +64,7 @@ export const TeamMemberWrapper = ({
 }: {
   teamMembers: ITeamMember[];
 }) => {
-  return (
-    <div className="grid  gap-5  md:gap-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 ">
-      {teamMembers.map((item, index) => {
-        return <TeamMemberCard key={index} member={item} />;
-      })}
-    </div>
-  );
+  return <TeamMemberSections teamMembers={teamMembers} />;
 };
 export const WritersWrapper = ({ writers }: { writers: IWriter[] }) => {
   return (
