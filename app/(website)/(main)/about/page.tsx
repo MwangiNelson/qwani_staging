@@ -9,9 +9,11 @@ import React from "react";
 import {
   AboutHero,
   AboutStory,
+  AboutLocations,
+  AboutWhatWeDo,
   AboutStats,
-  AboutValues,
-  AboutExplore,
+  AboutMissionVision,
+  AboutFAQ,
   AboutTeam,
 } from "@/components/website/pageUIs/about/AboutSections";
 
@@ -21,10 +23,12 @@ async function AboutPage() {
   return (
     <div className="min-h-screen">
       <AboutHero about={about} />
-      <AboutStory about={about} />
-      <AboutStats about={about} />
-      <AboutValues about={about} />
-      <AboutExplore about={about} />
+      <AboutStory />
+      <AboutLocations />
+      <AboutWhatWeDo />
+      <AboutStats />
+      <AboutMissionVision />
+      <AboutFAQ />
       <AboutTeam about={about}>
         <TeamMemberWrapper teamMembers={about.teamMembers} />
       </AboutTeam>
