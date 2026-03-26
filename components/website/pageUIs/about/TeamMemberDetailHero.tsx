@@ -17,7 +17,7 @@ import { Particles } from "@/components/ui/particles";
 import { LineShadowText } from "@/components/ui/line-shadow-text";
 import { PixelImage } from "@/components/ui/pixel-image";
 import Portable_Text_Editor from "@/components/website/shared/portable_text_editor";
-import { inferDepartment } from "./team-utils";
+import { inferDepartment, inferAllDepartments } from "./team-utils";
 
 // Social platform link row
 const SocialLink = ({
@@ -43,7 +43,7 @@ const SocialLink = ({
 
 export function TeamMemberDetailHero({ member }: { member: ITeamMember }) {
   const socials = member.socialLinks;
-  const dept = inferDepartment(member.role);
+  const depts = inferAllDepartments(member.role);
 
   return (
     <>
@@ -108,9 +108,14 @@ export function TeamMemberDetailHero({ member }: { member: ITeamMember }) {
               transition={{ duration: 0.5, delay: 0.1 }}
             >
               <span className="h-px w-8 bg-primary" />
-              <span className="font-dm-sans text-primary text-xs font-medium tracking-[0.2em] uppercase">
-                {dept}
-              </span>
+              {depts.map((dept) => (
+                <span
+                  key={dept}
+                  className="font-dm-sans text-primary text-xs font-medium tracking-[0.2em] uppercase"
+                >
+                  {dept}
+                </span>
+              ))}
             </motion.div>
 
             {/* Role */}
